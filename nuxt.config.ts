@@ -1,0 +1,50 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  // devtools: { enabled: true },
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-primevue','@nuxt/image','radix-vue/nuxt','@vueuse/nuxt','@pinia/nuxt'],
+  pinia: {
+    storesDirs: ['./stores/**', './custom-folder/stores/**'],
+  },
+  css: ['~/assets/css/main.css'],
+
+  // build: {
+  //     transpile: ["@fawmi/vue-google-maps"],
+  // },
+  
+
+  app: {
+    head: {
+      title: "Dynamo Africa",
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'True seamless finance across borders', name: 'Smart and secured mediums to effortlessly send and receive money for individuals and businesses', content: 'Smart and secured mediums to effortlessly send and receive money for individuals and businesses' }
+      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/vyreLogo.png' }],
+      script: [
+        {
+            src: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBBYUi-MAFpiGyHI67x-xCrAWArKPm4n7w&libraries=places',
+        }
+      ],
+    },
+  },
+  primevue: {
+    usePrimeVue: true,
+    importPT: { as: 'Tailwind', from: 'primevue/passthrough/tailwind' },
+    cssLayerOrder: 'tailwind-base, primevue, tailwind-utilities',
+    components: {
+      // include: '*',
+      include: ['Timeline', 'Button', 'Dialog','Toast','ProgressSpinner','Ripple','Sidebar','Menu','SelectButton','InputNumber','TabView','TabPanel'],
+    },
+    directives: {
+      include: '*'
+    },
+    composables: {
+      include: '*'
+  },
+  options: {
+    ripple: true,
+    unstyled: true
+  }
+  }
+})
