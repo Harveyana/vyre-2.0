@@ -1,24 +1,23 @@
 <template>
-    <div class="w-full flex flex-row items-center justify-between" v-for="transaction in recents" :key="transaction.date">
+    <div :class="transaction.type == 'received' ? 'border-green-500' : 'border-red-500' " class="w-full flex flex-row items-center justify-between  border-l-4 p-2 " v-for="transaction in recents" :key="transaction.date">
             <!-- right -->
             <div class="w-1/2 flex flex-row items-center justify-start">
-              <img src="~/assets/img/send.svg" class="w-8 p-1 rounded-[50px] bg-red-300 mx-3 md:w-10" v-if="transaction.type == 'sent'"/>
-              <img src="~/assets/img/receive.svg" class="w-8 p-1 rounded-[50px] bg-[#D6EDDA] mx-3 md:w-10" v-else />
+             
               
               <div class=" w-[50%] flex flex-col rounded-2xl">
-                <h2 class="text-black text-sm poppinsSemiBold truncate">
+                <h2 class="text-black dark:text-white text-sm poppinsSemiBold truncate">
                   {{transaction.destination ? transaction.destination:transaction.source}}
                 </h2>
-                <p class="text-black text-[10px] md:text-xs truncate">{{transaction.description}}</p>
+                <p class="text-black dark:text-white text-[10px] md:text-xs truncate">{{transaction.description}}</p>
               </div>
             </div>
             <!-- left -->
             <div class="w-1/2 flex flex-row items-center justify-end px-4">
               <div class="w-[50%] flex flex-col rounded-2xl">
-                <h2 class="text-black poppinsMedium text-sm font-bold">
+                <h2 class="text-black dark:text-white poppinsMedium text-sm font-bold">
                   {{transaction.type == 'sent'? '-':'+'}}{{transaction.symbol}}{{transaction.amount}}
                 </h2>
-                <p class="text-black poppinsRegular text-xs truncate">{{transaction.date}}</p>
+                <p class="text-black dark:text-white poppinsRegular text-xs truncate">{{transaction.date}}</p>
               </div>
             </div>
           </div>

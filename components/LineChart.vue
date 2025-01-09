@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full min-h-[280px] border border-[#F4F4FB] rounded-lg p-1.5">
+  <div class="w-full h-full min-h-[240px]  rounded-lg p-1.5">
     <ClientOnly fallback="Loading Chart...">
       <apexchart
         :key="series"
@@ -121,16 +121,5 @@
 
 </script>
 <style scoped>
-.vyreGrey{
-  background-color: v-bind(vyreGrey);
-}
-.vyreYellow{
-    background-color: v-bind(vyreYellow);
-}
-.vyreGreen{
-    background-color: v-bind(vyreGreen);
-}
-.vyreLemon{
-    background-color: v-bind(vyreLemon);
-}
+
 </style>

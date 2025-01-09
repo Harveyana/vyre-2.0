@@ -1,20 +1,32 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   // devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-primevue','@nuxt/image','radix-vue/nuxt','@vueuse/nuxt','@pinia/nuxt'],
+  ssr:false,
+  runtimeConfig: {
+    public: {
+      baseUrl: 'http://localhost:5000/api/v1',
+    }
+    // https://qaya-backend-8aa84c165678.herokuapp.com/api/v1
+    // http://localhost:5000/api/v1
+  },
+  
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-primevue','@nuxt/image','radix-vue/nuxt','@vueuse/nuxt','@pinia/nuxt','vue-sonner/nuxt'],
   pinia: {
     storesDirs: ['./stores/**', './custom-folder/stores/**'],
   },
   css: ['~/assets/css/main.css'],
 
-  // build: {
-  //     transpile: ["@fawmi/vue-google-maps"],
-  // },
+  components: [
+    {
+      path: '~/components',
+      pathPrefix: false,
+    },
+  ],
   
 
   app: {
     head: {
-      title: "Dynamo Africa",
+      title: "Vyre Africa",
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -34,7 +46,7 @@ export default defineNuxtConfig({
     cssLayerOrder: 'tailwind-base, primevue, tailwind-utilities',
     components: {
       // include: '*',
-      include: ['Timeline', 'Button', 'Dialog','Toast','ProgressSpinner','Ripple','Sidebar','Menu','SelectButton','InputNumber','TabView','TabPanel'],
+      include: ['Timeline', 'Button', 'Dialog', 'ProgressSpinner','Ripple','Sidebar','Menu','SelectButton','InputNumber','TabView','TabPanel'],
     },
     directives: {
       include: '*'

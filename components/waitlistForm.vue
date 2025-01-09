@@ -134,3 +134,101 @@
     
   }
  </style>
+
+
+
+
+
+
+
+
+
+
+
+<div class="w-full h-full flex flex-col item-start justify-start">
+
+  <div class="w-full py-3 flex items-center justify-between">
+
+    <h1 class="Grotesque-Bold text-xl text-[#010109]">
+      Hello Anayo
+    </h1>
+    
+  </div>
+
+  <!-- verification bar -->
+
+  <div class="w-full bg-bar flex flex-col items-start px-6 py-7 gap-y-1 rounded-lg mb-5">
+
+    <h1 class="Grotesque-Semi-Bold gap-x-4 text-[18px] sm:text-[17px] text-white">
+      Currently Verifying your account
+    </h1>
+
+    <div class="w-full flex flex-col sm:flex-row items-start justify-between gap-y-4">
+      <h4 class="Grotesque-Light text-xs sm:text-[12px] text-white">
+        We are currently verifying your account, and this should take 2-3 business working days.
+      </h4>
+
+      <h4 class="w-full sm:w-fit Grotesque-Light text-xs sm:text-[12px] text-white mr-20">
+        If it takes longer  <span class="text-[#367bad] Grotesque-Semi-Bold cursor-pointer">Contact Support</span>
+      </h4>
+    </div>
+
+  </div>
+
+  <!-- Top bar ends here -->
+
+  <div class="w-full flex flex-col lg:flex-row items-center justify-start gap-y-3 gap-x-2 border border-black">
+    <!-- balance -->
+
+    <div class="w-full h-full lg:w-[60%]">
+
+        <h2 class="text-black text-xl Grotesque-Regular mb-2">
+          Portfolio
+        </h2>
+
+        <div data-aos="fade-down" data-aos-once="true" class="w-full h-fit border bg-[#e5f2fe] rounded-2xl">
+          
+          <h2 class="text-black text-2xl Grotesque-Bold ml-6 sm:ml-8 mt-6 sm:mt-8">
+              $ 17 643.41
+              <p class="text-black poppinsRegular text-xs">Portfolio balance</p>
+          </h2>
+
+          <!-- <ClientOnly fallback="Loading Chart..."> -->
+            <LineChart />
+          <!-- </ClientOnly> -->
+
+        </div>
+
+    </div>
+
+    <div class=" h-full">
+
+        <h2 class="text-black text-xl poppinsSemiBold mb-2">
+          Your Assets
+        </h2>
+
+        <div class="w-full h-full flex flex-row items-center justify-center no-scrollbar overflow-x-scroll ">
+          <div class="w-full h-full flex">
+            <CurrencyCard :balances="balances"/>
+          </div>
+          
+        </div>
+    </div>
+  </div>
+  
+
+  <div class="w-full h-fit">
+        <div class="w-full flex flex-row items-center justify-between">
+          <h2 class="text-black text-xl poppinsSemiBold mb-2">
+           Recents
+          </h2>
+          <img src="~/assets/img/right-arrow.png" class="w-10 md:w-12 rounded-2xl hover:bg-gray-500 px-2" alt='transactions'/>
+        </div>
+        
+        <div class="overflow-y-scroll scroll-smooth max-h-[10rem] lg:max-h-[15rem] flex flex-col items-center justify-start rounded-2xl col-span-12 py-2 mb-2 md:mb-5 space-y-4">
+          <Recent :recents="transactions"/>
+        </div>
+  </div>
+        
+      
+</div>

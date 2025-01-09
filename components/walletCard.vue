@@ -1,16 +1,14 @@
 <template>
-    <NuxtLink :href="`/wallets/${data.walletId}`" :style="{ backgroundColor: getRandomColor() }" class="hover:bg-[#d9d5d5] border-2 hover:border-black cursor-pointer w-full sm:w-[45%] flex-none mx-2 p-3 sm:p-4 flex flex-col items-start justify-between rounded-2xl " >
+    <NuxtLink :href="`/wallets/${wallet.id}`" :style="{ backgroundColor: getRandomColor() }" class="relative hover:bg-[#d9d5d5] border-2 hover:border-black cursor-pointer w-full sm:w-[22%] flex-none p-3 sm:p-4 flex flex-col items-start justify-between rounded-2xl " >
 
-      <img :src=props.wallet.imgUrl class="absolute w-16 sm:w-12 rounded-full mb-4 border-8 border-white"/>
+      <img :src=wallet.imgurl class="absolute w-16 sm:w-12 rounded-full mb-4 border-8 border-white"/>
 
       <baseChart />
 
       <div class="flex flex-col items-start justify-center">
-        <span class="text-black poppinsBold text-2xl sm:text-2xl">
-            <span class="truncate">{{data.balance.accountBalance}}</span> <span class="text-sm">{{props.wallet.ISO}}</span>
-        </span>
-        <span class="text-sm truncate poppinsRegular">
-          ₦ 1203
+        <span class="text-black text-sm Grotesque-Bold">{{wallet.currency}}</span>
+        <span class="text-lg truncate Grotesque-Regular">
+          {{ parseFloat(wallet.accountBalance).toFixed(wallet.type ==='CRYPTO'? 6: 2) }}
         </span>
       </div>
 
@@ -22,49 +20,53 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from '~/store/auth';
+  import { useAuthStore } from '~/store/auth';
   const { logUserOut } = useAuthStore();
   const token = useCookie('token');
   const route = useRoute()
   const router = useRouter()
 
  type wallet = {
-    name:string,
-    walletId:string,
-    ISO:string,
+    currency:string,
+    id:string,
+    createdAt:string,
     type:string,
-    imgUrl:string
+    imgurl:string
+    accountBalance:string
+    availableBalance:string
  }
 
-type card = {
-  name:string;
-  imgurl:URL;
-  symbol:string;
-  amount:number
-}
+  type card = {
+    name:string;
+    imgurl:URL;
+    symbol:string;
+    amount:number
+  }
 
-const props = defineProps<{
-    wallet: wallet
-}>()
+  const props = defineProps<{
+      wallet: wallet
+  }>()
 
-const { data, pending, error }: any = await useFetch('/fetchWallet', {
-      method: 'post',
-      body: {
-        idToken: token.value,
-        walletId: props.wallet.walletId
-      }
-});
+  const {wallet} = props
 
-    if(data.value){
-      console.log(data.value)
-    }
+// const { data, pending, error }: any = await useFetch('/fetchWallet', {
+//       method: 'post',
+//       body: {
+//         idToken: token.value,
+//         walletId: props.wallet.walletId
+//       }
+// });
 
-    if(error.value){
-      console.log(error.value)
-      logUserOut()
-      // console.log(error.value);
-      router.push('/auth')
-    }
+//     if(data.value){
+//       console.log(data.value)
+//     }
+
+//     if(error.value){
+//       console.log(error.value)
+//       logUserOut()
+//       // console.log(error.value);
+//       router.push('/auth')
+//     }
 
 
 const getRandomColor = () => {
