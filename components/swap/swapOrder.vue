@@ -173,30 +173,30 @@
     },
     
     // USDC (USD Coin)
-    // {
-    //   label: 'USD Coin (Arbitrum)',
-    //   value: 'USDC',
-    //   chain: 'ARBITRUM',
-    //   type: 'CRYPTO'
-    // },
+    {
+      label: 'USD Coin (Arbitrum)',
+      value: 'USDC',
+      chain: 'ARBITRUM',
+      type: 'CRYPTO'
+    },
     {
       label: 'USD Coin (Ethereum)',
       value: 'USDC',
       chain: 'ETHEREUM',
       type: 'CRYPTO'
     },
-    {
-      label: 'USD Coin (Polygon)',
-      value: 'USDC',
-      chain: 'POLYGON',
-      type: 'CRYPTO'
-    },
-    {
-      label: 'USD Coin (Solana)',
-      value: 'USDC',
-      chain: 'SOLANA',
-      type: 'CRYPTO'
-    },
+    // {
+    //   label: 'USD Coin (Polygon)',
+    //   value: 'USDC',
+    //   chain: 'POLYGON',
+    //   type: 'CRYPTO'
+    // },
+    // {
+    //   label: 'USD Coin (Solana)',
+    //   value: 'USDC',
+    //   chain: 'SOLANA',
+    //   type: 'CRYPTO'
+    // },
     {
       label: 'USD Coin (Optimism)',
       value: 'USDC',
@@ -211,30 +211,30 @@
     },
 
     // USDT (Tether)
-    // {
-    //   label: 'Tether (Arbitrum)',
-    //   value: 'USDT',
-    //   chain: 'ARBITRUM',
-    //   type: 'CRYPTO'
-    // },
+    {
+      label: 'Tether (Arbitrum)',
+      value: 'USDT',
+      chain: 'ARBITRUM',
+      type: 'CRYPTO'
+    },
     {
       label: 'Tether (Ethereum)',
       value: 'USDT',
       chain: 'ETHEREUM',
       type: 'CRYPTO'
     },
-    {
-      label: 'Tether (Polygon)',
-      value: 'USDT',
-      chain: 'POLYGON',
-      type: 'CRYPTO'
-    },
-    {
-      label: 'Tether (Solana)',
-      value: 'USDT',
-      chain: 'SOLANA',
-      type: 'CRYPTO'
-    },
+    // {
+    //   label: 'Tether (Polygon)',
+    //   value: 'USDT',
+    //   chain: 'POLYGON',
+    //   type: 'CRYPTO'
+    // },
+    // {
+    //   label: 'Tether (Solana)',
+    //   value: 'USDT',
+    //   chain: 'SOLANA',
+    //   type: 'CRYPTO'
+    // },
     {
       label: 'Tether (Optimism)',
       value: 'USDT',
@@ -247,18 +247,18 @@
       chain: 'BASE',
       type: 'CRYPTO'
     },
-    {
-      label: 'Tether (Tron)',
-      value: 'USDT',
-      chain: 'TRON',
-      type: 'CRYPTO'
-    },
-    {
-      label: 'Bitcoin',
-      value: 'BTC',
-      chain: 'Bitcoin',
-      type: 'CRYPTO'
-    }
+    // {
+    //   label: 'Tether (Tron)',
+    //   value: 'USDT',
+    //   chain: 'TRON',
+    //   type: 'CRYPTO'
+    // },
+    // {
+    //   label: 'Bitcoin',
+    //   value: 'BTC',
+    //   chain: 'Bitcoin',
+    //   type: 'CRYPTO'
+    // }
   ];
 
   const direction = ref('Source')
