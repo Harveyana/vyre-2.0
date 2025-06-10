@@ -20,15 +20,15 @@
               <TabsList  class="flex items-center justify-start gap-x-6 relative py-1 " aria-label="PROFILE">
 
                 <TabsIndicator class="absolute left-0 h-[3px] bottom-0 w-[--radix-tabs-indicator-size] translate-x-[--radix-tabs-indicator-position] rounded-full transition-[width,transform] duration-300">
-                  <div class="bg-black dark:bg-white  w-full h-full" />
+                  <div class="bg-black w-full h-full" />
                 </TabsIndicator>
 
 
-                <TabsTrigger class="flex items-center justify-center gap-1.5 text-[#686767] dark:text-[#686767] data-[state=active]:text-black dark:data-[state=active]:text-white text-[14px]" value="PROFILE">
+                <TabsTrigger class="flex items-center justify-center gap-1.5 text-[#686767] data-[state=active]:text-black text-[14px]" value="PROFILE">
                   About You
                 </TabsTrigger>
                 
-                <TabsTrigger class="flex items-center justify-center gap-2 text-[#686767] dark:text-[#686767] data-[state=active]:text-black  dark:data-[state=active]:text-white  text-[14px]" value="FAMILY">
+                <TabsTrigger class="flex items-center justify-center gap-2 text-[#686767] data-[state=active]:text-black text-[14px]" value="ACCOUNTS">
                   Payment Accounts
                 </TabsTrigger>
 

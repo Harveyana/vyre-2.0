@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full bg-[#F2F4F5] dark:bg-[#12171D] h-screen mx-auto fixed top-0 left-0 z-20 flex flex-col">
+    <div class="w-full bg-[#F2F4F5] dark:bg-[#12171D] min-h-screen h-[100dvh] mx-auto fixed top-0 left-0 z-20 flex flex-col">
       <!-- <headerMain /> -->
 
       <Toaster position="top-right" />

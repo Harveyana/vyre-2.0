@@ -3,19 +3,19 @@
 
     <div class="w-full flex flex-row items-center justify-between rounded-2xl py-3 pl-1 sm:pl-3 sm:pr-6 ">
             <div class="flex flex-row items-center justify-start gap-x-3">
-              <p class="text-gray-500 Grotesque-Light dark:text-white text-[10px] md:text-xs whitespace-nowrap">Type</p>
+              <p class="text-gray-500 Grotesque-Light text-[10px] md:text-xs whitespace-nowrap">Type</p>
             </div>
 
             <div class="flex flex-row items-center justify-start gap-x-3">
-              <p class="text-gray-500 Grotesque-Light dark:text-white text-[10px] md:text-xs whitespace-nowrap">Date</p>
+              <p class="text-gray-500 Grotesque-Light text-[10px] md:text-xs whitespace-nowrap">Date</p>
             </div>
 
             <div class="flex flex-row items-center justify-start gap-x-3">
-              <p class="text-gray-500 Grotesque-Light dark:text-white text-[10px] md:text-xs whitespace-nowrap">Status</p>
+              <p class="text-gray-500 Grotesque-Light text-[10px] md:text-xs whitespace-nowrap">Status</p>
             </div>
 
             <div class="flex flex-row items-center justify-start gap-x-3">
-              <p class="text-gray-500 Grotesque-Light dark:text-white text-[10px] md:text-xs whitespace-nowrap">Amount</p>
+              <p class="text-gray-500 Grotesque-Light text-[10px] md:text-xs whitespace-nowrap">Amount</p>
             </div>
     </div>
 
@@ -49,7 +49,7 @@
             </div>
 
             <div class="hidden sm:flex flex-row items-center justify-start gap-x-3">
-              <p class="text-gray-500 Grotesque-Light dark:text-white text-[10px] md:text-xs whitespace-nowrap">{{timeAgo(order?.createdAt)}}</p>
+              <p class="text-gray-500 Grotesque-Light  text-[10px] md:text-xs whitespace-nowrap">{{timeAgo(order?.createdAt)}}</p>
             </div>
 
             <div class="flex flex-row items-center justify-center bg-green-100 py-1 sm:py-0 px-1.5 rounded-lg">
@@ -63,7 +63,7 @@
             </div>
 
             <div class="flex flex-col items-center justify-start gap-x-3">
-              <h2 class="text-black group-hover:text-white dark:text-white Grotesque-Medium text-[12px]">
+              <h2 class="text-black group-hover:text-white  Grotesque-Medium text-[12px]">
                 {{order?.sourceCurrency}} {{Number(order?.sourceAmount).toLocaleString('en-US')}}
               </h2>
               <p class="sm:hidden text-gray-500 group-hover:text-white Grotesque-Light text-[10px] md:text-xs whitespace-nowrap">{{timeAgo(order?.createdAt)}}</p>

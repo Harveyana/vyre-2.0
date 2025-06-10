@@ -65,7 +65,7 @@
             <div class="col-span-12 relative h-fit lg:col-span-8 bg-black rounded-2xl px-8 py-4 border border-black">
               <div class="w-full flex flex-col justify-center gap-y-3">
                 <h2 class="text-black text-xl Grotesque-Bold text-white">
-                  Earn Free Crypto<br> <span class="Grotesque-Bold">with Vyre!</span>
+                  Earn Free Crypto <span class="Grotesque-Bold">with Vyre!</span>
                 </h2>
 
                 <div class="w-full flex flex-col items-start justify-start gap-y-3">
@@ -80,7 +80,7 @@
                 
               </div>
 
-              <img src="~/assets/img/bg1.svg" class="absolute right-0 bottom-0 "/>
+              <img src="~/assets/img/bg1.svg" class="w-28 absolute right-0 bottom-0 "/>
 
             </div>
 
