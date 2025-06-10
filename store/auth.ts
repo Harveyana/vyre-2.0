@@ -13,7 +13,6 @@ interface UserPayloadInterface {
 }
 
 interface Userpayload {
-    TYPE: string;
     DETAILS:{
       firstName: string;
       lastName: string;
@@ -215,6 +214,39 @@ export const useAuthStore = defineStore('auth', {
         }
       },
 
+      async userAddress(payload:{userId:string, country:string,address:string, state:string, city:string, postalCode:string}) {
+        
+        this.loading = true
+        console.log(payload)
+
+        try {
+          const token = useCookie('token');
+          const { axiosInstance } = useAxios()
+          const url = '/user-Address';
+          // const token = useCookie('token');
+          const response = await axiosInstance.post(url, payload);
+
+          console.log(response.data);
+    
+          return response.data
+          
+        } catch (error: any | AxiosError) {
+          console.log(error)
+            if (axios.isAxiosError(error))  {
+              // Access to config, request, and response
+              console.log(error.response?.data)
+              return error.response?.data
+
+            } else {
+              // Just a stock error
+              console.error('Error:', error.message);
+            }
+            
+        } finally {
+          this.loading = false
+        }
+      },
+
       // async register_Business(payload: Businesspayload) {
         
       //   this.loading = true
@@ -280,6 +312,7 @@ export const useAuthStore = defineStore('auth', {
           this.loading = false
         }
       },
+
       async SubmitOtp(payload:{code:number, email:string}) {
         
         this.loading = true
@@ -871,7 +904,7 @@ export const useAuthStore = defineStore('auth', {
         }
       },
 
-      async getbanks(name?:string) {
+      async getbanks(search?:string) {
         
         this.loading = true
         try {
@@ -879,7 +912,7 @@ export const useAuthStore = defineStore('auth', {
           const url = '/banks';
           const response = await axiosInstance.get(url,{
               params: {
-                name
+                search
               }
           });
 

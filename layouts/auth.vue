@@ -4,24 +4,7 @@
     <div class="bg-doodle w-full h-full flex  flex-col sm:flex-row items-center justify-center px-4 sm:px-10">
 
         <section class="w-[40%] h-full flex items-center justify-center header p-6">
-            <div class="w-full h-full flex justify-center items-center rounded-3xl">
-                <!-- <NuxtLink class="hidden sm:flex" >
-                    <img src="~/assets/img/logo/vyreLogo.png" alt="vyre">
-                </NuxtLink> -->
-
-                <!-- <NuxtLink v-if="$route.path == '/signup' " class="flex flex-row items-center justify-center gap-x-1" to="/login">
-                    <h3 class="text-[12px] sm:text-[16px] SansRegular text-[#0D0D0D] text-left ">Already have an account?</h3>
-                    <span class="text-[12px] sm:text-[16px] SansRegular text-[#FF2E42] text-left ">Login</span>
-                </NuxtLink>
-
-                <NuxtLink v-if="$route.path == '/login' " class="flex flex-row items-center justify-center gap-x-1" to="/signup">
-                    <h3 class="text-[12px] sm:text-[16px] SansRegular text-[#0D0D0D] text-left ">Are you a new user?</h3>
-                    <span class="text-[12px] sm:text-[16px] SansRegular text-[#FF2E42] text-left ">Create account</span>
-                </NuxtLink> -->
-            </div>
-            <!-- <div v-if="$route.path == '/signup' || $route.path == '/forgotPassword' " class="w-full bg-gray-200 rounded-full h-1 ">
-            <div  class="bg-[#FF2E42] h-1 rounded-full" :style="`width: ${progress}%`"></div>
-            </div> -->
+          
         </section>
 
         <section class="w-full sm:w-[40%] ">
@@ -32,6 +15,17 @@
     </div>
 
       <!-- <MobileMenu /> -->
+
+      <BaseDialogue class="bg-white" :visible="showKYCModal">
+
+         <div class="relative flex flex-col lg:w-[350px] gap-y-4 bg-white">
+               
+            <KycModal @close="showKYCModal = false" />
+
+         </div>
+
+
+      </BaseDialogue>
 
    </div>
 </template>
@@ -44,6 +38,27 @@
 
    const route = useRoute()
    const progressValue = ref(progress)
+
+   const showKYCModal = ref(false)
+
+   const checkKYCStatus = () => {
+      const kycData = JSON.parse(localStorage.getItem('kycTracking') as string);
+      
+      if (kycData) {
+         // Check if expired
+         const isExpired = (new Date().getTime() > kycData.timestamp + kycData.expiresIn);
+         
+         if (!isExpired) {
+            showKYCModal.value = true;
+         } else {
+            localStorage.removeItem('kycTracking');
+         }
+      }
+   };
+
+   onMounted(async()=>{
+      checkKYCStatus()
+   })
    
 </script>
 

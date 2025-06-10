@@ -1,21 +1,44 @@
 <template>
 
-  <div class="w-full h-fit gap-x-4 gap-y-4 flex flex-row flex-wrap items-center justify-center lg:items-start lg:justify-start">
+  <div class="w-full h-fit">
 
-    <div href="/wallets/wallet" :style="{ backgroundColor: getRandomColor() }" class="hover:bg-[#d9d5d5] border-2 hover:border-black cursor-pointer h-fit w-fit min-w-[120px] lg:min-w-[130px] flex-none p-2.5 gap-y-4 sm:gap-y-4 flex flex-col items-start justify-between rounded-2xl" v-for="balance in props.balances" :key="balance.name">
+    <Carousel v-bind="config" class="rounded-2xl">
+      <Slide href="/wallets/wallet" :style="{ backgroundColor: 'white' }" class=" hover:bg-[#d9d5d5] cursor-pointer h-fit sm:min-w-[250px] p-2 flex items-center justify-start rounded-2xl" v-for="balance in props.balances" :key="balance.name">
 
-        <div class="w-full h-[60%] flex flex-col items-start justify-center">
-          <span class="text-black poppinsBold text-sm whitespace-nowrap">
-              <span class="truncate">{{balance.amount}}</span> <span class=" text-xs">{{balance.symbol}}</span>
-          </span>
-          <span class="text-xs truncate poppinsRegular">
-            ₦ {{balance.amount}}
-          </span>
+        <img src="~/assets/img/currency/usdt.svg" class=" min-w-[50px] rounded-2xl border-4 border-white mr-4"/>
+
+        <div class="w-full flex items-center justify-between gap-8 pr-2">
+
+            <div class=" h-full flex flex-col items-start justify-center">
+              <span class="text-black Grotesque-Black text-[16px] whitespace-nowrap">
+                <span class="truncate">{{balance.symbol}}</span>
+              </span>
+              <span class="text-[12px] truncate Grotesque-Regular">
+              {{balance.symbol}}
+              </span>
+            </div>
+
+            <div class="h-full flex flex-col items-start justify-center ">
+              <span class="text-black Grotesque-Bold text-[16px] whitespace-nowrap">
+                <span class="truncate">{{balance.amount}}</span>
+              </span>
+              <span class="text-[12px] truncate poppinsRegular">
+                ₦ {{balance.amount}}
+              </span>
+            </div>
+
         </div>
 
-        <img src="~/assets/img/currency/usdt.svg" class="w-9 rounded-2xl border-4 border-white"/>
+       
+
         
-      </div>
+
+        
+
+      </Slide>
+    </Carousel>
+
+
 
 
   </div>
@@ -38,6 +61,7 @@
 
 <script setup lang="ts">
 
+
 type card = {
   name:string;
   imgurl:URL;
@@ -51,6 +75,19 @@ const getRandomColor = () => {
 }
 
 const props = defineProps<{
-    balances: card[]
+    balances: card[],
+    itemsToShow: number
 }>()
+
+const {itemsToShow} = props
+
+const config = {
+  // height: 190,
+  itemsToShow: itemsToShow,
+  gap: 30,
+  autoplay: 2000,
+  wrapAround: true,
+  pauseAutoplayOnHover: true,
+};
+
 </script>

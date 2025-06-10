@@ -15,13 +15,13 @@
           Enter New Password
         </label>
 
-        <div class="w-full relative flex flex-row items-center justify-between border-[#E4E5E7] border text-[#080708] text-[14px] rounded-xl outline-none">
+        <div class="w-full relative flex flex-row items-center justify-between border-[#E4E5E7] border text-[#080708] text-[14px] rounded-2xl outline-none">
             <input
               required
               v-model="password"
               :type="passwordVisible ? 'text' : 'password'"
               type="text"
-              class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-3 rounded-lg flex items-center justify-between outline-none"
+              class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-3 rounded-2xl flex items-center justify-between outline-none"
             />
 
             <button class="absolute my-auto right-6 flex items-center justify-center " @click.prevent="passwordVisible = !passwordVisible">
@@ -40,13 +40,13 @@
           Confirm New Password
         </label>
 
-        <div class="w-full relative flex flex-row items-center justify-between border-[#E4E5E7] border text-[#080708] text-[14px] rounded-xl outline-none">
+        <div class="w-full relative flex flex-row items-center justify-between border-[#E4E5E7] border text-[#080708] text-[14px] rounded-2xl outline-none">
           <input
             required
             v-model="confirmNewPassword"
             :type="confirmNewPasswordVisible ? 'text' : 'password'"
             type="text"
-            class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-3 rounded-lg flex items-center justify-between outline-none"
+            class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-3 rounded-2xl flex items-center justify-between outline-none"
           />
 
           <button class="absolute my-auto right-6 flex items-center justify-center " @click.prevent="confirmNewPasswordVisible = !confirmNewPasswordVisible">
@@ -103,7 +103,7 @@
     !passwordChecks.value.NUMBER || 
     !passwordChecks.value.COUNT ) return
 
-    const PasswordCreated = await setupPassword({userId:props.userId,password: password.value})
+    const PasswordCreated = await setupPassword({userId:props.userId, password: password.value})
     if (PasswordCreated.success) {
       emit('passwordCreated')
     }

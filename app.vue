@@ -1,7 +1,7 @@
 <template>
   <NuxtLayout>
-    <NuxtLoadingIndicator />
-    <NuxtPage />
-    <Toaster position="top-right" />
+    <!-- <NuxtLoadingIndicator /> -->
+    <!-- <Toaster position="top-right" /> -->
+      <NuxtPage />
   </NuxtLayout>
 </template>

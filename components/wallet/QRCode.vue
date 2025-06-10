@@ -20,8 +20,8 @@
   
   // Default options
   const options = {
-      width: 180,
-      height: 180,
+      width: 140,
+      height: 140,
       type: 'svg' as DrawType,
       data: props.data,
       image: '/vyreLogo.png',

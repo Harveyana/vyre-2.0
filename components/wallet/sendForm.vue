@@ -3,15 +3,17 @@
 
   <div class="w-full" >
 
-    <SendTab1 v-if="tab === 'tab1'" 
-      @update-value="(value:string)=> onSubmitTransferType(value)"  
+    <SendPreference v-if="tab === 'SELECT'"
+      v-model="DETAILS.TRANSFER_TYPE"
+      @next="tab = 'AMOUNT'"  
       :currency="currency" 
       :type="type" 
     />
 
-    <SendTab2 v-if="tab === 'tab2'"
-      @back="tab='tab1'"
-      @update-value="(value:number)=> onSubmitAmount(value)"
+    <EnterAmount v-if="tab === 'AMOUNT'"
+      v-model="DETAILS.AMOUNT"
+      @back="tab='SELECT'"
+      @next="tab = DETAILS.TRANSFER_TYPE" 
       :currency="currency" 
       :type="type" 
       :balance="balance"
@@ -20,22 +22,25 @@
     <!-- optional tabs based on transfer type for the currency -->
 
     <SendVyre v-if="tab === 'VYRE'"
-      @back="tab='tab2'"
-      @update-value="(value:string)=> onSubmitVyreUser(value)"
+      v-model:-amount="DETAILS.AMOUNT"
+      @back="tab='AMOUNT'"
+      @close="$emit('close')"
       :currency="currency" 
       :type="type" 
     />
 
     <SendBlockchain v-if="tab === 'BLOCKCHAIN'"
-      @back="tab='tab2'"
-      @update-value="(value:any)=> onSubmitBlockchain(value)"
+      v-model:-amount="DETAILS.AMOUNT"
+      @back="tab='AMOUNT'"
+      @close="$emit('close')"
       :currency="currency" 
       :type="type" 
     />
 
     <SendBank v-if="tab === 'BANK'"
-      @back="tab='tab2'"
-      @update-value="(value:any)=> onSubmitBank(value)"
+      v-model:-amount="DETAILS.AMOUNT"
+      @back="tab='AMOUNT'"
+      @close="$emit('close')"
       :currency="currency" 
       :type="type" 
     />
@@ -64,7 +69,8 @@
 
     const {currency, balance, type} = props
 
-   const tab = ref('tab1');
+   const tab = ref('SELECT');
+   const emit = defineEmits(['close']) 
 
    const showList = ref(false)
 
@@ -72,7 +78,7 @@
       CURRENCY_TYPE: type,
       CURRENCY: currency,
       TRANSFER_TYPE: '',
-      AMOUNT: 0,
+      AMOUNT: 0.00,
       RECEIPIENT_ID:'',
       BLOCKCHAIN:{
           address: '',

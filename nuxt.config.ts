@@ -4,13 +4,13 @@ export default defineNuxtConfig({
   ssr:false,
   runtimeConfig: {
     public: {
-      baseUrl: 'http://localhost:5000/api/v1',
+      baseUrl: 'https://api.vyre.africa/api/v1',
     }
-    // https://qaya-backend-8aa84c165678.herokuapp.com/api/v1
+    // https://vyre-africa-backend.onrender.com/api/v1
     // http://localhost:5000/api/v1
   },
   
-  modules: ['@nuxtjs/tailwindcss', 'nuxt-primevue','@nuxt/image','radix-vue/nuxt','@vueuse/nuxt','@pinia/nuxt','vue-sonner/nuxt'],
+  modules: ['@nuxtjs/tailwindcss', 'nuxt-primevue', '@nuxt/image', 'radix-vue/nuxt', '@vueuse/nuxt', '@pinia/nuxt', 'vue-sonner/nuxt', 'vue3-carousel-nuxt'],
   pinia: {
     storesDirs: ['./stores/**', './custom-folder/stores/**'],
   },
@@ -39,6 +39,7 @@ export default defineNuxtConfig({
         }
       ],
     },
+    pageTransition: { name: 'page', mode: 'out-in' }
   },
   primevue: {
     usePrimeVue: true,

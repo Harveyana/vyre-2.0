@@ -1,7 +1,7 @@
 <template>
 
 
-      <nav class="col-span-12 relative z-30 w-full py-8 px-6 rounded-2xl bg-[url('~/assets/img/doodle2.png')] bg-white dark:bg-[#12171D]">
+      <nav class="col-span-12 relative z-30 h-fit w-full py-8 px-6 rounded-2xl bg-[url('~/assets/img/doodle2.png')] bg-white dark:bg-[#12171D]">
         <div class="bg-[#F2F4F5] border-b border-gray-200 dark:bg-[#0B1015] dark:border-gray-700 rounded-2xl">
 
           <div class="px-3 py-1 lg:px-5 lg:pl-3">
@@ -31,16 +31,6 @@
                 </form> -->
               </div>
               <div class="flex items-center">
-                  <div class="hidden mr-3 -mb-1 sm:block">
-                    <a class="github-button" href="https://github.com/themesberg/flowbite-admin-dashboard" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star themesberg/flowbite-admin-dashboard on GitHub">Star</a>
-                  </div>
-                  <!-- Search mobile -->
-                  <button id="toggleSidebarMobileSearch" type="button" class="p-2 text-gray-500 rounded-lg lg:hidden hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-                    <span class="sr-only">Search</span>
-                    <!-- Search icon -->
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
-                  </button>
-
 
                   <!-- Notifications -->
                   <button @click="showNotification = !showNotification" type="button" data-dropdown-toggle="notification-dropdown" class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700">
@@ -125,13 +115,12 @@
 
 
                   <!-- Apps -->
-                  <button @click="showApps = !showApps" type="button" data-dropdown-toggle="apps-dropdown" class="hidden p-2 text-gray-500 rounded-lg sm:flex hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700">
+                  <!-- <button @click="showApps = !showApps" type="button" data-dropdown-toggle="apps-dropdown" class="hidden p-2 text-gray-500 rounded-lg sm:flex hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700">
                     <span class="sr-only">View Apps</span>
-                    <!-- Icon -->
                     <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                  </button>
+                  </button> -->
                   <!-- Dropdown menu -->
-                  <div v-if="showApps" class="absolute top-14 right-4 z-20 z-50 max-w-sm my-4 overflow-hidden text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600" id="apps-dropdown">
+                  <!-- <div v-if="showApps" class="absolute top-14 right-4 z-20 z-50 max-w-sm my-4 overflow-hidden text-base list-none bg-white divide-y divide-gray-100 rounded shadow-lg dark:bg-gray-700 dark:divide-gray-600" id="apps-dropdown">
                     <div class="block px-4 py-2 text-base font-medium text-center text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         Apps
                     </div>
@@ -173,7 +162,7 @@
                           <div class="text-sm font-medium text-gray-900 dark:text-white">Logout</div>
                       </a>
                     </div>
-                  </div>
+                  </div> -->
 
 
                   <button @click="toggleDark()" id="theme-toggle" data-tooltip-target="tooltip-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
@@ -184,6 +173,10 @@
                       Toggle dark mode
                       <div class="tooltip-arrow" data-popper-arrow></div>
                   </div>
+
+                  <h2 v-if="user" class="text-black dark:text-white capitalize" role="none">
+                    {{ user?.firstName }} .{{ user?.lastName.charAt(0) }}
+                  </h2>
                   <!-- Profile -->
                   <div class="flex items-center ml-3">
                     <div>

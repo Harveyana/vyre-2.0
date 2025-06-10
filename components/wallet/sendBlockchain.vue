@@ -38,11 +38,11 @@
           </BaseButton>
 
           <baseButton
-              @click="submitInfo()"
+              @click="sendAsset()"
                 type="submit"
                 class="w-[70%] py-3 bg-black  text-white text-[15px] rounded-lg "
               >
-              Continue
+              Send
           </baseButton>
 
         </div>
@@ -62,13 +62,12 @@
   import { storeToRefs } from 'pinia';
   import { useWalletStore } from '~/store/wallet';
   import { useAuthStore } from '~/store/auth';
-  const { createWallet, fetchRate} = useWalletStore();
+  const { blockchainTransfer } = useWalletStore();
 
 
   const { loading } = storeToRefs(useAuthStore()); 
-  const showLoader = ref(false)
- 
-
+  
+  const amount = defineModel<number>('Amount')
   const BLOCKCHAIN = reactive({
     address: '',
     destinationTag: '',
@@ -81,41 +80,48 @@
 
   const {currency, type} = props
 
-
-
   const route = useRouter()
 
-  const emit = defineEmits(['next','update-value','back'])  // Declare Events
+  const emit = defineEmits(['next','update-value','back','close'])  // Declare Events
 
-  // const create = async(currency:string)=>{
-  //     emit('close')
-  //     toast.promise(() => new Promise(async(resolve,reject) =>{
-  //       const created = await createWallet(currency)
-  //       if (created.success) {
-  //         resolve({msg:created.msg})
-  //         // emit('verified', verified?.userId)
-  //       }else{
-  //         reject({msg:created.msg})
-  //         // $toast.error(verified.msg)
-  //       }
-  //     }), 
-  //     {
-  //       loading: 'Creating wallet',
-  //       success: (data: any) => {
-  //         emit('created')
-  //         return data.msg
-  //       },
-  //       error: (data: any) => {return data.msg}
-  //     })
 
-  // }
+  const sendAsset = async()=>{
+      if(!BLOCKCHAIN.address) return
+      if(currency === 'XRP' && !BLOCKCHAIN.destinationTag) return
+      emit('close')
+      toast.promise(() => new Promise(async(resolve,reject) =>{
+        const transfered = await blockchainTransfer(
+          {
+            amount: amount.value!,
+            currency: currency!,
+            address: BLOCKCHAIN.address, 
+            destinationTag: BLOCKCHAIN.destinationTag
+          })
+
+        if (transfered.success) {
+          resolve({msg:transfered.msg})
+          // emit('verified', verified?.userId)
+        }else{
+          reject({msg:transfered.msg})
+          // $toast.error(verified.msg)
+        }
+      }), 
+      {
+        loading: `Sending ${currency}`,
+        success: (data: any) => {
+          return data.msg
+        },
+        error: (data: any) => {return data.msg}
+      })
+
+  }
   
 
-  const submitInfo = ()=>{
-    if(currency === 'XRP' && !BLOCKCHAIN.destinationTag) return
-    if(!BLOCKCHAIN.address) return
-    emit('update-value', BLOCKCHAIN)
-  }
+  // const submitInfo = ()=>{
+  //   if(currency === 'XRP' && !BLOCKCHAIN.destinationTag) return
+  //   if(!BLOCKCHAIN.address) return
+  //   emit('update-value', BLOCKCHAIN)
+  // }
 
   // onMounted(async()=>{
   //   getRate()

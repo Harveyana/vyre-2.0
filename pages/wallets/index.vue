@@ -1,6 +1,6 @@
 <template>
 
-  <div class="dark:bg-[#12171D] h-fit w-full gap-x-1 lg:gap-x-6 px-4 sm:px-10 py-8">
+  <div class="dark:bg-[#12171D] h-[80vh] w-full gap-x-1 lg:gap-x-6 px-4 sm:px-6 py-8">
 
     <!-- <div class="w-full py-3 flex items-start justify-start mb-3">
 
@@ -59,7 +59,7 @@
 
     </div> -->
 
-    <div class="w-full flex flex-col sm:flex-row gap-y-4 ">
+    <div class="w-full flex flex-col sm:flex-row gap-6 ">
 
       <div class="w-full sm:w-[70%] flex flex-col gap-y-6">
 
@@ -95,11 +95,9 @@
 
         </div>
 
-        <div class="flex w-full">
+        <div class="flex w-full rounded-2xl p-3.5 bg-white/60 dark:bg-black/60 ">
           <div v-if="loading" class="w-full h-[40vh] flex items-center justify-center">
-            <ProgressSpinner class="" style="width: 25px; height: 25px" strokeWidth="8" fill="#ffff"
-                animationDuration=".5s" aria-label="Custom ProgressSpinner" 
-            />
+            <img class="animate-pulse animate-bounce" src="~/assets/img/icons/walletLoader.svg" />
           </div>
           <div v-else-if="!wallets.length" class="w-full h-[40vh] flex items-center justify-center">
             <h1 class="text-[14px] sm:text-[18px] whitespace-nowrap Grotesque-Bold text-[#080708] dark:text-gray-300">
@@ -116,7 +114,7 @@
       </div>
 
 
-      <div class="w-full sm:w-[30%] flex flex-col gap-y-6">
+      <div class="w-full sm:w-[30%] flex flex-col gap-y-6 ">
 
         <div class="w-full flex items-center justify-between sm:justify-center gap-x-3">
 
@@ -130,7 +128,7 @@
         
         </div>
 
-        <div class=" bg-white dark:bg-[#0B1015] rounded-xl w-full h-full">
+        <div class=" bg-white/50 dark:bg-[#0B1015] rounded-xl w-full h-full">
 
         </div>
 

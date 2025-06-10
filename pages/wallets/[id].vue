@@ -36,7 +36,7 @@
                   
                   <span class="flex flex-col text-black Grotesque-Bold text-2xl">
                       <div v-if="!loading">
-                        <span class="truncate">{{parseFloat(wallet.accountBalance).toFixed(wallet.type ==='CRYPTO'? 8 : 2)}}</span> <span class="text-sm">{{wallet.currency}}</span>
+                        <span class="truncate">{{Number(accountBalance).toLocaleString('en-US')}}</span> <span class="text-sm">{{wallet.currency}}</span>
                       </div>
                       <div v-else>
                         <span class="truncate">---</span>
@@ -57,7 +57,7 @@
                   
                   <div class="flex flex-col text-black Grotesque-Bold text-2xl ">
                       <div v-if="!loading">
-                        <span class="truncate">{{parseFloat(wallet.availableBalance).toFixed(wallet.type ==='CRYPTO'? 8 : 2)}}</span> <span class="text-sm">{{wallet.currency}}</span>
+                        <span class="truncate">{{Number(availableBalance).toLocaleString('en-US')}}</span> <span class="text-sm">{{wallet.currency}}</span>
                       </div>
                       <div v-else>
                         <span class="truncate">---</span>
@@ -103,8 +103,8 @@
             </button>
           </div>
           
-          <div class="overflow-y-scroll scroll-smooth max-h-[10rem] lg:max-h-[15rem] flex flex-col items-center justify-start rounded-2xl col-span-12 py-2 mb-2 md:mb-5 space-y-4">
-            <Recent :recents="transactions"/>
+          <div class="w-full overflow-y-scroll scroll-smooth max-h-[10rem] lg:max-h-[15rem] flex flex-col items-center justify-start rounded-2xl py-2 mb-2 md:mb-5 gap-y-4">
+            <Recent />
           </div>
         </div>
         
@@ -116,12 +116,12 @@
 
         <div class="w-full flex items-center justify-between sm:justify-center gap-x-3">
 
-          <baseButton @click="showSendModal = true" class="flex items-center justify-center gap-x-2 bg-black rounded-xl border border-white Grotesque-Bold w-[50%] py-2.5 px-6 text-white text-[16px]">
+          <baseButton :disabled="loading" @click="showSendModal = true" class="flex items-center justify-center gap-x-2 bg-black rounded-xl border border-white Grotesque-Bold w-[50%] py-2.5 px-6 text-white text-[16px]">
             Send
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32"><path fill="#fff" d="M27.71 4.29a1 1 0 0 0-1.05-.23l-22 8a1 1 0 0 0 0 1.87l8.59 3.43L19.59 11L21 12.41l-6.37 6.37l3.44 8.59A1 1 0 0 0 19 28a1 1 0 0 0 .92-.66l8-22a1 1 0 0 0-.21-1.05"/></svg>
           </baseButton>
 
-          <baseButton @click="showRecieveModal = true" class="flex items-center justify-center gap-x-2 bg-white rounded-xl border border-black Grotesque-Bold w-[50%] py-2.5 px-6 text-black text-[14px]">
+          <baseButton :disabled="loading" @click="showRecieveModal = true" class="flex items-center justify-center gap-x-2 bg-white rounded-xl border border-black Grotesque-Bold w-[50%] py-2.5 px-6 text-black text-[14px]">
             Replenish
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" color="#000"><path d="M15 15a1.5 1.5 0 1 0 3 0a1.5 1.5 0 0 0-3 0"/><path d="M3 12V6c2.105.621 6.576 1.427 12.004 1.803c2.921.202 4.382.303 5.189 1.174c.807.87.807 2.273.807 5.078v2.013c0 2.889 0 4.333-.984 5.232c-.983.899-2.324.768-5.005.506a62 62 0 0 1-2.011-.23"/><path d="M17.626 8c.377-1.423.72-4.012-.299-5.297c-.645-.815-1.605-.736-2.545-.654c-4.944.435-8.437 1.318-10.389 1.918C3.553 4.225 3 5.045 3 5.96M11 18H7m0 0H3m4 0v4m0-4v-4"/></g></svg>          
           </baseButton>
@@ -314,6 +314,20 @@ const wallet = ref<wallet>({
 
 // console.log(rate(1.2,wallet.currency,'NGN'))
 
+const accountBalance = computed(() => {
+  const balance = parseFloat(wallet.value?.accountBalance);
+  if (isNaN(balance)) return '0.00';
+  const decimalPlaces = wallet.value.type === 'CRYPTO' ? 8 : 2;
+  return balance.toFixed(decimalPlaces);
+});
+
+const availableBalance = computed(() => {
+  const balance = parseFloat(wallet.value?.availableBalance);
+  if (isNaN(balance)) return '0.00';
+  const decimalPlaces = wallet.value.type === 'CRYPTO' ? 8 : 2;
+  return balance.toFixed(decimalPlaces);
+});
+
 
 const fetchWallet = async()=>{
 
@@ -342,54 +356,6 @@ onMounted(async()=>{
   fetchWallet()
 })
 
-
-const transactions:{type:string;source?:string;symbol:string;destination?:string;currency:string;date:string;description:string;amount:number}[]=[
-      {
-        type:'sent',
-        destination:'hilda234@yahoo.com',
-        currency:'USD',
-        symbol:'$',
-        date:'jan 3 2004 12:30pm',
-        description:'payment for fashion services',
-        amount:2400
-      },
-      {
-        type:'received',
-        source:'harveyana@yahoo.com',
-        currency:'EUR',
-        symbol:'€',
-        date:'April 17 2014 6:30pm',
-        description:'payment for house services',
-        amount:5300
-      },
-      {
-        type:'received',
-        source:'harveyana@yahoo.com',
-        currency:'EUR',
-        symbol:'€',
-        date:'April 17 2014 6:40pm',
-        description:'payment for house services',
-        amount:5300
-      },
-      {
-        type:'sent',
-        destination:'hilda234@yahoo.com',
-        currency:'USD',
-        symbol:'$',
-        date:'jan 3 2004 12:30pm',
-        description:'payment for fashion services',
-        amount:2400
-      },
-      {
-        type:'sent',
-        destination:'hilda234@yahoo.com',
-        currency:'USD',
-        symbol:'$',
-        date:'jan 3 2004 12:30pm',
-        description:'payment for fashion services',
-        amount:2400
-      },
-    ]
 
 
 

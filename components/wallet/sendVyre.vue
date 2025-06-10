@@ -80,11 +80,11 @@
 
 
           <baseButton
-              @click="submitUser()"
+              @click="sendAsset()"
                 type="submit"
                 class="w-[70%] py-3 bg-black  text-white text-[15px] rounded-lg "
               >
-              Continue
+              Send
           </baseButton>
 
         </div>
@@ -107,20 +107,18 @@
   import { storeToRefs } from 'pinia';
   import { useWalletStore } from '~/store/wallet';
   import { useAuthStore } from '~/store/auth';
-  const { createWallet, fetchRate} = useWalletStore();
+  const { vyreTransfer} = useWalletStore();
   const { queryUser } = useAuthStore();
 
-  const { loading } = storeToRefs(useAuthStore()); 
-  const showLoader = ref(false)
-  
-  const visible = ref(false)
-  const toggleState = ref(false)
+  const { loading } = storeToRefs(useAuthStore());
 
-  // const state = useGlobalState()
-  // const AssetMap = state.assetMap
   const entry = ref('')
 
+
+
+  const amount = defineModel<number>('Amount')
   const userId = ref('')
+
 
   interface user {
     id:string;
@@ -129,7 +127,6 @@
     email:string;
     photoUrl:string
   }
-
 
   const allUsers = ref<user[]>([])
 
@@ -144,30 +141,37 @@
 
   const route = useRouter()
 
-  const emit = defineEmits(['next','update-value','back'])  // Declare Events
+  const emit = defineEmits(['next','update-value','back','close'])  // Declare Events
 
-  // const create = async(currency:string)=>{
-  //     emit('close')
-  //     toast.promise(() => new Promise(async(resolve,reject) =>{
-  //       const created = await createWallet(currency)
-  //       if (created.success) {
-  //         resolve({msg:created.msg})
-  //         // emit('verified', verified?.userId)
-  //       }else{
-  //         reject({msg:created.msg})
-  //         // $toast.error(verified.msg)
-  //       }
-  //     }), 
-  //     {
-  //       loading: 'Creating wallet',
-  //       success: (data: any) => {
-  //         emit('created')
-  //         return data.msg
-  //       },
-  //       error: (data: any) => {return data.msg}
-  //     })
+  const sendAsset = async()=>{
+      if(!userId.value) return
+      emit('close')
+      toast.promise(() => new Promise(async(resolve,reject) =>{
+        const transfered = await vyreTransfer(
+          {
+            amount: amount.value!,
+            currency: currency!,
+            receipient_id: userId.value
+          })
 
-  // }
+        if (transfered.success) {
+          resolve({msg:transfered.msg})
+          // emit('verified', verified?.userId)
+        }else{
+          reject({msg:transfered.msg})
+          // $toast.error(verified.msg)
+        }
+      }), 
+      {
+        loading: `Sending ${currency}`,
+        success: (data: any) => {
+          return data.msg
+        },
+        error: (data: any) => {return data.msg}
+      })
+
+  }
+
   const rate = ref(0)
 
   const getUser = async()=>{
@@ -188,10 +192,10 @@
     await debouncedFn()
   });
 
-  const submitUser = ()=>{
-    if(!userId.value) return
-    emit('update-value',userId.value)
-  }
+  // const submitUser = ()=>{
+  //   if(!userId.value) return
+  //   emit('update-value',userId.value)
+  // }
 
   // onMounted(async()=>{
   //   getRate()

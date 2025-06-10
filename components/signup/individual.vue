@@ -1,9 +1,10 @@
 <template>
     <div class="w-full bg-white rounded-xl">
 
-      <PersonalForm v-if="tab =='FORM'" :AccountType="props.AccountType" @back="$emit('back')" @submit="(value)=>{submit(value)}" />
+      <PersonalForm v-if="tab =='FORM'" @submit="(value)=>{submit(value)}" />
       <Verify :email="details.DETAILS?.email || 'NON'" v-if="tab =='VERIFY'" @verified="(id)=>{userVerified(id)}" />
-      <CreatePassword v-if="tab =='PASSWORD'" :userId="userId"  @passwordCreated="tab = 'SUCCESS'" />
+      <CreatePassword v-if="tab =='PASSWORD'" :userId="userId"  @passwordCreated="tab = 'ADDRESS'" />
+      <AddressForm v-if="tab =='ADDRESS'" :userId="userId" @back="$emit('back')" />
       <Congratulation v-if="tab =='SUCCESS'" successMessage="Account Created Successfully" buttonText="Login To Dashboard" />
 
     </div>
@@ -20,31 +21,33 @@
     const { $toast } = useNuxtApp()
 
     interface Userpayload {
-        TYPE: string;
         DETAILS:{
           firstName: string;
           lastName: string;
           businessName?: string;
-          email:string;
-          phoneNumber: string
+          email: string;
+          phoneNumber: string;
+          // country: string;
+          // referreeId?: string
         }
     }
 
-    const props = defineProps<{
-      AccountType: string;
-    }>()
+    // const props = defineProps<{
+    //   AccountType: string;
+    // }>()
 
 
-    const emit = defineEmits(['back'])  // Declare Events
+    // const emit = defineEmits(['back'])  // Declare Events
     
     const details = reactive<Userpayload>({
-      TYPE: props.AccountType,
       DETAILS:{
           firstName: '',
           lastName: '',
           businessName:'',
           email: '',
-          phoneNumber: ''
+          phoneNumber: '',
+          // country: '',
+          // referreeId:''
       }
     })
 
@@ -55,13 +58,24 @@
       return Object.keys(obj).length > 0;
     }
 
-    const submit = async(value:{businessName?:string;firstName: string;lastName: string;email:string;phoneNumber: string})=>{
+    const submit = async(
+        value:{
+          businessName?:string;
+          referreeId?:string;
+          firstName: string;
+          lastName: string;
+          email:string;
+          phoneNumber: string
+      })=>{
+
       details.DETAILS = value
       console.log(details)
       if(isObjectNotEmpty(details.DETAILS)){
 
         const registered = await register_User(details)
         if (registered.success) {
+          console.log('registered.user',registered.user?.id)
+          userId.value = registered.user?.id
           toast.success(registered.msg)
           tab.value = 'VERIFY'
         }else{
@@ -71,7 +85,7 @@
     }
 
     const userVerified = (id:string)=>{
-      userId.value = id
+      // userId.value = id
       tab.value = 'PASSWORD'
     }
 

@@ -4,9 +4,9 @@
   >
     <div class="w-full h-full rounded-xl px-4 sm:px-8 py-6 overflow-y-auto">
 
-      <Preference v-if="tab =='SELECT'" @update-value="(value:string)=>{tab = value}" />
+      <!-- <Preference v-if="tab =='SELECT'" @update-value="(value:string)=>{tab = value}" /> -->
 
-      <Individual v-if="tab =='INDIVIDUAL'|| tab =='BUSINESS'" :AccountType="tab" @back="tab = 'SELECT'" />
+      <Individual />
 
       <!-- <Business v-if="tab =='BUSINESS'" @back="tab = 'SELECT'" /> -->
 

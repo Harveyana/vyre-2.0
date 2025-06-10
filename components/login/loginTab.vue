@@ -33,6 +33,7 @@
             v-model="inputs.password"
             :type="passwordVisible ? 'text' : 'password'"
             type="text"
+            @keyup.enter="login()"
             placeholder="Password"
             class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-2 rounded-lg flex items-center justify-between outline-none"
           />
@@ -51,7 +52,7 @@
         Forgot password?
       </NuxtLink>
 
-      <button :disabled="loading" type="submit" class="w-full flex items-center justify-center py-3 bg-black text-white rounded-lg mt-6">
+      <button @keyup.enter="login()" :disabled="loading" type="submit" class="w-full flex items-center justify-center py-3 bg-black text-white rounded-2xl mt-6">
         <span v-if="!loading" class="text-[16px] text-white text-center">Login</span>
         <ProgressSpinner v-else class="" style="width: 25px; height: 25px" strokeWidth="8" fill="#ffff"
             animationDuration=".5s" aria-label="Custom ProgressSpinner" 

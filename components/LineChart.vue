@@ -69,31 +69,31 @@
           { length: 10 },
           (_, i) => new Date().getFullYear() - i
         ), // array of last 10 years
-        show: false,
+        show: true,
       labels: {
-        show: false,
+        show: true,
       },
       lines: {
-        show: false,
+        show: true,
       }
       },
 
       yaxis: {
-        show: false,
+        show: true,
         labels: {
-          show: false,
+          show: true,
         },
         axisBorder: {
-          show: false,
+          show: true,
         },
         axisTicks: {
-          show: false,
+          show: true,
         },
         crosshairs: {
-          show: false,
+          show: true,
         },
         tooltip: {
-          enabled: false,
+          enabled: true,
         },
       
       },

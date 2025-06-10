@@ -78,12 +78,6 @@
 
   const submit = async(code:number,email:string)=>{
 
-    // const verified = await SubmitOtp({code:code,email:email})
-    // if (verified.success) {
-    //   emit('verified', verified?.userId)
-    // }else{
-    //   $toast.error(verified.msg)
-    // }
     console.log('started')
     toast.promise(() => new Promise(async(resolve,reject) =>{
       const verified = await SubmitOtp({code,email})
