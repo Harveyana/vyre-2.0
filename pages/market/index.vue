@@ -97,7 +97,7 @@
 
       <div class="hidden w-full sm:w-[35%] sm:flex flex-col items-end gap-y-4">
 
-        <OrderFilters @update="(entry:any)=>initFilter(entry)"/>
+        <OrdersFilters @update="(entry:any)=>initFilter(entry)"/>
         
       </div>
       
