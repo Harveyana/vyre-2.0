@@ -183,14 +183,14 @@
   // }
 
   const startKYC = (userId:string,url:string) => {
-    const kycData = {
-      userId,
-      timestamp: new Date().getTime(),
-      expiresIn: 24 * 60 * 60 * 1000 // 24 hours
-    };
+    // const kycData = {
+    //   userId,
+    //   timestamp: new Date().getTime(),
+    //   expiresIn: 24 * 60 * 60 * 1000 // 24 hours
+    // };
     
-    localStorage.setItem('kycTracking', JSON.stringify(kycData));
-    window.location.href = `${url}?redirect_uri='https'`;
+    // localStorage.setItem('kycTracking', JSON.stringify(kycData));
+    window.location.href = `${url}?redirect_uri='https://app.vyre.africa/login?kyc_User=${userId}'`;
   };
 
   const submit = async()=>{

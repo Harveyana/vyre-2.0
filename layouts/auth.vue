@@ -36,28 +36,17 @@
 
    const { progress } = storeToRefs(useAuthStore());
 
-   const route = useRoute()
    const progressValue = ref(progress)
 
    const showKYCModal = ref(false)
 
-   const checkKYCStatus = () => {
-      const kycData = JSON.parse(localStorage.getItem('kycTracking') as string);
-      
-      if (kycData) {
-         // Check if expired
-         const isExpired = (new Date().getTime() > kycData.timestamp + kycData.expiresIn);
-         
-         if (!isExpired) {
-            showKYCModal.value = true;
-         } else {
-            localStorage.removeItem('kycTracking');
-         }
-      }
-   };
+   const router = useRouter()
+   const route = useRoute()
 
    onMounted(async()=>{
-      checkKYCStatus()
+      if (route.query.kyc_User) {
+         showKYCModal.value = true;
+      }
    })
    
 </script>

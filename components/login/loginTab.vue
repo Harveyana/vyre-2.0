@@ -14,7 +14,7 @@
 
         <input
           type="email"
-          class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-2.5 rounded-lg flex items-center justify-between outline-none"
+          class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-none focus:ring-0 px-3 py-3 rounded-xl flex items-center justify-between outline-none"
           v-model="inputs.email"
           required
           placeholder="Email"
@@ -27,15 +27,14 @@
           Password
         </label>
 
-        <div class="w-full relative flex flex-row items-center justify-between border-[#E4E5E7] border text-[#080708] text-[14px] rounded-xl outline-none">
+        <div class="w-full relative flex flex-row items-center justify-between text-[#080708] text-[14px] rounded-xl outline-none">
           <input
             required
             v-model="inputs.password"
             :type="passwordVisible ? 'text' : 'password'"
-            type="text"
             @keyup.enter="login()"
             placeholder="Password"
-            class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-2 rounded-lg flex items-center justify-between outline-none"
+            class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-none focus:ring-0 px-3 py-2.5 rounded-xl flex items-center justify-between outline-none"
           />
 
           <button class="absolute my-auto right-6 flex items-center justify-center " @click.prevent="passwordVisible = !passwordVisible">
