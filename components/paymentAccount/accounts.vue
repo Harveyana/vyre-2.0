@@ -47,42 +47,42 @@
         <div v-if="loading" class="w-full h-full flex flex-col gap-y-4 w-full rounded-xl items-center justify-center">
 
                 <div class="flex gap-x-3 h-16 gap-y-2 w-full p-4 border rounded-xl items-center justify-center">
-                  <div class="h-12 w-12 bg-gray-300 rounded-full dark:bg-gray-600 "></div>
+                  <div class="h-12 w-12 bg-gray-300 rounded-full  "></div>
 
                   <div class="w-full flex flex-col items-start gap-y-2 ">
-                    <div class="h-5 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                    <div class="h-2 bg-gray-300 rounded-full dark:bg-gray-600 w-40"></div>
-                    <div class="h-2 bg-gray-300 rounded-full dark:bg-gray-600 w-20"></div>
+                    <div class="h-5 bg-gray-300 rounded-full  w-full"></div>
+                    <div class="h-2 bg-gray-300 rounded-full  w-40"></div>
+                    <div class="h-2 bg-gray-300 rounded-full  w-20"></div>
                   </div>
                 </div>
 
                 <div class="flex gap-x-3 h-16 gap-y-2 w-full p-4 border rounded-xl items-center justify-center">
-                  <div class="h-12 w-12 bg-gray-300 rounded-full dark:bg-gray-600 "></div>
+                  <div class="h-12 w-12 bg-gray-300 rounded-full  "></div>
 
                   <div class="w-full flex flex-col items-start gap-y-2 ">
-                    <div class="h-5 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                    <div class="h-2 bg-gray-300 rounded-full dark:bg-gray-600 w-40"></div>
-                    <div class="h-2 bg-gray-300 rounded-full dark:bg-gray-600 w-20"></div>
+                    <div class="h-5 bg-gray-300 rounded-full  w-full"></div>
+                    <div class="h-2 bg-gray-300 rounded-full  w-40"></div>
+                    <div class="h-2 bg-gray-300 rounded-full  w-20"></div>
                   </div>
                 </div>
 
                 <div class="flex gap-x-3 h-16 gap-y-2 w-full p-4 border rounded-xl items-center justify-center">
-                  <div class="h-12 w-12 bg-gray-300 rounded-full dark:bg-gray-600 "></div>
+                  <div class="h-12 w-12 bg-gray-300 rounded-full  "></div>
 
                   <div class="w-full flex flex-col items-start gap-y-2 ">
-                    <div class="h-5 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                    <div class="h-2 bg-gray-300 rounded-full dark:bg-gray-600 w-40"></div>
-                    <div class="h-2 bg-gray-300 rounded-full dark:bg-gray-600 w-20"></div>
+                    <div class="h-5 bg-gray-300 rounded-full  w-full"></div>
+                    <div class="h-2 bg-gray-300 rounded-full  w-40"></div>
+                    <div class="h-2 bg-gray-300 rounded-full  w-20"></div>
                   </div>
                 </div>
 
                 <div class="flex gap-x-3 h-16 gap-y-2 w-full p-4 border rounded-xl items-center justify-center">
-                  <div class="h-12 w-12 bg-gray-300 rounded-full dark:bg-gray-600 "></div>
+                  <div class="h-12 w-12 bg-gray-300 rounded-full  "></div>
 
                   <div class="w-full flex flex-col items-start gap-y-2 ">
-                    <div class="h-5 bg-gray-300 rounded-full dark:bg-gray-600 w-full"></div>
-                    <div class="h-2 bg-gray-300 rounded-full dark:bg-gray-600 w-40"></div>
-                    <div class="h-2 bg-gray-300 rounded-full dark:bg-gray-600 w-20"></div>
+                    <div class="h-5 bg-gray-300 rounded-full  w-full"></div>
+                    <div class="h-2 bg-gray-300 rounded-full  w-40"></div>
+                    <div class="h-2 bg-gray-300 rounded-full  w-20"></div>
                   </div>
                 </div>
                 
