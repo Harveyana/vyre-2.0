@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full h-[80vh] bg-gradient-to-b from-bg-white/60 to-bg-white/70 dark:bg-black/50 sm:h-[85vh] flex flex-col items-start justify-start gap-y-4 px-3 lg:px-10">
+    <div class="w-full h-[80vh] bg-gradient-to-b from-bg-white/60 to-bg-white/70 sm:h-[85vh] flex flex-col items-start justify-start gap-y-4 px-3 lg:px-10">
 
         <div class="w-full flex flex-col gap-y-2 items-start">
 

@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-full h-[80vh] bg-gradient-to-b from-bg-white/60 to-bg-white/70 dark:bg-black/50 sm:h-[85vh] overflow-y-auto dark:bg-[#12171D] grid grid-cols-12 gap-x-1 lg:gap-x-6 sm:px-4">
+  <div class="w-full h-[80vh] bg-gradient-to-b from-bg-white/60 to-bg-white/70 sm:h-[85vh] overflow-y-auto grid grid-cols-12 gap-x-1 lg:gap-x-6 sm:px-4">
 
     <!-- First Section -->
                 
@@ -122,7 +122,7 @@
 
             
         
-            <div class="col-span-12 h-fit lg:col-span-8 ">
+            <!-- <div class="col-span-12 h-fit lg:col-span-8 ">
 
                 <h2 class="text-black dark:text-white text-lg Grotesque-Regular mb-2">
                   Overview
@@ -141,12 +141,12 @@
 
                 </div>
 
-            </div>
+            </div> -->
 
 
           </div>
 
-          <div class="col-span-12 h-fit lg:col-span-4 flex flex-col gap-y-6 bg-white/50 dark:bg-black/50 rounded-2xl p-4">
+          <div class="col-span-12 h-fit lg:col-span-4 flex flex-col gap-y-6 bg-white/50 rounded-2xl p-4">
 
             <div class="col-span-12 h-fit lg:col-span-6 flex flex-col items-started justify-center">
 

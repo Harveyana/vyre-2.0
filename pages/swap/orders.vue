@@ -1,6 +1,6 @@
 <template>
 
-  <div class="w-full h-[80vh] flex items-start justify-center bg-gradient-to-b from-bg-white/60 to-bg-white/70 dark:bg-black/50 sm:h-[85vh] overflow-y-auto dark:bg-[#12171D] gap-x-1 lg:gap-x-6 sm:px-4">
+  <div class="w-full h-[80vh] flex items-start justify-center bg-gradient-to-b from-bg-white/60 to-bg-white/70 sm:h-[85vh] overflow-y-auto gap-x-1 lg:gap-x-6 sm:px-4">
 
     <!-- First Section -->
 
