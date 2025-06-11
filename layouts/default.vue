@@ -12,12 +12,11 @@
          <VyreMenu/>
         <section class="w-full relative flex flex-col items-center justify-center ">
             <Transition name="page" mode="out-in">
-            <slot />
+              <slot />
             </Transition>
-            <VyreMobileMenu />
         </section>
         
-        
+        <VyreMobileMenu />
       </div>
 
 

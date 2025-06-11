@@ -1,7 +1,7 @@
 <template>
 
 
-   <div class="w-[99%] flex sm:hidden items-center justify-center rounded-3xl bg-black px-4 py-2">
+   <div class="w-[99%] absolute bottom-2 left-[1px] flex sm:hidden items-center justify-center rounded-3xl bg-black px-4 py-2">
                   <ul class="flex items-center justify-between gap-2">
                      
                      <li>
