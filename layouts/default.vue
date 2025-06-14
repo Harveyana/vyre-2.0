@@ -1,5 +1,7 @@
 <template>
-   <div class="min-h-screen h-[100dvh] bg-doodle  max-w-screen-3xl mx-auto w-full overflow-hidden flex flex-col items-center justify-center">
+   <div class="min-h-screen h-[100dvh] bg-doodle  max-w-screen-3xl mx-auto w-full overflow-hidden flex flex-col items-center justify-center relative">
+
+      <VyreMobileMenu />
 
       <Toaster position="top-right" />
       <div v-if="pending" class="flex items-center gap-x-3 justify-center h-full w-full bg-[#F7F7F7] rounded-3xl border border-8 border-white">
@@ -16,7 +18,7 @@
             </Transition>
         </section>
         
-        <VyreMobileMenu />
+        <!-- <VyreMobileMenu /> -->
       </div>
 
 

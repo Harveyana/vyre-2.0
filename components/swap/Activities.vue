@@ -52,12 +52,12 @@
               <p class="text-gray-500 Grotesque-Light  text-[10px] md:text-xs whitespace-nowrap">{{timeAgo(order?.createdAt)}}</p>
             </div>
 
-            <div class="flex flex-row items-center justify-center bg-green-100 py-1 sm:py-0 px-1.5 rounded-lg">
+            <div :class="order?.status === 'AWAITING_TRANSFER' ? 'bg-[#FFF3E0]':order?.status === 'CREATED' ? 'bg-[#E3F2FD]':order?.status === 'PROCESSING' ? 'bg-[#F3E5F5]':order?.status === 'COMPLETED' ? 'bg-[#E8F5E9]':order?.status === 'FAILED' ? 'bg-[#FFEBEE]':'bg-none' " class="flex flex-row items-center justify-center py-1 sm:py-0 px-1.5 rounded-lg">
 
               <span>
-                  <svg class="text-green-500 " xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48"><path fill="currentColor" stroke="currentColor" stroke-width="2" d="M24 33a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z"/></svg>
+                <svg :class="order?.status === 'AWAITING_TRANSFER' ? 'text-[#FFA500]':order?.status === 'CREATED' ? 'text-[#3498DB]':order?.status === 'PROCESSING' ? 'text-[#9B59B6]':order?.status === 'COMPLETED' ? 'text-[#2ECC71]':order?.status === 'FAILED' ? 'text-[#E74C3C]':'text-green-500'" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48"><path fill="currentColor" stroke="currentColor" stroke-width="2" d="M24 33a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z"/></svg>
               </span>
-              <p class=" flex flex-row items-center justify-center text-green-500 sm:p-1.5 rounded-xl Grotesque-Bold text-[9px] sm:text-[12px] whitespace-nowrap">
+              <p :class="order?.status === 'AWAITING_TRANSFER' ? 'text-[#FFA500]':order?.status === 'CREATED' ? 'text-[#3498DB]':order?.status === 'PROCESSING' ? 'text-[#9B59B6]':order?.status === 'COMPLETED' ? 'text-[#2ECC71]':order?.status === 'FAILED' ? 'text-[#E74C3C]':'text-green-500'" class="flex flex-row items-center justify-center sm:p-1.5 rounded-xl Grotesque-Bold text-[9px] sm:text-[12px] whitespace-nowrap">
                 {{order?.status}}
               </p>
             </div>

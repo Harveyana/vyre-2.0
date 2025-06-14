@@ -1,58 +1,36 @@
 <template>
-    <div class="h-fit bg-white">
-<!-- 
-      <div class="w-full flex flex-col ml-2">
+    <div class="h-[59vh] bg-white">
 
-        <p class="Grotesque-Regular text-[13px] text-[#737373]">
-          Account Details, Bank Address
-        </p>
-        <h3 class="Grotesque-Bold text-[16px] text-[#1A1A1A]">
-          Bank Details
-        </h3>
+      <div  class="w-full h-full flex flex-col px-2 rounded-2xl sm:shadow-md py-3 gap-y-3">
 
-      </div> -->
-
-      <div  class="w-full border flex flex-col px-2 rounded-2xl sm:shadow-md py-3 gap-y-3">
-
-        <div class="w-full flex items-center justify-center gap-3">
-
-          <div class="w-full relative">
-              <!-- <label class="Grotesque-Regular text-[12px] text-[#010109]">Account Number</label> -->
-              <input
-                type="text"
-                class="Grotesque-Regular text-[12px] w-full bg-gray-100 border-[1px] border-[#2F2B43]/10 px-3 py-1 rounded-3xl flex items-center justify-between focus:ring-0 border-none outline-none"
-                v-model="AccountNumber"
-                required
-                placeholder="Account Number"
-              />
-          </div>
-
-          <div class="w-full relative">
-              <!-- <label class="Grotesque-Regular text-[12px] text-[#010109]">Name</label> -->
-              <input
-                type="text"
-                class="Grotesque-Regular text-[12px] w-full bg-gray-100 border-[1px] border-[#2F2B43]/10 px-3 py-1 rounded-3xl flex items-center justify-between focus:ring-0 border-none outline-none"
-                v-model="bankName"
-                required
-                placeholder="Bank Name"
-              />
-          </div>
-
+        <div class="w-full flex flex-col items-start justify-start gap-y-2">
+          <span class="text-[15px] SansRegular text-[#0D0D0D] text-left ">Select Bank Account</span>
+          <BanksList @update="onbankSelected" />
         </div>
 
-      
-        <div class="flex items-center justify-center gap-3">
+        <div class="w-full flex items-start justify-center gap-3">
 
-          <div class="w-full relative">
-              <!-- <label class="Grotesque-Regular text-[12px] text-[#010109]">Currency</label> -->
-              <SetupSelect :options="currencies" :placeholder="Currency ? Currency :'Select Currency'" @update="(value)=>{Currency = value}" />
+          <div class="w-full sm:w-1/2 flex flex-col items-start justify-start gap-y-2">
+              <input
+                id="place"
+                type="text"
+                v-model="AccountNumber"
+                class="Grotesque-Regular text-[12px] w-full bg-gray-100 border-[1px] border-[#2F2B43]/10 px-3 py-1 rounded-2xl focus:ring-0 border-none outline-none"
+                placeholder="Account number"
+              />
+              <div class="flex items-center justify-center gap-x-3">
+                <span v-if="resolvedName" class="text-[12px] Grotesque-Regular text-[#0D0D0D] text-left ">{{resolvedName}}</span>
+                <ProgressSpinner v-if="nameLoading" class="" style="width: 25px; height: 25px" strokeWidth="8" fill="#ffff"
+                  animationDuration=".5s" aria-label="Custom ProgressSpinner" 
+                />
+              </div>
+
           </div>
 
-          <div class="w-full relative">
-              <!-- <label class="Grotesque-Regular text-[12px] text-[#010109]">Account Type</label> -->
-              <SetupSelect :options="[{label:'CHECKING',value:'CHECKING'}, {label:'SAVINGS',value:'SAVINGS'}]" :placeholder="Type ? Type :'Select Type'" @update="(value:any)=>{Type = value}" />
+          <div class="w-full sm:w-1/2 relative">
+            <SetupSelect :options="[{label:'CHECKING',value:'CHECKING'}, {label:'SAVINGS',value:'SAVINGS'}]" :placeholder="Type ? Type :'Select Type'" @update="(value:any)=>{Type = value}" />
           </div>
-
+          
         </div>
 
         <div class="w-full relative">
@@ -66,18 +44,16 @@
               />
         </div>
 
-        <div class="w-full flex flex-col items-start justify-center border-dashed border-black px-4 rounded-2xl py-2 mt-3 gap-y-3">
+        <!-- <div class="w-full flex flex-col items-start justify-center border-dashed border-black px-4 rounded-2xl py-2 mt-3 gap-y-3">
           <h2 class="Grotesque-Regular text-md text-[#010109]">Bank Address</h2>
 
           <div class="w-full flex items-center justify-center gap-3">
 
             <div class="w-full relative">
-                <!-- <label class="Grotesque-Regular text-[12px] text-[#010109]">Country</label> -->
                 <SetupSelect :options="countries" :placeholder="Country ? Country :'Select Country'" @update="(value)=>{Country = value}" />
             </div>
 
             <div class="w-full relative">
-                <!-- <label class="Grotesque-Regular text-[12px] text-[#010109]">State</label> -->
                 <input
                   type="text"
                   class="Grotesque-Regular text-[12px] w-full bg-gray-100 border-[1px] border-[#2F2B43]/10 px-4 py-1 rounded-3xl flex items-center justify-between focus:ring-0 border-none outline-none"
@@ -90,7 +66,6 @@
         </div>
 
         <div class="w-full relative">
-              <!-- <label class="Grotesque-Regular text-[12px] text-[#010109]">Address Line 1</label> -->
               <input
                 type="text"
                 class="Grotesque-Regular text-[12px] w-full bg-gray-100 border-[1px] border-[#2F2B43]/10 px-4 py-1 rounded-3xl flex items-center justify-between focus:ring-0 border-none outline-none"
@@ -101,7 +76,6 @@
         </div>
 
         <div class="w-full relative">
-              <!-- <label class="Grotesque-Regular text-[12px] text-[#010109]">Address Line 2</label> -->
               <input
                 type="text"
                 class="Grotesque-Regular text-[12px] w-full bg-gray-100 border-[1px] border-[#2F2B43]/10 px-4 py-1 rounded-3xl flex items-center justify-between focus:ring-0 border-none outline-none"
@@ -114,7 +88,6 @@
         <div class="w-full flex items-center justify-center gap-3">
 
           <div class="w-full relative">
-              <!-- <label class="Grotesque-Regular text-[12px] text-[#010109]">City</label> -->
               <input
                 type="text"
                 class="Grotesque-Regular text-[12px] w-full bg-gray-100 border-[1px] border-[#2F2B43]/10 px-3 py-1 rounded-3xl flex items-center justify-between focus:ring-0 border-none outline-none"
@@ -125,7 +98,6 @@
           </div>
 
           <div class="w-full relative">
-              <!-- <label class="Grotesque-Regular text-[12px] text-[#010109]">Postal Code</label> -->
               <input
                 type="text"
                 class="Grotesque-Regular text-[12px] w-full bg-gray-100 border-[1px] border-[#2F2B43]/10 px-4 py-1 rounded-3xl flex items-center justify-between focus:ring-0 border-none outline-none"
@@ -141,9 +113,9 @@
           
 
 
-      </div>
+        </div> -->
 
-        <div class="w-full flex items-center justify-center gap-x-2 mt-6" >
+        <div class="w-full flex items-center justify-center gap-x-2 mt-auto" >
 
           <button
               @click="$emit('back')"
@@ -164,10 +136,7 @@
         </div>
 
         
-
-
-
-        </div>
+      </div>
         
 
     </div>
@@ -181,31 +150,38 @@
   import { storeToRefs } from 'pinia';
   import { useWalletStore } from '~/store/wallet';
   import { useAuthStore } from '~/store/auth';
+  const { getbanks, verifyBank, saveBank } = useAuthStore();
   const { createWallet, fetchRate} = useWalletStore();
 
   const { loading } = storeToRefs(useWalletStore()); // make authenticated state reactive with storeToRefs
   const { user } = storeToRefs(useAuthStore());
 
   const showLoader = ref(false)
-  
+  const nameLoading = ref(false)
   const insufficient = ref(false)
-  // const toggleState = ref(false)
 
-  // const state = useGlobalState()
-  // const AssetMap = state.assetMap
-  // const entry = ref(0.00)
+  interface bank {
+   id: string;
+   name: string;
+   code: string;
+   country: string
+ }
 
-  const bankName = defineModel<string>('bankName')
+  const AllBanks = ref<bank[]>([])
+
+  const selectedBank = ref<bank>()
+  // const AccountNumber = ref()
+  const resolvedName = ref('')
+
+  const bankId = defineModel<string>('bankId')
+  const Type = defineModel<string>('Type')
   const AccountNumber = defineModel<string>('AccountNumber')
   const Optional = defineModel<string>('Optional')
-  const Currency = defineModel<string>('Currency')
-  const Type = defineModel<string>('Type')
-  const Country = defineModel<string>('Country')
-  const State = defineModel<string>('State')
-  const Address1 = defineModel<string>('Address1')
-  const Address2 = defineModel<string>('Address2')
-  const City = defineModel<string>('City')
-  const PostalCode = defineModel<string>('PostalCode')
+
+  const onbankSelected = async(bank:bank)=>{
+    selectedBank.value = bank
+    bankId.value = bank.id
+  }
 
 
 
@@ -213,10 +189,19 @@
 
   const emit = defineEmits(['submit','update-value','back'])  // Declare Events
 
-
-
-
-  const rate = ref(0)
+  watch([selectedBank, AccountNumber], async(newVal) => {
+    nameLoading.value = true
+    if(!selectedBank.value || !AccountNumber.value ) return nameLoading.value = false
+      const result = await verifyBank({bankId: selectedBank.value.id, accountNumber: AccountNumber.value});
+      console.log(result)
+      if(result?.success){
+        console.log(result.data)
+        const detail = result.data
+        resolvedName.value = detail.accountName
+        nameLoading.value = false
+      }
+      nameLoading.value = false
+  });
 
   const getBankField = computed(() => (countryName: string) => {
     const countryToFieldMap: Record<string, string> = {

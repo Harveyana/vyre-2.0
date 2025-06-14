@@ -70,7 +70,7 @@
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 72 72"><path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="2" d="m46.196 16.205l-19.392 19.46l19.392 19.46"/></svg>
               back
             </button> 
-            <button v-if="TAB !=='DETAILS'" @click="handleAction(TAB)" :disabled="inprogress" :class="inprogress ? 'bg-gray-200 text-white' : 'bg-black text-gray-200'" class="w-full sm:w-fit   Grotesque-Regular rounded-3xl px-6 py-2">
+            <button v-if="TAB !=='DETAILS'" @click="handleAction(TAB)" :disabled="inprogress || !order || !quote" :class="inprogress || !order || !quote ? 'bg-gray-200 text-white' : 'bg-black text-gray-200'" class="w-full sm:w-fit   Grotesque-Regular rounded-3xl px-6 py-2">
               Continue
             </button> 
             <button v-if="TAB ==='DETAILS'" @click="$router.push('/swap/orders')" :disabled="inprogress" :class="inprogress ? 'bg-gray-200 text-white' : 'bg-black text-gray-200'" class="w-full sm:w-fit  Grotesque-Regular rounded-3xl px-6 py-2">
@@ -190,6 +190,7 @@ const initiate = async()=>{
 const handleAction = async(action:string)=>{
 
   if(action == 'SET'){
+    if(!order.value || !quote.value) return
     return TAB.value = 'CONFIRM'
   }
   if(action == 'CONFIRM'){

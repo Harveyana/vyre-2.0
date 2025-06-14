@@ -7,12 +7,12 @@
 
       <div v-else class="w-full flex flex-col items-center justify-center gap-3">
 
-        <div class="flex flex-row items-center justify-center bg-green-100 py-1 sm:py-0 px-1.5 rounded-lg">
+        <div :class="transaction?.transactionStatus === 'AWAITING_TRANSFER' ? 'bg-[#FFF3E0]':transaction?.transactionStatus === 'CREATED' ? 'bg-[#E3F2FD]':transaction?.transactionStatus === 'PROCESSING' ? 'bg-[#F3E5F5]':transaction?.transactionStatus === 'COMPLETED' ? 'bg-[#E8F5E9]':transaction?.transactionStatus === 'FAILED' ? 'bg-[#FFEBEE]':'bg-none'" class="flex flex-row items-center justify-center py-1 sm:py-0 px-1.5 rounded-lg">
 
               <span>
-                  <svg class="text-green-500 animate-ping" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48"><path fill="currentColor" stroke="currentColor" stroke-width="2" d="M24 33a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z"/></svg>
+                  <svg :class="transaction?.transactionStatus === 'AWAITING_TRANSFER' ? 'text-[#FFA500]':transaction?.transactionStatus === 'CREATED' ? 'text-[#3498DB]':transaction?.transactionStatus === 'PROCESSING' ? 'text-[#9B59B6]':transaction?.transactionStatus === 'COMPLETED' ? 'text-[#2ECC71]':transaction?.transactionStatus === 'FAILED' ? 'text-[#E74C3C]':'text-green-500'" class="animate-ping" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 48 48"><path fill="currentColor" stroke="currentColor" stroke-width="2" d="M24 33a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z"/></svg>
               </span>
-              <p class=" flex flex-row items-center justify-center text-green-500 sm:p-1.5 rounded-xl Grotesque-Bold text-[9px] sm:text-[12px] whitespace-nowrap">
+              <p :class="transaction?.transactionStatus === 'AWAITING_TRANSFER' ? 'text-[#FFA500]':transaction?.transactionStatus === 'CREATED' ? 'text-[#3498DB]':transaction?.transactionStatus === 'PROCESSING' ? 'text-[#9B59B6]':transaction?.transactionStatus === 'COMPLETED' ? 'text-[#2ECC71]':transaction?.transactionStatus === 'FAILED' ? 'text-[#E74C3C]':'text-green-500'" class=" flex flex-row items-center justify-center sm:p-1.5 rounded-xl Grotesque-Bold text-[9px] sm:text-[12px] whitespace-nowrap">
                 {{transaction?.transactionStatus}}
               </p>
         </div>
@@ -66,7 +66,7 @@
                   <h1 class="Grotesque-Regular whitespace-nowrap text-[14px] text-black ">
                     Status:
                   </h1>
-                  <span class="Grotesque-Light  text-[12px] sm:text-[13px] whitespace-nowrap">
+                  <span :class="transaction?.transactionStatus === 'AWAITING_TRANSFER' ? 'text-[#FFA500]':transaction?.transactionStatus === 'CREATED' ? 'text-[#3498DB]':transaction?.transactionStatus === 'PROCESSING' ? 'text-[#9B59B6]':transaction?.transactionStatus === 'COMPLETED' ? 'text-[#2ECC71]':transaction?.transactionStatus === 'FAILED' ? 'text-[#E74C3C]':'text-green-500'" class="Grotesque-Light  text-[12px] sm:text-[13px] whitespace-nowrap">
                     {{transaction?.transactionStatus}}
                   </span>
                 </div>

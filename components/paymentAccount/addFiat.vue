@@ -75,19 +75,11 @@
 
     <BankDetails
       v-if="tab === 'DETAILS'"
-      v-model:bank-name="DETAILS.bankName"
+
+      v-model:bankId="DETAILS.bankId"
       v-model:-accountNumber="DETAILS.accountNumber"
-      v-model:-currency="DETAILS.currency"
       v-model:-type="DETAILS.type"
       v-model:-optional="optionalField"
-      
-      v-model:-country="DETAILS.Address.country"
-      v-model:-address1="DETAILS.Address.addressLine1"
-      v-model:-address2="DETAILS.Address.addressLine2"
-      v-model:-city="DETAILS.Address.city"
-      v-model:-state="DETAILS.Address.state"
-      v-model:-postal-code="DETAILS.Address.postalCode"
-
 
       @submit="onSubmit()"
       @back="tab = 'BANKS'"
@@ -146,9 +138,8 @@
     const accounts = ref<any[]>([])
 
     const DETAILS = reactive({
+      bankId:'',
       accountNumber: '',
-      bankName:'',
-      currency: '',
       type:'',
 
       routingNumber:'',
@@ -161,16 +152,7 @@
       cnapsCode:'',
       nubanNumber:'',
       pixCode:'',
-      clearingCode:'',
-
-      Address:{
-        country: '',
-        addressLine1: '',
-        addressLine2: '',
-        city:'',
-        state:'',
-        postalCode:''
-      }
+      clearingCode:''
    
     })
 
@@ -185,22 +167,14 @@
 
       // Account Info Validation
       if (!String(details.accountNumber).trim()) errors.push("Account number is required");
-      if (!details.bankName.trim()) errors.push("Bank name is required");
-      if (!details.currency.trim()) errors.push("Currency is required");
+      if (!details.bankId.trim()) errors.push("Bank is required");
       if (!details.type.trim()) errors.push("Select Account type");
-
-      // Bank Address Validation
-      if (!details.Address.country.trim()) errors.push("Bank country is required");
-      if (!details.Address.addressLine1.trim()) errors.push("Bank address line 1 is required");
-      if (!details.Address.state.trim()) errors.push("Bank State is required");
-      if (!details.Address.city.trim()) errors.push("Bank city is required");
 
       return {
         isValid: !errors.length,
         errors: errors.length ? errors : null
       };
     }
-
 
     const submit = async()=>{
 

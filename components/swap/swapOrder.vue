@@ -117,7 +117,7 @@
 
     </Transition>
 
-    <SideLog :visible="showFiatAccounts">
+    <!-- <SideLog :visible="showFiatAccounts">
 
       <Accounts type="FIAT" :direction="direction" @close="showFiatAccounts = false" @submit="selectFiatAccount" />
 
@@ -127,7 +127,29 @@
 
       <Accounts type="CRYPTO" :direction="direction" @close="showCryptoAccounts = false" @submit="selectCryptoAccount" />
 
-    </SideLog>
+    </SideLog> -->
+
+    <client-only>
+      <vue-bottom-sheet :max-width="400" ref="FiatBottomSheet">
+        <Accounts 
+          type="FIAT" 
+          :direction="direction" 
+          @close="FiatBottomSheet.close();" 
+          @submit="selectFiatAccount" 
+        />
+      </vue-bottom-sheet>
+    </client-only>
+
+    <client-only>
+      <vue-bottom-sheet :max-width="400" ref="CryptoBottomSheet">
+        <Accounts 
+          type="CRYPTO" 
+          :direction="direction" 
+          @close="CryptoBottomSheet.close()" 
+          @submit="selectCryptoAccount" 
+        />
+      </vue-bottom-sheet>
+    </client-only>
 
     
 
@@ -137,6 +159,8 @@
   <script setup lang="ts">
   import { useDebounceFn } from '@vueuse/core'
   import { Toaster, toast } from 'vue-sonner';
+  import VueBottomSheet from "@webzlodimir/vue-bottom-sheet";
+  import  "@webzlodimir/vue-bottom-sheet/dist/style.css";
   import { storeToRefs } from 'pinia';
     import { useSwapStore } from '~/store/swap';
     import { useAuthStore } from '~/store/auth';
@@ -261,6 +285,33 @@
     // }
   ];
 
+  const FiatBottomSheet = ref<InstanceType<typeof VueBottomSheet>>()
+  const CryptoBottomSheet = ref<InstanceType<typeof VueBottomSheet>>()
+
+  const openFiats = () => {
+    if (FiatBottomSheet.value) {
+      FiatBottomSheet.value.open();
+    }
+  };
+
+  const openCrypto = () => {
+    if (CryptoBottomSheet.value) {
+      CryptoBottomSheet.value.open();
+    }
+  };
+
+  const closeFiats = () => {
+    if (FiatBottomSheet.value) {
+      FiatBottomSheet.value.close();
+    }
+  };
+
+  const closeCrypto = () => {
+    if (CryptoBottomSheet.value) {
+      CryptoBottomSheet.value.close();
+    }
+  };
+
   const direction = ref('Source')
   const currencyType = ref('FIAT')
 
@@ -355,6 +406,8 @@
 
   const selectFiatAccount = (payload:any) => {
 
+    FiatBottomSheet.value.close()
+
     if(payload.currency !== SOURCE.currency && payload.currency !== DESTINATION.currency ) return toast.error('Please select Currency Account')
     showFiatAccounts.value = false
 
@@ -378,8 +431,11 @@
 
   const selectCryptoAccount = (payload:any) => {
 
+   
+
     if(payload.chain !== SOURCE.chain && payload.chain !== DESTINATION.chain ) return toast.error('Please select the correct Chain')
-    showCryptoAccounts.value = false
+    // showCryptoAccounts.value = false
+    CryptoBottomSheet.value.close()
 
     if(SOURCE.type === "CRYPTO"){
       Object.assign(SOURCE, {
@@ -398,6 +454,8 @@
         name: payload.name
       });
     }
+
+
     
   };
 
@@ -429,13 +487,13 @@
 
   const openAccountsTab = (position:string)=>{
     if(position === 'SOURCE'){
-      if(SOURCE.type ==='FIAT') return showFiatAccounts.value = true
-      if(SOURCE.type ==='CRYPTO') return showCryptoAccounts.value = true
+      if(SOURCE.type ==='FIAT') return FiatBottomSheet.value.open();
+      // if(SOURCE.type ==='CRYPTO') return showCryptoAccounts.value = true
     }
 
     if(position === 'DESTINATION'){
-      if(DESTINATION.type ==='FIAT') return showFiatAccounts.value = true
-      if(DESTINATION.type ==='CRYPTO') return showCryptoAccounts.value = true
+      if(DESTINATION.type ==='FIAT') return FiatBottomSheet.value.open();
+      if(DESTINATION.type ==='CRYPTO') return CryptoBottomSheet.value.open();
     }
   }
 
@@ -515,13 +573,13 @@
   watch(() => [
     SOURCE.amount,
     SOURCE.paymentAccountId,
-    SOURCE.type,
+    // SOURCE.type,
     SOURCE.currency,
-    SOURCE.chain,
-    DESTINATION.chain,
+    // SOURCE.chain,
+    // DESTINATION.chain,
     DESTINATION.currency,
     DESTINATION.paymentAccountId,
-    DESTINATION.type
+    // DESTINATION.type
   ], async (newValue, oldValue) => {
     if (newValue !== oldValue) {
       try {

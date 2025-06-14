@@ -1,10 +1,10 @@
 <template>
     <!-- <div class="h-fit"> -->
 
-      <div  class="w-full sm:w-[300px] flex flex-col items-center justify-center rounded-2xl gap-y-3">
+      <div  class="w-full flex flex-col items-center justify-center rounded-2xl gap-y-3 px-4">
 
         <div class="w-full flex flex-col items-center justify-center rounded-2xl gap-y-3">
-
+<!-- 
           <div class="w-full flex items-start justify-between ">
 
             <button @click="$emit('close')">
@@ -15,7 +15,7 @@
               </svg>
             </button>
 
-          </div>
+          </div> -->
 
           <div class="w-full">
             <div class="w-full flex items-start">
@@ -112,7 +112,7 @@
                v-for="account in accounts"
                :key="account.id"
                 class="w-full border hover:border-black flex items-center justify-start gap-x-5 py-4 bg-white rounded-lg border-[1px] px-4 cursor-pointer"
-                @click="selectAccount(account)"
+                @click="$emit('submit',account)"
                 :class="
                   selectedAccount?.id === account.id
                     ? 'border-black'
@@ -147,14 +147,14 @@
               </div>
 
 
-              <baseButton
+              <!-- <baseButton
                v-if="selectedAccount"
                 @click="$emit('submit',selectedAccount)"
                   type="submit"
                   class="w-ful py-3 bg-black  text-white text-[15px] rounded-lg mt-6"
                 >
                 Continue
-              </baseButton>
+              </baseButton> -->
 
 
             </div>

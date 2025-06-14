@@ -11,9 +11,8 @@ interface Address {
 }
 
 interface BankDetails {
+  bankId: string;
   accountNumber: string;
-  bankName: string;
-  currency: string;
   type: string;
   
   // Country-specific banking fields
@@ -28,8 +27,6 @@ interface BankDetails {
   nubanNumber?: string;        // Nigeria
   pixCode?: string;            // Brazil
   clearingCode?: string;       // Hong Kong
-  
-  Address: Address;
 }
 
 interface PaymentSource {

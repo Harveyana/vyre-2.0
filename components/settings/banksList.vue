@@ -12,7 +12,7 @@
                   <input
                     type="text"
                     v-model="queryName"
-                    class="w-full border-[#E4E5E7] SansRegular border text-[#080708] text-[14px] py-2 px-3 rounded-xl outline-none"
+                    class="Grotesque-Regular text-[12px] w-full bg-gray-100 border-[1px] border-[#2F2B43]/10 px-3 py-1.5 rounded-xl focus:ring-0 border-none outline-none"
                     placeholder="Start Typing"
                     @input="fetchbanks()"
                     @focusin="openList = true"
@@ -39,7 +39,7 @@
                       </li>
                     </ul>
                     <div v-else class="w-full flex items-center justify-center p-3">
-                      <span class="text-[#010109]">Loading...</span>
+                      <!-- <span class="text-[#010109]">Loading...</span> -->
                     </div>
                     <PopoverArrow class="fill-white" />
                   </PopoverContent>
