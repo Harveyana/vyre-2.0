@@ -1,7 +1,7 @@
 <template>
    <div class="min-h-screen h-[100dvh] bg-doodle  max-w-screen-3xl mx-auto w-full overflow-hidden flex flex-col items-center justify-center relative">
 
-      <VyreMobileMenu />
+      
 
       <Toaster position="top-right" />
       <div v-if="pending" class="flex items-center gap-x-3 justify-center h-full w-full bg-[#F7F7F7] rounded-3xl border border-8 border-white">
@@ -9,8 +9,8 @@
       </div>
 
 
-      <div v-else class="relative  w-full h-full flex flex-col items-center justify-start px-2 sm:px-10 py-6 sm:py-0">
-
+      <div v-else class="relative  w-full h-full flex flex-col items-start justify-start px-2 sm:px-10 py-6 sm:py-0">
+         <VyreMobileMenu />
          <VyreMenu/>
         <section class="w-full relative flex flex-col items-center justify-center ">
             <Transition name="page" mode="out-in">

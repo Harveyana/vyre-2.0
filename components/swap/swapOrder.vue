@@ -209,12 +209,12 @@
       chain: 'ETHEREUM',
       type: 'CRYPTO'
     },
-    // {
-    //   label: 'USD Coin (Polygon)',
-    //   value: 'USDC',
-    //   chain: 'POLYGON',
-    //   type: 'CRYPTO'
-    // },
+    {
+      label: 'USD Coin (Polygon)',
+      value: 'USDC',
+      chain: 'POLYGON',
+      type: 'CRYPTO'
+    },
     // {
     //   label: 'USD Coin (Solana)',
     //   value: 'USDC',
@@ -247,12 +247,12 @@
       chain: 'ETHEREUM',
       type: 'CRYPTO'
     },
-    // {
-    //   label: 'Tether (Polygon)',
-    //   value: 'USDT',
-    //   chain: 'POLYGON',
-    //   type: 'CRYPTO'
-    // },
+    {
+      label: 'Tether (Polygon)',
+      value: 'USDT',
+      chain: 'POLYGON',
+      type: 'CRYPTO'
+    },
     // {
     //   label: 'Tether (Solana)',
     //   value: 'USDT',

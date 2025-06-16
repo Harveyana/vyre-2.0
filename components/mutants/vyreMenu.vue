@@ -7,7 +7,7 @@
       <-- Back
     </button> -->
 
-    <a href="/" class="sm:absolute left-10 text-black bg-[#ffff] Grotesque-Regular hover:text-white hover:bg-black rounded-3xl text-[12px] sm:text-[16px] sm:px-6 sm:py-3 px-3 py-2">
+    <a href="/" class="hidden sm:flex sm:absolute left-10 text-black bg-[#ffff] Grotesque-Regular hover:text-white hover:bg-black rounded-3xl text-[12px] sm:text-[16px] sm:px-6 sm:py-3 px-3 py-2">
       <img src="~/assets/img/logo/vyreLogo.png" class="h-8 w-8 sm:w-12 sm:h-12" alt="vyre Logo" />
       <!-- <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Vyre</span> -->
     </a>
@@ -57,7 +57,7 @@
     </div>
 
 
-    <button class="sm:absolute right-10 text-gray-200 bg-black Grotesque-Regular hover:bg-white hover:text-black rounded-3xl text-[12px] sm:text-[16px] sm:px-6 sm:py-3 px-3 py-2 ">
+    <button class="hidden sm:flex sm:absolute right-10 text-gray-200 bg-black Grotesque-Regular hover:bg-white hover:text-black rounded-3xl text-[12px] sm:text-[16px] sm:px-6 sm:py-3 px-3 py-2 ">
       Connect Wallet
     </button>
 
