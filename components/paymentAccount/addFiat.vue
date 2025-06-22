@@ -28,40 +28,32 @@
           v-else
           v-for="account in accounts"
           :key="account.id"
-          class="w-full sm:w-[45%] min-w-[45%]  border hover:border-black flex items-center justify-start gap-x-3 py-2 bg-black rounded-2xl border-[1px] px-3 cursor-pointer"
+          class="w-full sm:w-[45%] min-w-[45%]  border hover:border-black flex items-center justify-start gap-x-3 py-2 rounded-2xl border-[1px] px-3 cursor-pointer"
         >
-                  
-                  <h2 v-if="account?.currency" class="border rounded-full bg-white text-black text-[12px] px-1 py-2 ">
-                    {{ account?.currency }}
-                  </h2>
 
-                  <div class="flex flex-col justify-start items-start">
-                    <h3 v-if="account?.bank" class="Grotesque-Regular text-[12px] truncate text-white">
-                      {{account?.bank}}
-                    </h3>
+          <div class="w-full flex items-center justify-start px-1 gap-x-2">
 
-                    <h3 v-if="account?.chain" class="Grotesque-Regular uppercase text-[14px] text-[#1A1A1A]">
-                      {{account?.name}}
-                    </h3>
+            <div class="flex w-full flex-col items-start justify-center gap-y-2">
+              <div class="w-full flex items-center justify-between">
+                <h1 class="text-[12px] max-w-[90%] truncate leading-none whitespace-nowrap Grotesque-Regular text-[#080708]">
+                  {{account?.name}}
+                </h1>
+                <ActionDrop  class="absolute top-1 right-1 bg-gray-200 rounded-xl" @update="(value:string)=>{actionDispatch(value,bank.id)}" :filters="['Delete Bank']" />
+              </div>
+                          
+              <h4 v-if="account?.accountNumber" class="text-[12px] whitespace-nowrap Grotesque-Regular text-[#686767]">
+                {{account?.accountNumber}}***
+              </h4>
+            </div>
 
-                    <p v-if="account?.accountNumber" class="Grotesque-Regular text-[12px] text-[#737373]">
-                      {{account?.accountNumber}}***
-                    </p>
-
-                    <h3 v-if="account?.address" class=" truncate  Grotesque-Regular text-[12px] text-[#737373]">
-                      {{account?.address}}
-                    </h3>
-                    <h3 v-if="account?.chain" class=" truncate  Grotesque-Regular text-[12px] text-[#737373]">
-                      {{account?.chain}}
-                    </h3>
-                  </div>
+          </div>
         </div>
 
       </div>
 
       
 
-      <baseButton
+      <!-- <baseButton
         v-if="accounts.length"
           @click="$emit('switch')"
           type="submit"
@@ -69,7 +61,7 @@
         >
           Continue
           <svg class="w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 9"><path fill="#fff" d="M12.5 5h-9c-.28 0-.5-.22-.5-.5s.22-.5.5-.5h9c.28 0 .5.22.5.5s-.22.5-.5.5"/><path fill="#fff" d="M10 8.5a.47.47 0 0 1-.35-.15c-.2-.2-.2-.51 0-.71l3.15-3.15l-3.15-3.15c-.2-.2-.2-.51 0-.71s.51-.2.71 0l3.5 3.5c.2.2.2.51 0 .71l-3.5 3.5c-.1.1-.23.15-.35.15Z"/></svg>
-      </baseButton>
+      </baseButton> -->
 
     </div>
 
@@ -141,6 +133,7 @@
       bankId:'',
       accountNumber: '',
       type:'',
+      currency:'',
 
       routingNumber:'',
       sortCode:'',
@@ -169,6 +162,7 @@
       if (!String(details.accountNumber).trim()) errors.push("Account number is required");
       if (!details.bankId.trim()) errors.push("Bank is required");
       if (!details.type.trim()) errors.push("Select Account type");
+      if (!details.currency.trim()) errors.push("currency Required");
 
       return {
         isValid: !errors.length,

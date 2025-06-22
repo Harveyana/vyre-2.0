@@ -172,17 +172,129 @@
   const currencies = [
     // FIAT Currencies
     {
+      label: 'Egyptian Pound',
+      value: 'EGP',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Ghanaian Cedi',
+      value: 'GHS',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Kenyan Shilling',
+      value: 'KES',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
       label: 'Nigerian Naira',
       value: 'NGN',
       chain: '',
       type: 'FIAT'
     },
     {
-      label: 'US Dollar',
-      value: 'USD',
+      label: 'Tanzanian Shilling',
+      value: 'TZS',
       chain: '',
       type: 'FIAT'
     },
+    {
+      label: 'South African Rand',
+      value: 'ZAR',
+      chain: '',
+      type: 'FIAT'
+    },
+    
+    // Asia
+    {
+      label: 'Bangladeshi Taka',
+      value: 'BDT',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Chinese Yuan',
+      value: 'CNY',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Hong Kong Dollar',
+      value: 'HKD',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Indonesian Rupiah',
+      value: 'IDR',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Indian Rupee',
+      value: 'INR',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Japanese Yen',
+      value: 'JPY',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'South Korean Won',
+      value: 'KRW',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Sri Lankan Rupee',
+      value: 'LKR',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Malaysian Ringgit',
+      value: 'MYR',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Pakistani Rupee',
+      value: 'PKR',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Philippine Peso',
+      value: 'PHP',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Singapore Dollar',
+      value: 'SGD',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Thai Baht',
+      value: 'THB',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Vietnamese Dong',
+      value: 'VND',
+      chain: '',
+      type: 'FIAT'
+    },
+    
+    // Europe
     {
       label: 'Euro',
       value: 'EUR',
@@ -190,8 +302,182 @@
       type: 'FIAT'
     },
     {
+      label: 'Czech Koruna',
+      value: 'CZK',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Danish Krone',
+      value: 'DKK',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
       label: 'British Pound',
       value: 'GBP',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Hungarian Forint',
+      value: 'HUF',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Norwegian Krone',
+      value: 'NOK',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Polish Złoty',
+      value: 'PLN',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Romanian Leu',
+      value: 'RON',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Swedish Krona',
+      value: 'SEK',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Turkish Lira',
+      value: 'TRY',
+      chain: '',
+      type: 'FIAT'
+    },
+    
+    // Americas
+    {
+      label: 'US Dollar',
+      value: 'USD',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Argentine Peso',
+      value: 'ARS',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Bolivian Boliviano',
+      value: 'BOB',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Brazilian Real',
+      value: 'BRL',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Canadian Dollar',
+      value: 'CAD',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Chilean Peso',
+      value: 'CLP',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Colombian Peso',
+      value: 'COP',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Costa Rican Colón',
+      value: 'CRC',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Dominican Peso',
+      value: 'DOP',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Guatemalan Quetzal',
+      value: 'GTQ',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Jamaican Dollar',
+      value: 'JMD',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Mexican Peso',
+      value: 'MXN',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Peruvian Sol',
+      value: 'PEN',
+      chain: '',
+      type: 'FIAT'
+    },
+    
+    // Oceania
+    {
+      label: 'Australian Dollar',
+      value: 'AUD',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'New Zealand Dollar',
+      value: 'NZD',
+      chain: '',
+      type: 'FIAT'
+    },
+    
+    // Middle East
+    {
+      label: 'UAE Dirham',
+      value: 'AED',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Jordanian Dinar',
+      value: 'JOD',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Qatari Riyal',
+      value: 'QAR',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Saudi Riyal',
+      value: 'SAR',
+      chain: '',
+      type: 'FIAT'
+    },
+    {
+      label: 'Israeli Shekel',
+      value: 'ILS',
       chain: '',
       type: 'FIAT'
     },

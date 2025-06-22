@@ -21,33 +21,26 @@
           v-else
           v-for="account in accounts"
           :key="account.id"
-          class="w-full sm:w-[45%] min-w-[45%] border hover:border-black flex items-start justify-start gap-x-3 py-2 bg-black rounded-2xl border-[1px] px-4 cursor-pointer"
-        >
-                  
-                  <h2 v-if="account?.currency" class="border rounded-full bg-white text-black text-[14px] px-2 py-3 ">
-                    {{ account?.currency }}
-                  </h2>
+          class="w-full sm:w-[45%] min-w-[45%] border hover:border-black flex items-start justify-start gap-x-3 py-2 rounded-2xl border-[1px] px-4 cursor-pointer"
+        >         
 
-                  <div class="flex flex-col justify-start items-start">
-                    <h3 v-if="account?.bank" class="Grotesque-Regular text-[12px] truncate text-white">
-                      {{account?.bank}}
-                    </h3>
+          <div class="w-full flex items-center justify-start px-1 gap-x-2">
 
-                    <h3 v-if="account?.chain" class="Grotesque-Regular uppercase text-[12px] text-white">
-                      {{account?.name}}
-                    </h3>
+            <div class="flex w-full flex-col items-start justify-center gap-y-2">
+              <div class="w-full flex items-center justify-between">
+                <h1 v-if="account?.chain" class="text-[12px] max-w-[90%] truncate leading-none whitespace-nowrap Grotesque-Regular text-[#080708]">
+                  {{account?.name}}
+                </h1>
+                <ActionDrop  class="absolute top-1 right-1 bg-gray-200 rounded-xl" @update="(value:string)=>{actionDispatch(value,bank.id)}" :filters="['Delete Bank']" />
+              </div>
+                          
+              <h4 v-if="account?.chain" class="text-[12px] whitespace-nowrap Grotesque-Regular text-[#686767]">
+                {{account?.chain}}
+              </h4>
+            </div>
 
-                    <p v-if="account?.accountNumber" class="Grotesque-Regular text-[12px] text-[#737373]">
-                      {{account?.accountNumber}}***
-                    </p>
-
-                    <!-- <h3 v-if="account?.address" class="w-full truncate  Grotesque-Regular text-[12px] text-[#737373]">
-                      {{account?.address}}
-                    </h3> -->
-                    <h3 v-if="account?.chain" class=" truncate  Grotesque-Regular text-[12px] text-[#737373]">
-                      {{account?.chain}}
-                    </h3>
-                  </div>
+          </div>
+                
         </div>
 
     </div>

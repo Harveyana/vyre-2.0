@@ -76,7 +76,7 @@
 
             <div class="flex flex-col items-center justify-center gap-y-4">
 
-               <button @click="SELECT = 'ADD'" class="w-full rainbow-border-box flex flex-col items-center justify-center gap-y-2 rounded-2xl p-[5px]  bg-black">
+               <NuxtLink href="/accounts" class="w-full rainbow-border-box flex flex-col items-center justify-center gap-y-2 rounded-2xl p-[5px]  bg-black">
 
                   <div class=" w-full flex flex-row items-center justify-between sm:gap-y-2 rounded-3xl p-2 py-4 sm:p-4  bg-black">
 
@@ -96,7 +96,7 @@
 
                   </div>
 
-               </button>
+               </NuxtLink>
 
                <button @click="showAddAccount = false" class="p-1 self-end mr-2 sm:p-2 bg-white flex items-center justify-center rounded-full">
                 Skip
@@ -105,7 +105,6 @@
             </div>
       
          </div>
-         <General v-if="SELECT ==='ADD'" @close="showAddAccount = false" />
       </div>
    </BaseDialogue>
 

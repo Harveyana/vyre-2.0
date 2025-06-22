@@ -5,9 +5,7 @@
        @click.stop="toggleMenu"
        class="border border-white flex items-center justify-center gap-1 py-2 px-2 text-base text-gray-900 rounded-full group"
      >
-       <svg v-if="!expanded" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 transition duration-75 text-white" viewBox="0 0 24 24">
-         <path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 17h14M5 12h14M5 7h14"/>
-       </svg>
+       <svg v-if="!expanded" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 transition duration-75 text-white" viewBox="0 0 24 24">\<path fill="#fff" d="M7 11.5a4.5 4.5 0 1 1 0-9a4.5 4.5 0 0 1 0 9m0 10a4.5 4.5 0 1 1 0-9a4.5 4.5 0 0 1 0 9m10-10a4.5 4.5 0 1 1 0-9a4.5 4.5 0 0 1 0 9m0 10a4.5 4.5 0 1 1 0-9a4.5 4.5 0 0 1 0 9"/></svg>
        <svg v-else xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 transition duration-75 text-white" viewBox="0 0 21 21">
          <path fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" d="m7.5 7.5l6 6m0-6l-6 6" stroke-width="1"/>
        </svg>

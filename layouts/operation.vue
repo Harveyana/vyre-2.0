@@ -1,22 +1,21 @@
 <template>
-   <div class="min-h-screen h-[100dvh] max-w-screen-3xl mx-auto w-full overflow-hidden flex flex-col items-center justify-center">
+   <div class="min-h-screen h-[100dvh] bg-doodle  max-w-screen-3xl mx-auto w-full overflow-hidden flex flex-col items-center justify-center relative">
 
-    <div class="bg-doodle w-full h-full flex  flex-col sm:flex-row items-center justify-center px-4 sm:px-10">
+      <Toaster position="top-right" />
+      <div class="relative  w-full h-full flex flex-col items-start justify-start px-2 sm:px-10 py-10">
+         <!-- <VyreMobileMenu />
+         <VyreMenu/> -->
+         <section class="w-full relative flex flex-col items-center justify-center">
+            <Transition name="page" mode="out-in">
+              <slot />
+            </Transition>
+         </section>
+      
+      </div>
 
-        <!-- <section class="w-[40%] h-full flex items-center justify-center header p-6">
-          
-        </section> -->
-
-        <section class="w-full sm:w-[40%] bg-white p-3 flex items-center justify-center rounded-2xl shadow-md">
-           <slot /> 
-        </section>
-        
-        
-    </div>
-
-      <!-- <MobileMenu /> -->
 
    </div>
+
 </template>
 
 <script setup lang="ts">
@@ -32,14 +31,15 @@
 
 <style scoped>
 
-    .bg-doodle {
-    background: url("~/assets/img/doodle2.png");
-    /* background-color: #4eacea; */
+   .bg-doodle {
+    background: url("~/assets/img/doodle4.png");
+    /* background-color: #fff; */
     background-repeat: no-repeat;
     /* background-size: auto; */
     background-size: cover;
     /* background-position: right center; */
-    }
+   }
+
 
 </style>
 

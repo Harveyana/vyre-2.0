@@ -3,7 +3,7 @@
 
       <Menu as="div" class="w-full relative inline-block text-left">
         <div class="w-full">
-          <MenuButton :class="selected ? 'text-black':'text-gray-500'" class="w-full inline-flex items-center justify-between whitespace-nowrap interRegular py-1 px-3 gap-x-2 text-[12px]  bg-gray-100 hover:bg-white rounded-lg shadow-sm">
+          <MenuButton :class="selected ? 'text-black':'text-gray-500'" class="w-full inline-flex items-center justify-between whitespace-nowrap interRegular py-2 px-3 gap-x-2 text-[12px]  bg-gray-100 hover:bg-white rounded-lg shadow-sm">
             {{selected ? selected : props.placeholder!}}
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M12 14.6997L8.18127 10.881L9.45477 9.6084L12 12.1545L14.5452 9.6084L15.8187 10.881L12 14.6997Z" fill="#686767"/>

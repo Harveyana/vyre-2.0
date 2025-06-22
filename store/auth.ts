@@ -904,6 +904,39 @@ export const useAuthStore = defineStore('auth', {
         }
       },
 
+      async getBanksByCurrency(currency:string) {
+        
+        this.loading = true
+        try {
+          const { axiosInstance } = useAxios()
+          const url = '/banks/currency';
+          const response = await axiosInstance.get(url,{
+              params: {
+                currency
+              }
+          });
+
+          console.log(response.data);
+    
+          return response.data
+          
+        } catch (error: any | AxiosError) {
+          console.log(error)
+            if (axios.isAxiosError(error))  {
+              // Access to config, request, and response
+              console.log(error.response?.data)
+              return error.response?.data
+
+            } else {
+              // Just a stock error
+              console.error('Error:', error.message);
+            }
+            
+        } finally {
+          this.loading = false
+        }
+      },
+
       async getbanks(search?:string) {
         
         this.loading = true
