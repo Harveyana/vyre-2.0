@@ -61,7 +61,7 @@
               {{order.SOURCE.amount}} {{order.SOURCE.label}} -> {{parseFloat(quote.destinationAmount).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}} {{order.DESTINATION.label}}
             </h1>
             <h3 class="Grotesque-Light sm:text-[11px] text-[13px] whitespace-nowrap">
-              Rate is for refernce only, updated just now 
+              Average wait time: >10 minutes
             </h3>
           </div>
 

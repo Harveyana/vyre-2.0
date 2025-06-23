@@ -1,19 +1,19 @@
 <template>
 
 
-  <section class=" self-start w-full relative sm:top-2 right-0 h-fit flex items-center justify-between sm:justify-center sm:p-6 mb-2 sm:mb-0">
+  <section class=" hidden lg:flex self-start w-full relative sm:top-2 right-0 h-fit items-center justify-between sm:justify-center sm:p-6 mb-2 sm:mb-0">
 
     <!-- <button class="sm:absolute left-10 text-black bg-[#ffff] Grotesque-Regular hover:text-white hover:bg-black rounded-3xl text-[12px] sm:text-[16px] sm:px-6 sm:py-3 px-3 py-2">
       <-- Back
     </button> -->
 
-    <a href="/" class="hidden sm:flex sm:absolute left-10 text-black bg-[#ffff] Grotesque-Regular hover:text-white hover:bg-black rounded-3xl text-[12px] sm:text-[16px] sm:px-6 sm:py-3 px-3 py-2">
+    <a href="/" class="hidden lg:flex sm:absolute left-10 text-black bg-[#ffff] Grotesque-Regular hover:text-white hover:bg-black rounded-3xl text-[12px] sm:text-[16px] sm:px-6 sm:py-3 px-3 py-2">
       <img src="~/assets/img/logo/vyreLogo.png" class="h-8 w-8 sm:w-12 sm:h-12" alt="vyre Logo" />
       <!-- <span class="self-center text-xl font-semibold sm:text-2xl whitespace-nowrap dark:text-white">Vyre</span> -->
     </a>
 
     <div class="flex items-center justify-center gap-2 bg-white p-2 rounded-3xl">
-      <div class="hidden sm:flex items-center justify-center rounded-3xl bg-black px-6 py-2">
+      <div class="flex items-center justify-center rounded-3xl bg-black px-6 py-2">
           <ul class="flex items-center justify-center gap-4">
             
             <li>
@@ -50,12 +50,43 @@
           </ul>
       </div>
 
-      <div class="hidden sm:flex items-center justify-center rounded-full bg-black px-1 py-1">
+      <div class="flex items-center justify-center rounded-full bg-black px-2 py-1">
           <ul class="flex items-center justify-center gap-1">
 
-            <NavDrop @signout="showLogout = true" />
+            <button 
+              @click.stop="toggleMenu" 
+              @mouseenter="toggleMenu"
+              class="flex items-center justify-center w-fit text-sm bg-black rounded-full focus:ring-0 " id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
+              <img v-if="user && user?.photoUrl" class="max-w-8 min-w-6 min-h-6 rounded-full" :src="user?.photoUrl" alt="user photo">
+              <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="18" height="18" viewBox="0 0 32 32"><path fill="#fff" d="M11.166 23.963L22.36 17.5c1.43-.824 1.43-2.175 0-3L11.165 8.037c-1.43-.826-2.598-.15-2.598 1.5v12.926c0 1.65 1.17 2.326 2.598 1.5z"/></svg>
+            </button>
 
           </ul>
+
+          <transition name="fade">
+            <ul
+              v-if="expanded" 
+              v-click-outside="closeMenu"
+              @mouseleave="closeMenu"
+              class="flex items-center justify-center gap-1"
+            >
+
+              <li>
+                  <NuxtLink href="/settings" class=" bg-black hover:bg-white flex items-center justify-center gap-1 py-2 px-2 text-base rounded-full group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 text-white transition duration-75 group-hover:text-black " viewBox="0 0 24 24"><path fill="currentColor" d="M9.954 2.21a10 10 0 0 1 4.09-.002A4 4 0 0 0 16 5.07a4 4 0 0 0 3.457.261A10 10 0 0 1 21.5 8.877a4 4 0 0 0-1.5 3.122c0 1.264.586 2.391 1.501 3.124a10 10 0 0 1-2.045 3.543a4 4 0 0 0-3.456.261a4 4 0 0 0-1.955 2.86a10 10 0 0 1-4.09.004A4 4 0 0 0 8 18.927a4 4 0 0 0-3.457-.26A10 10 0 0 1 2.5 15.121A4 4 0 0 0 4 11.999c0-1.264-.587-2.39-1.502-3.124a10 10 0 0 1 2.045-3.542A4 4 0 0 0 8 5.07a4 4 0 0 0 1.954-2.86M12 15a3 3 0 1 0 0-6a3 3 0 0 0 0 6"/></svg>
+                    <span  class="text-[14px] Grotesque-Regular text-white group-hover:text-black">Settings</span>
+                  </NuxtLink>
+              </li>
+
+              <li>
+                  <button @click="showLogout = true" class=" bg-white hover:bg-gray-400 flex items-center justify-center gap-1 py-2 px-2 text-base text-gray-900 rounded-full  group">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-black" viewBox="0 0 24 24"><path fill="#000" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2a9.99 9.99 0 0 1 8 4h-2.71a8 8 0 1 0 .001 12h2.71A9.99 9.99 0 0 1 12 22m7-6v-3h-8v-2h8V8l5 4z"/></svg>
+                  </button>
+              </li>
+
+            </ul>
+          </transition>
+          
       </div>
     </div>
 
@@ -132,6 +163,7 @@
    const router = useRouter()
 
    const showLogout = ref(false)
+   const expanded = ref(false)
 
     const signOut = ()=>{
       logUserOut()
@@ -160,6 +192,30 @@
         return false
       }
     }
+
+    const toggleMenu = () => {
+      expanded.value = !expanded.value
+    }
+
+    const closeMenu = () => {
+      expanded.value = false
+    }
+
+    // Click outside directive
+    const vClickOutside = {
+      beforeMount(el, binding) {
+        el.clickOutsideEvent = function(event) {
+          if (!(el === event.target || el.contains(event.target))) {
+            binding.value()
+          }
+        }
+        document.addEventListener('click', el.clickOutsideEvent)
+      },
+      unmounted(el) {
+        document.removeEventListener('click', el.clickOutsideEvent)
+      }
+    }
+
           
   </script>
 

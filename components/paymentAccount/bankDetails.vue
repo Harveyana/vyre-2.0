@@ -89,7 +89,12 @@
 
           </div>
 
+        
+        </div>
 
+        <div v-if="selectedBank?.name" class="flex items-center justify-start gap-x-2 px-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 20 20"><path fill="#000" d="M10 2L3 6v1h14V6zM5 8l-.2 7h2.5L7 8zm4 0l-.2 7h2.5L11 8zm4 0l-.2 7h2.5L15 8zM3 18h14v-2H3z"/></svg>
+          <h2 class="text-[12px] sm:text-[13px] text-gray-900 Grotesque-Regular">{{ selectedBank?.name }}</h2>
         </div>
         
       </div>
@@ -246,19 +251,9 @@
 
   const emit = defineEmits(['submit','update-value','back'])  // Declare Events
 
-  // watch([selectedBank, AccountNumber], async(newVal) => {
-  //   nameLoading.value = true
-  //   if(!selectedBank.value || !AccountNumber.value ) return nameLoading.value = false
-  //     const result = await verifyBank({bankId: selectedBank.value.id, accountNumber: AccountNumber.value});
-  //     console.log(result)
-  //     if(result?.success){
-  //       console.log(result.data)
-  //       const detail = result.data
-  //       resolvedName.value = detail.accountName
-  //       nameLoading.value = false
-  //     }
-  //     nameLoading.value = false
-  // });
+  watch([activeContinent, selectedCurrency], async(newVal) => {
+    selectedBank.value = undefined
+  });
 
   const getBankField = computed(() => (countryName: string) => {
     const countryToFieldMap: Record<string, string> = {

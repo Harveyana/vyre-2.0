@@ -130,7 +130,7 @@
     </SideLog> -->
 
     <client-only>
-      <vue-bottom-sheet :max-width="400" ref="FiatBottomSheet">
+      <vue-bottom-sheet :max-width="400" :max-height="1090" ref="FiatBottomSheet">
         <Accounts 
           type="FIAT" 
           :direction="direction" 
@@ -141,7 +141,7 @@
     </client-only>
 
     <client-only>
-      <vue-bottom-sheet :max-width="400" ref="CryptoBottomSheet">
+      <vue-bottom-sheet :max-width="400" :max-height="1090" ref="CryptoBottomSheet">
         <Accounts 
           type="CRYPTO" 
           :direction="direction" 
