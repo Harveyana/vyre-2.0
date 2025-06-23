@@ -35,11 +35,11 @@
          <li>
            <NuxtLink 
              href="/swap" 
-             :class="$route.path.includes('/swap') ? 'text-black bg-[#e5f2fe]' : 'text-white bg-black hover:bg-white'"  
+             :class="$route.path.includes('/swap') ? 'text-black bg-[#e5f2fe]' : 'text-white bg-black'"  
              class="flex items-center justify-center gap-1 py-2 px-3 text-base rounded-full group"
              @click="closeMenu"
            >
-             <svg xmlns="http://www.w3.org/2000/svg" :class="$route.path.includes('/swap') ? 'text-black' : 'text-gray-500'" class="flex-shrink-0 w-6 h-6 transition duration-75 group-hover:text-black" viewBox="0 0 24 24">
+             <svg xmlns="http://www.w3.org/2000/svg" :class="$route.path.includes('/swap') ? 'text-black' : 'text-gray-500'" class="flex-shrink-0 w-6 h-6 transition duration-75" viewBox="0 0 24 24">
                <path fill="currentColor" d="M21.5 9a6.5 6.5 0 0 1-4 6.002V15A8.5 8.5 0 0 0 9 6.5h-.002A6.502 6.502 0 0 1 21.5 9M7 3a4 4 0 0 0-4 4v1.5h2V7a2 2 0 0 1 2-2h1.5V3zm12 12.5V17a2 2 0 0 1-2 2h-1.5v2H17a4 4 0 0 0 4-4v-1.5zm-10 6a6.5 6.5 0 1 0 0-13a6.5 6.5 0 0 0 0 13m0-9l2.5 2.5L9 17.5L6.5 15z"/>
              </svg>
            </NuxtLink>
@@ -48,11 +48,11 @@
          <li>
            <NuxtLink 
              href="/send" 
-             :class="$route.path == '/send' ? 'text-black bg-white' : 'text-white bg-black hover:bg-white'"  
+             :class="$route.path == '/send' ? 'text-black bg-white' : 'text-white bg-black '"  
              class="flex items-center justify-center gap-1 py-2 px-3 text-base rounded-full group"
              @click="closeMenu"
            >
-             <svg xmlns="http://www.w3.org/2000/svg" :class="$route.path == '/send' ? 'text-black' : 'text-gray-500'" class="flex-shrink-0 w-6 h-6 transition duration-75 group-hover:text-black" viewBox="0 0 24 24">
+             <svg xmlns="http://www.w3.org/2000/svg" :class="$route.path == '/send' ? 'text-black' : 'text-gray-500'" class="flex-shrink-0 w-6 h-6 transition duration-75 " viewBox="0 0 24 24">
                <path fill="currentColor" d="M20.04 2.323c1.016-.355 1.992.621 1.637 1.637l-5.925 16.93c-.385 1.098-1.915 1.16-2.387.097l-2.859-6.432l4.024-4.025a.75.75 0 0 0-1.06-1.06l-4.025 4.024l-6.432-2.859c-1.063-.473-1-2.002.097-2.387z"/>
              </svg>
            </NuxtLink>
