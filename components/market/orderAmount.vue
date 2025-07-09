@@ -1,18 +1,56 @@
 <template>
     <div class="h-fit ">
 
-      <div  class="w-full border flex flex-col items-center justify-center sm:px-4 rounded-2xl sm:shadow-md py-3 gap-y-3 bg-gray-200">
+      <div  class="w-full border flex flex-col items-center justify-center sm:px-4 rounded-2xl sm:shadow-md py-3 gap-y-3">
+
+        <div v-if="!IsBothWalletsPresent" class="w-full flex items-center justify-between bg-red-400 border border-red-500 p-3 rounded-t-2xl">
+
+          <div class="flex flex-col items-start justify-center">
+            
+            <NuxtLink
+                  href="/wallets"
+                  class="w-fit flex items-center justify-center group rounded-lg "
+              >
+              <p class=" Grotesque-Bold whitespace-nowrap text-[15px] text-black">
+                Add wallets
+              </p>
+              <svg xmlns="http://www.w3.org/2000/svg" class="group-hover:ml-2" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12.5 18s6-4.419 6-6s-6-6-6-6m-7 12s6-4.419 6-6s-6-6-6-6" color="#000"/></svg>
+            </NuxtLink>
+
+            <!-- <p v-if="!baseWallet" class=" Grotesque-Light whitespace-nowrap text-[11px] text-black">
+              {{baseWallet.ISO}}<span v-if="baseWallet?.chain">({{baseWallet?.chain}})</span> wallet required
+            </p> -->
+
+            <p class=" Grotesque-Light whitespace-nowrap text-[11px] text-black">
+              Wallets with sufficient balance required
+            </p>
+
+          </div>
+
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 15 15"><path fill="#000" d="M1.093 11.892L6.84 1.391a.752.752 0 0 1 1.32 0l5.747 10.501a.75.75 0 0 1-.66 1.11H1.753a.75.75 0 0 1-.66-1.11M8.3 8l.403-2.418A.5.5 0 0 0 8.21 5H6.79a.5.5 0 0 0-.493.582L6.7 8zm.3 1.9a1.1 1.1 0 1 0-2.2 0a1.1 1.1 0 0 0 2.2 0"/></svg>
+
+        </div>
 
         <div class="w-full relative flex flex-col items-start justify-between sm:justify-center sm:gap-x-16 gap-y-1 border px-4 sm:px-6 rounded-2xl py-2 bg-white/60">
+
+          
 
           <!-- <p class="Grotesque-Regular text-[16px] text-[#737373] self-end">
             You <span class="lowercase">{{ orderType }}</span>
           </p> -->
 
-          <div class=" flex flex-col items-start justify-center">
+          <div class=" flex flex-col items-start justify-center pt-4 ">
+
+            <p class="absolute left-6 top-2 Grotesque-Regular text-[14px] text-[#737373]">
+              You <span class="lowercase">{{ orderType }}</span>
+            </p>
            
-            <div class="w-full flex items-center justify-center gap-x-2">
-              <img :src="baseWallet?.imgurl" class="max-w-8 w-8 rounded-full"/>
+            <div class="w-full self-end flex items-center justify-center gap-x-2">
+              <div>
+                <img v-if="baseWallet && baseWallet.currency.type ==='CRYPTO'" :src="baseWallet?.currency?.imgurl" class="max-w-8 w-8 rounded-full"/>
+                <h3 v-else class="text-white text-[30px] bg-white rounded-full  ">{{ baseWallet?.currency?.flagEmoji }}</h3>
+              </div>
+              
               <input 
                 v-model="entry"
                 :class="insufficient ? 'border border-red-500 bg-red-200' : 'border-none'"
@@ -26,9 +64,7 @@
               />
             </div>
 
-            <p class="absolute right-6 top-2 Grotesque-Regular text-[14px] text-[#737373]">
-              You <span class="lowercase">{{ orderType }}</span>
-            </p>
+            
 
             <div class="ml-2 mt-1">
               <span v-if="!loading" class="loading text-black text-center text-[12px]">~ ₦ {{ baseWallet?.availableBalance }} {{ baseWallet?.currency }}</span>
@@ -52,11 +88,16 @@
           <div class="flex flex-col items-start justify-center mt-6">
            
             <div class="w-full flex items-center justify-center gap-x-2">
-              <img :src="quoteWallet?.imgurl" class="max-w-8 w-8 rounded-full"/>
+              <!-- <img :src="quoteWallet?.imgurl" class="max-w-8 w-8 rounded-full"/> -->
+              <div>
+                <img v-if="quoteWallet && quoteWallet.currency.type ==='CRYPTO'" :src="quoteWallet?.currency?.imgurl" class="max-w-8 w-8 rounded-full"/>
+                <h3 v-else class="text-white text-[30px] bg-white rounded-full  ">{{ quoteWallet?.currency?.flagEmoji }}</h3>
+              </div>
+
               <input v-model="quote" :class="insufficient ? 'border border-red-500 bg-red-200':'border-none'" class="w-36 sm:w-42 focus:outline-none focus:ring-0 border-none shadow-none rounded-xl text-black Grotesque-Bold text-2xl"  type="number" id="numberInput" name="numberInput" pattern="[0-9]*" inputmode="numeric" />
             </div>
 
-            <p class=" absolute right-6 top-2 Grotesque-Regular text-[14px] text-[#737373]">
+            <p class=" absolute left-6 top-2 Grotesque-Regular text-[14px] text-[#737373]">
               {{orderType == 'SELL'? 'You Get':'You Spend'}}
             </p>
 
@@ -132,9 +173,11 @@
 
 
           <baseButton
+            :disabled="!IsBothWalletsPresent"
               @click="submitAmount()"
                 type="submit"
-                class="w-[70%] py-3 bg-black  text-white text-[15px] rounded-lg "
+                class="w-[70%] py-3   text-white text-[15px] rounded-lg "
+                :class="!IsBothWalletsPresent ? 'bg-gray-200':'bg-black' "
               >
               Submit Order
           </baseButton>
@@ -160,7 +203,7 @@
   import { useOrderStore } from '~/store/order';
   import { useWalletStore } from '~/store/wallet';
   const { fetchRate} = useWalletStore();
-  const { getPairWallets} = useOrderStore();
+  const { getPairWallets, fetchPairRate} = useOrderStore();
 
   const { loading } = storeToRefs(useOrderStore()); // make authenticated state reactive with storeToRefs
 
@@ -169,6 +212,7 @@
 
   const entry = ref<number>()
   const moq = ref<number>()
+  const orderType = defineModel<string>('orderType')
 
   const rate = defineModel<number>('rate')
   const quote = computed(() => (entry.value! * rate.value!).toFixed(0))
@@ -176,25 +220,28 @@
   const tooltip = ref('minimum amount required for a single trade')
 
   const baseWallet = ref<any>()
-
   const quoteWallet = ref<any>()
 
+
   const props = defineProps({
-    orderType: String,
     pairId: String,
   });
-
-  const {pairId, orderType} = props
+  const {pairId} = props
 
   const route = useRouter()
-
   const emit = defineEmits(['next','submit','back'])  // Declare Events
 
   // const currentRate = computed(() => (entry.value! * rate.value).toFixed(2))
   // const rate = ref(0)
 
+  const IsBothWalletsPresent = computed(() => {
+    if(!baseWallet.value || !quoteWallet.value) return false
+    return true
+  })
+
+
   const getWallets = async()=>{
-    const result = await getPairWallets(orderType!,pairId!)
+    const result = await getPairWallets(pairId!)
     
       console.log(result)
       if(result?.success){
@@ -205,9 +252,9 @@
   }
 
   const getRate = async()=>{
-    const result = await fetchRate(baseWallet.value?.currency as string, quoteWallet.value?.currency)
+    const result = await fetchPairRate(pairId as string)
     
-      console.log(result)
+      console.log("rate",result)
       if(result?.success){
         console.log(result?.value)
         rate.value = result?.rate.value
@@ -217,8 +264,8 @@
 
 
   watch(() => entry.value, async(newvalue, oldvalue) => {
-    if(orderType == 'BUY' && quoteWallet.value.availableBalance! <= entry.value! ||
-     orderType == 'SELL' && baseWallet.value.availableBalance! <= entry.value!){ 
+    if(orderType.value == 'BUY' && quoteWallet.value.availableBalance! <= entry.value! ||
+     orderType.value == 'SELL' && baseWallet.value.availableBalance! <= entry.value!){ 
       insufficient.value = true
     }else{
       insufficient.value = false

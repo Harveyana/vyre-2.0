@@ -1,30 +1,8 @@
 <template>
-    <div class="w-full bg-gray-200  rounded-xl">
+    <div class="w-full  rounded-xl">
 
 
       <div class="w-full">
-        <div class="w-full flex items-start">
-
-          <div class="w-full flex flex-col">
-
-            <p class="Grotesque-Regular text-[16px] text-[#737373]">
-              Select Order Pair
-            </p>
-            <h3 class="Grotesque-Bold text-[20px] text-[#1A1A1A]">
-              Choose Your Preference
-            </h3>
-
-          </div>
-
-          <button
-           class="bg-[#F1F0FE] py-2 px-4 text-black text-xs rounded-md whitespace-nowrap"
-          >
-            choose one
-          </button>
-
-
-
-        </div>
 
 
         <div v-if="loading" class="flex flex-col gap-y-4 w-full rounded-xl items-center justify-center">
@@ -65,16 +43,40 @@
           >
             
             <div class="flex items-center justift-center">
-              <img :src="pair?.baseWallet?.imgurl" class="w-12 sm:w-12 -mr-3  rounded-full"/>
-              <img :src="pair?.quoteWallet?.imgurl" class="w-12 sm:w-10 rounded-full"/>
+              <div class="flex items-center justift-center gap-2">
+              <!-- <img :src="order?.pair?.baseWallet?.imgurl" class="z-10 w-10 sm:w-12 -mr-2 sm:-mr-2.5  rounded-full"/> -->
+                <div class="z-10 flex items-center justify-center -mr-2 sm:-mr-2.5">
+                  <div v-if="pair?.baseCurrency && pair?.baseCurrency.type ==='CRYPTO'" class="flex items-end justify-center">
+                  <img class="w-[50px] rounded-full" :src="pair?.baseCurrency?.imgUrl" alt="avatar">
+                  <img v-if="pair?.baseCurrency?.isStablecoin" class="w-[20px] bg-black rounded-full -ml-5" :src="pair?.baseCurrency?.chainImgUrl" alt="avatar">
+                  </div>
+                  <h3 v-else class="text-white text-[30px] bg-white rounded-full  ">{{ pair?.baseCurrency?.flagEmoji }}</h3>
+                </div>
+
+
+                <!-- <img :src="order?.pair?.quoteWallet?.imgurl" class="z-20 w-6 sm:w-8 rounded-full self-end"/> -->
+
+                <div class="z-20 flex items-center justify-center self-end">
+                  <div v-if="pair?.quoteCurrency && pair?.quoteCurrency.type ==='CRYPTO'" class="flex items-end justify-center">
+                  <img class="w-[30px] rounded-full" :src="pair?.quoteCurrency?.imgUrl" alt="avatar">
+                  <img v-if="pair?.quoteCurrency?.chainImgUrl" class="w-[20px] bg-black rounded-full -ml-5" :src="pair?.quoteCurrency?.chainImgUrl" alt="avatar">
+                  </div>
+                  <h3 v-else class="text-white text-[30px] ">{{ pair?.quoteCurrency?.flagEmoji }}</h3>
+                </div>
+
+              </div>
             </div>
 
             <div class="flex flex-col justify-start items-start">
                 <h3 class="Grotesque-Regular text-[14px] text-[#1A1A1A]">
-                  {{pair.base}}/{{pair.quote}}
-                </h3>
-                <p class="Grotesque-Regular text-[12px] text-[#737373]">
                   {{pair.name}}
+                </h3>
+                <p v-if="orderType ==='BUY'" class="Grotesque-Regular text-[12px] text-[#737373]">
+                 Buy {{pair?.baseCurrency?.ISO}} with {{ pair?.quoteCurrency?.ISO }}
+                </p>
+
+                <p v-if="orderType ==='SELL'" class="Grotesque-Regular text-[12px] text-[#737373]">
+                 Sell {{pair?.baseCurrency?.ISO}} for {{ pair?.quoteCurrency?.ISO }}
                 </p>
             </div>
           </div>
@@ -102,12 +104,7 @@
 
     const { loading } = storeToRefs(useOrderStore());
 
-    // const props = defineProps({
-    //   type: String,
-    //   currency: String
-    // });
-
-    // const {currency, type} = props
+    const orderType = defineModel<string>('orderType')
     
     const emit = defineEmits(['close','update-value','next'])  // Declare Events
 

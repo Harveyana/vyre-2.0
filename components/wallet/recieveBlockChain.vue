@@ -14,37 +14,37 @@
               <div class="flex flex-col items-start ">
 
                 <h1 class="text-xl flex flex-row items-center justify-center gap-x-2 truncate text-black poppinsBold">
-                  <img :src=imgurl class="w-12 rounded-full border-8 border-white bg-white"/>
-                  {{currency}}   
+                  <img :src=wallet?.currency?.imgUrl class="w-12 rounded-full border-8 border-white bg-white"/>
+                  {{wallet?.currency?.ISO}}   
                 </h1>
 
                  <!-- <span class="Grotesque-Regular text-[16px] truncate ml-2">
                   zero fee
                 </span> -->
-                <span class="Grotesque-Regular text-[14px] ml-2">
-                  Send only {{ currency }} to this Address
-                </span>
+                <h3 class="Grotesque-Regular text-[14px] ml-2">
+                  Send only {{ wallet?.currency?.ISO }} <span v-if="wallet?.currency.isStablecoin">({{ wallet.currency.chain}})</span> to this Address
+                </h3>
               </div>
                           
             </div>
 
-            <QRCode :data="depositAddress" />
+            <QRCode :data="wallet?.depositAddress" />
 
             <div  class="w-full flex rounded-full px-2 py-1 items-center justify-center text-white gap-2 bg-gray-200">
-              <button @click="copyToClipboard(depositAddress!)">
+              <button @click="copyToClipboard(wallet?.depositAddress!)">
                 <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192c.373-.03.748-.057 1.124-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9"/></svg>
               </button>
                 <span class="text-xs truncate text-black poppinsBold">
-                  {{depositAddress}}
+                  {{wallet?.depositAddress}}
                 </span>
             </div>
 
-            <div v-if="currency ==='XRP' && destinationTag" class="w-full flex mt-4 rounded-full px-2 py-1 items-center justify-center text-white gap-2 bg-gray-200">
-              <button @click="copyToClipboard(destinationTag!)">
+            <div v-if="wallet?.currency?.ISO ==='XRP' && wallet?.destinationTag" class="w-full flex mt-4 rounded-full px-2 py-1 items-center justify-center text-white gap-2 bg-gray-200">
+              <button @click="copyToClipboard(wallet?.destinationTag!)">
                 <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer" width="1.5em" height="1.5em" viewBox="0 0 24 24"><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192c.373-.03.748-.057 1.124-.08M15.75 18H18a2.25 2.25 0 0 0 2.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 0 0-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 0 0-3.375-3.375h-1.5a1.125 1.125 0 0 1-1.125-1.125v-1.5A3.375 3.375 0 0 0 6.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0 0 15 2.25h-1.5a2.251 2.251 0 0 0-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v12c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5a9 9 0 0 0-9-9"/></svg>
               </button>
                 <span class="text-xs truncate text-black poppinsBold">
-                  {{destinationTag}}
+                  {{wallet?.destinationTag}}
                 </span>
             </div>
 
@@ -120,21 +120,45 @@
 
   const allUsers = ref<user[]>([])
 
-  const props = defineProps({
-    type: String,
-    currency: String,
-    imgurl: String,
-    destinationTag: String,
-    depositAddress: String
-  });
+   interface currency {
+      type: string;
+      name: string;
+      ISO: string;
+      chain?: string;
+      imgUrl?: string;
+      chainImgUrl?: string;
+      flagEmoji?: string;
+      isStablecoin: boolean;
+      createdAt: string
+    }
 
-  const {
-    currency, 
-    type,
-    imgurl,
-    depositAddress,
-    destinationTag
-  } = props
+  interface wallet {
+      currency: currency;
+      id:string;
+      createdAt:string;
+      depositAddress?:string;
+      destinationTag?:string;
+      accountBalance: string;
+      availableBalance: string;
+    }
+
+  const wallet = defineModel<wallet>('wallet')
+
+  // const props = defineProps({
+  //   type: String,
+  //   currency: String,
+  //   imgurl: String,
+  //   destinationTag: String,
+  //   depositAddress: String
+  // });
+
+  // const {
+  //   currency, 
+  //   type,
+  //   imgurl,
+  //   depositAddress,
+  //   destinationTag
+  // } = props
 
 
 

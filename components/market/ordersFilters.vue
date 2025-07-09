@@ -59,13 +59,47 @@
         <div class="w-full flex gap-x-2 overflow-x-auto items-center justify-start py-2 px-3">
           <button
             v-for="pair in allPairs"
-            :key="pair.id"
-            @click="entry.pairId = pair.id"
-            class="bg-black hover:bg-gray-100 border border-gray-200 rounded-3xl px-3 py-1 transition-colors duration-200 group"
-            :class="{'ring-2 ring-[#34da97] bg-gray-100': entry.pairId === pair.id }"
+            :key="pair?.id"
+            @click="selectPair(pair)"
+            class="border rounded-3xl px-3 py-1 transition-colors duration-200 group"
+            :class="{
+              'border-black hover:bg-gray-100': selectedPair?.id === pair?.id,
+              'border-none': selectedPair?.id !== pair?.id
+            }"
           >
-            <span :class="{'text-[#34da97]': entry.pairId === pair.id }" class="SoraLight font-200 text-[13px] text-[#fff] group-hover:text-[#34da97] transition-colors duration-200">
-              {{pair.base}}/{{pair.quote}}
+
+            <div class="flex items-center justift-center">
+              <!-- <img :src="order?.pair?.baseWallet?.imgurl" class="z-10 w-10 sm:w-12 -mr-2 sm:-mr-2.5  rounded-full"/> -->
+              <div class="z-10 flex items-center justify-center">
+                <div v-if="pair?.baseCurrency && pair?.baseCurrency.type ==='CRYPTO'" class="flex items-end justify-center">
+                 <img class="w-[40px] sm:w-[40px] bg-white rounded-full" :src="pair?.baseCurrency?.imgUrl" alt="avatar">
+                 <img v-if="pair?.baseCurrency?.isStablecoin" class="w-[20px] bg-black rounded-full -ml-5" :src="pair?.baseCurrency?.chainImgUrl" alt="avatar">
+                </div>
+                <h3 v-else class="text-white text-[30px] bg-white rounded-full  ">{{ pair?.baseCurrency?.flagEmoji }}</h3>
+              </div>
+
+
+              <!-- <img :src="order?.pair?.quoteWallet?.imgurl" class="z-20 w-6 sm:w-8 rounded-full self-end"/> -->
+
+              <div class="z-20 flex items-center justify-center self-end">
+                <div v-if="pair?.quoteCurrency && pair?.quoteCurrency.type ==='CRYPTO'" class="flex items-end justify-center">
+                 <img class="w-[30px] rounded-full" :src="pair?.quoteCurrency?.imgUrl" alt="avatar">
+                 <img v-if="pair?.quoteCurrency?.chainImgUrl" class="w-[20px] bg-black rounded-full -ml-2" :src="pair?.quoteCurrency?.chainImgUrl" alt="avatar">
+                </div>
+                <h3 v-else class="text-white text-[30px] ">{{ pair?.quoteCurrency?.flagEmoji }}</h3>
+              </div>
+
+            </div>
+
+            <span 
+              class="whitespace-nowrap font-200 text-[13px] transition-colors duration-200"
+              :class="{
+                'text-black Grotesque-SemiBold group-hover:text-[#34da97]': selectedPair?.id === pair?.id,
+                'text-black Grotesque-Regular': selectedPair?.id !== pair?.id
+              }"
+            >
+              {{pair?.name}}
+
             </span>
           </button>
         </div>
@@ -156,7 +190,7 @@ const emit = defineEmits(['update'])  // Declare Events
 // Data
 const loading = ref(false)
 const allPairs = ref<any[]>([])
-const selectedPair = ref<any>(null)
+const selectedPair = ref<any>()
 const priceRange = ref({
   min: 1,
   max: 1000
@@ -207,19 +241,31 @@ const entry = reactive({
   priceMin: formattedMin.value,
   priceMax: formattedMax.value,
   type:'BUY',
-  pairId:''
+  pairId: selectedPair.value?.id
 })
+
+// const entry = computed(() => ({
+//   cursor: '',
+//   priceMin: price.priceMin,
+//   priceMax: price.priceMax,
+//   type: 'BUY',
+//   pairId: selectedPair.value?.id
+// }))
 
 
 
 // Reformat on blur to ensure proper comma formatting
 const onBlur = (field: 'priceMin' | 'priceMax') => {
-  const currentValue = entry[field];
+  const currentValue = price[field]
   if (currentValue !== null) {
-    entry[field] = parseNumber(currentValue.toString());
+    price[field] = parseNumber(currentValue.toString())
   }
 }
 
+const selectPair = (value: any) => {
+  selectedPair.value = value
+  entry.pairId = value?.id
+}
 
 // watch(() =>[ entry.type, sliderValue.value[0], sliderValue.value[1], entry.pairId], async(newvalue, oldvalue) => {
   
@@ -238,9 +284,14 @@ const fetchData = async () => {
   
   if (result?.success) {
     allPairs.value = result.pairs || []
+    if (allPairs.value.length > 0) {
+      selectedPair.value = allPairs.value[0]
+      entry.pairId = allPairs.value[0]?.id
+    }
   }
   loading.value = false
 }
+
 
 onMounted(async () => {
   await fetchData()
@@ -250,13 +301,13 @@ onMounted(async () => {
 
 <style scoped>
   /* Full-width slider track */
-  [data-radix-slider-track] {
+  /* [data-radix-slider-track] {
     width: 100%;
-  }
+  } */
 
   /* Thumb focus styles */
-  [data-radix-slider-thumb]:focus {
+  /* [data-radix-slider-thumb]:focus {
     outline: none;
     box-shadow: 0 0 0 3px rgba(52, 218, 151, 0.3);
-  }
+  } */
 </style>

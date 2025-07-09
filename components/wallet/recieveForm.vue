@@ -5,8 +5,8 @@
 
     <ReceiveTab1 v-if="tab === 'tab1'" 
       @update-value="(value:string)=> onSubmitTransferType(value)"  
-      :currency="currency" 
-      :type="type" 
+      :currency="wallet?.currency?.ISO" 
+      :type="wallet?.currency?.type" 
     />
 
     
@@ -17,24 +17,21 @@
     <RecieveVyre v-if="tab === 'VYRE'"
       @back="tab='tab1'"
       @close="$emit('close')"
-      :currency="currency" 
-      :type="type" 
+      :currency="wallet?.currency?.ISO" 
+      :type="wallet?.currency?.type" 
     />
 
     <RecieveBlockChain v-if="tab === 'BLOCKCHAIN'"
       @back="tab='tab1'"
       @close="$emit('close')"
-      :currency="currency" 
-      :imgurl="imgurl"
-      :depositAddress="depositAddress"
-      :destinationTag="destinationTag"
+      v-model:wallet="wallet"
     />
 
     <RecieveBank v-if="tab === 'BANK'"
       @close="$emit('close')"
       @back="tab='tab1'"
-      :currency="currency" 
-      :type="type" 
+      :currency="wallet?.currency?.ISO" 
+      :type="wallet?.currency?.type" 
     />
 
     <!-- <SendBank v-if="tab === 'BANK'"
@@ -61,41 +58,52 @@
     const { loading } = storeToRefs(useWalletStore());
     const emit = defineEmits(['close','update_TransferType'])  // Declare Events
 
-    interface Wallet {
-      currency:string;
-      id:string;
-      createdAt:string;
-      depositAddress?:string;
-      destinationTag?:string;
-      type:string;
-      imgurl:string;
-      accountBalance:string;
-      availableBalance:string
-    }
+    interface currency {
+    type: string;
+    name: string;
+    ISO: string;
+    chain?: string;
+    imgUrl?: string;
+    chainImgUrl?: string;
+    flagEmoji?: string;
+    isStablecoin: boolean;
+    createdAt: string
+  }
 
-    const props = defineProps({
-      wallet: {
-        type: Object as PropType<Wallet>,
-        required: true, // or false depending on your needs
-      },
-    });
+ interface wallet {
+    currency: currency;
+    id:string;
+    createdAt:string;
+    depositAddress?:string;
+    destinationTag?:string;
+    accountBalance: string;
+    availableBalance: string;
+  }
+  const wallet = defineModel<wallet>('wallet')
 
-    const {
-      currency,
-      type,
-      imgurl, 
-      depositAddress,
-      destinationTag,
+    // const props = defineProps({
+    //   wallet: {
+    //     type: Object as PropType<Wallet>,
+    //     required: true, // or false depending on your needs
+    //   },
+    // });
 
-    } = props.wallet
+    // const {
+    //   currency,
+    //   type,
+    //   imgurl, 
+    //   depositAddress,
+    //   destinationTag,
+
+    // } = props.wallet
 
    const tab = ref('tab1');
 
    const showList = ref(false)
 
    const DETAILS = reactive({
-      CURRENCY_TYPE: type,
-      CURRENCY: currency,
+      CURRENCY_TYPE: wallet.value?.currency.type,
+      CURRENCY: wallet.value?.currency.ISO,
       TRANSFER_TYPE: '',
       AMOUNT: 0,
       USERID:'',

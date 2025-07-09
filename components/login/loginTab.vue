@@ -98,21 +98,39 @@ const inputs = reactive({
 
 const emit = defineEmits(["next"]);
 
+function isValidRedirect(path?: string | null): path is string {
+  if (!path) return false;
+  
+  // Only allow redirects to specific prefixes
+  const allowedPrefixes = ['/', '/app'];
+  return allowedPrefixes.some(prefix => path.startsWith(prefix)) &&
+  !['/login', '/signup'].includes(path);
+}
+
 async function login() {
-        const signedIn = await loginUser(inputs); // login user
+  const signedIn = await loginUser(inputs);
 
-        if (signedIn.success) {
-          $toast.success(signedIn.msg)
+  if (signedIn.success) {
+    $toast.success(signedIn.msg);
 
-          if(signedIn.twoFactorEnabled){
-            return emit('next',signedIn.userId)
-          }
-          router.push('/')
-          
-        }else{
-          $toast.error(signedIn.msg)
-        }
-        
+    if (signedIn.twoFactorEnabled) {
+      return emit('next', signedIn.userId);
+    }
+
+    // Check for stored redirect path
+    const redirectPath = sessionStorage.getItem('preLoginRoute');
+    
+    // Validate the redirect path
+    if (isValidRedirect(redirectPath)) {
+      sessionStorage.removeItem('preLoginRoute');
+      return navigateTo(redirectPath);
+    }
+    
+    // Default redirect
+    return navigateTo('/');
+  } else {
+    $toast.error(signedIn.msg);
+  }
 }
 
 

@@ -22,25 +22,21 @@ export const useAxios = () => {
         // If the response is successful, just return the response
         return response;
       },
-      (error) => {
+      async(error) => {
         // If the response has a status of 401 or 403, handle it accordingly
         if (error.response) {
-          if (error.response.status === 401) {
-
-            token.value = null;
-            router.push('/login')
-
-            // Handle unauthorized access
-            // console.error('Unauthorized access - 401');
-
-          } else if (error.response.status === 403) {
-
-              token.value = null;
-              router.push('/login')
-
-            // console.error('Forbidden access - 403');
+          if ([401, 403].includes(error.response.status)) {
+            // Store current route if it's a dashboard route
+            // if (router.currentRoute.value.fullPath.startsWith('/dashboard') || 
+            //     router.currentRoute.value.fullPath.startsWith('/app')) {
+              sessionStorage.setItem('preLoginRoute', router.currentRoute.value.fullPath);
+            // }
             
+            // Clear token and redirect to login
+            token.value = null;
+            await navigateTo('/login');
           }
+
         }
         // Always return a rejected promise so that the calling code knows an error occurred
         return Promise.reject(error);

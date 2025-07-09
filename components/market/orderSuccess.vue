@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full bg-gray-200  rounded-xl">
+    <div class="w-full bg-white  rounded-xl">
 
 
       <div class="w-full">
@@ -113,7 +113,7 @@
     const emit = defineEmits(['close','update-value','next'])  // Declare Events
 
     // const TransferType = ref('')
-    const orderId = defineModel()
+    const order = defineModel()
 
     const copyLink = () => {
       navigator.clipboard.writeText('currentUrl.value');

@@ -20,19 +20,19 @@ export const useWalletStore = defineStore('wallet', {
     actions: {
 
 
-      async createWallet(ISO: string) {
+      async createWallet(currencyId: string) {
         this.loading = true
 
         try {
           const token = useCookie('token');
           const { axiosInstance } = useAxios()
-          const url = `/wallet/create/${ISO}`;
+          const url = `/wallet/create/${currencyId}`;
           // const token = useCookie('token');
           const response = await axiosInstance.post(url);
 
           
           console.log(response.data);
-           if(response.data.token) token.value = response.data.token
+          //  if(response.data.token) token.value = response.data.token
           
           // this.authenticated = true
            return response.data

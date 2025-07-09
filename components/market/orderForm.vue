@@ -22,35 +22,10 @@
     />
 
     <OrderSuccess v-if="tab === 'SUCCESS'"
-      v-model="order.id"
+      v-model="order"
     />
 
-    <!-- optional tabs based on transfer type for the currency -->
-
-    <!-- <SendVyre v-if="tab === 'VYRE'"
-      v-model:-amount="DETAILS.AMOUNT"
-      @back="tab='AMOUNT'"
-      @close="$emit('close')"
-      :currency="currency" 
-      :type="type" 
-    /> -->
-
-    <!-- <SendBlockchain v-if="tab === 'BLOCKCHAIN'"
-      v-model:-amount="DETAILS.AMOUNT"
-      @back="tab='AMOUNT'"
-      @close="$emit('close')"
-      :currency="currency" 
-      :type="type" 
-    /> -->
-
-    <!-- <SendBank v-if="tab === 'BANK'"
-      v-model:-amount="DETAILS.AMOUNT"
-      @back="tab='AMOUNT'"
-      @close="$emit('close')"
-      :currency="currency" 
-      :type="type" 
-    />
-    -->
+    
   </div>
 
     
@@ -75,7 +50,7 @@
 
     // const {currency, balance, type} = props
 
-   const tab = ref('SUCCESS');
+   const tab = ref('PAIR');
    const emit = defineEmits(['close'])
    
    const order = ref()
@@ -90,30 +65,7 @@
       minimumAmount:0
     })
 
-    // const onSubmitTransferType = (transferType:string)=>{
-    //   DETAILS.TRANSFER_TYPE = transferType
-    //   tab.value = 'tab2'
-    // }
-
-    // const onSubmitAmount = (amount:number)=>{
-    //   DETAILS.AMOUNT = amount
-    //   tab.value = DETAILS.TRANSFER_TYPE
-    // }
-
-    // const onSubmitVyreUser = (userId:string)=>{
-    //   DETAILS.RECEIPIENT_ID = userId
-    //   // tab.value = 'tab3'
-    // }
-
-    // const onSubmitBlockchain = (blockchainDetails:{address:string; destinationTag:string})=>{
-    //   DETAILS.BLOCKCHAIN = blockchainDetails
-    //   // tab.value = 'tab3'
-    // }
-
-    // const onSubmitBank = (bankDetails:{accountNumber:string;accountName:string;name:string})=>{
-    //   DETAILS.BANK = bankDetails
-    //   // tab.value = 'tab3'
-    // }
+    
 
     const submitOrder = async(amount:number,minimumAmount:number)=>{
       DETAILS.amount = amount
@@ -143,35 +95,6 @@
 
   }
 
-
-  //  watch(() => receipient, (newSearchTerm, oldSearchTerm) => {
-  //     Call your search function here with the new search term
-  //     if (receipient.value.trim() !== '') {
-  //        showList.value = true
-  //       // Call your search function here with the new search term
-  //       // search(newSearchTerm);
-  //     }else{
-  //           showList.value = false
-  //         }
-  //       });
-
-  
-
-   
-
-
-  //  const toast = useToast();
-  //  const {addUser,nover} = useFireBase()
-  //  const {objectToArray} = useConverters()
-
-  //  const showLoader = ref(false)
-  
-  //   const props = defineProps<{
-  //     visible: boolean
-  //     bar?: number
-  //   }>()
-
-  //   const amount = ref(0);
   
 
 

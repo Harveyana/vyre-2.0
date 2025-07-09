@@ -48,7 +48,7 @@
                   Amount below minimum
                 </h1>
                 <h1 class="w-full Grotesque-Light text-[13px] whitespace-nowrap flex gap-3 items-end justify-end">
-                  Available
+                  fee: {{fee}} 
                 </h1>
               </div>
               
@@ -172,403 +172,547 @@
   const currencies = [
     // FIAT Currencies
     {
+      id:'8cb57b9f-0633-4cc6-b2e8-9e4308be5f5a',
       label: 'Egyptian Pound',
       value: 'EGP',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇪🇬', // Egypt flag
     },
-    {
+    { 
+      id:'735284e1-72cb-4a07-85de-4e0ec03d0fb7',
       label: 'Ghanaian Cedi',
       value: 'GHS',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇬🇭', // Ghana flag
     },
     {
+      id:'d2054ab8-930d-40b9-b511-0d451535e9b2',
       label: 'Kenyan Shilling',
       value: 'KES',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇰🇪', // Kenya flag
     },
     {
+      id:'7d0b958f-b72a-4f0c-ab48-fd135a338afc',
       label: 'Nigerian Naira',
       value: 'NGN',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇳🇬', // Nigeria flag
     },
     {
+      id:'db490ed9-62ba-462f-bbfa-065caefcb300',
       label: 'Tanzanian Shilling',
       value: 'TZS',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇹🇿', // Tanzania flag
     },
     {
+      id:'e280958f-af50-440a-b576-a4941265e400',
       label: 'South African Rand',
       value: 'ZAR',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇿🇦', // South Africa flag
     },
     
     // Asia
     {
+      id:'2560c1e5-8139-4c8a-9a0f-52cd42436ae8',
       label: 'Bangladeshi Taka',
       value: 'BDT',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇧🇩'
     },
     {
+      id:'659052db-d85f-4d1c-a7bf-339ebc8a733c',
       label: 'Chinese Yuan',
       value: 'CNY',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇨🇳'
     },
     {
+      id:'efa06c1a-852d-49d8-af6b-993ff8d4934d',
       label: 'Hong Kong Dollar',
       value: 'HKD',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇭🇰'
     },
     {
+      id:'d6e8ddb3-8ca5-41d0-b632-44281fa88673',
       label: 'Indonesian Rupiah',
       value: 'IDR',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇮🇩'
     },
     {
+      id:'98db39c4-c6af-40cb-a7c7-b88dc2e98b99',
       label: 'Indian Rupee',
       value: 'INR',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇮🇳'
     },
     {
+      id:'f70dfbb4-e275-44eb-be6d-0990b8bbecbe',
       label: 'Japanese Yen',
       value: 'JPY',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇯🇵'
     },
     {
+      id:'e331ce1f-6b64-44d6-8218-dbf60662cbe4',
       label: 'South Korean Won',
       value: 'KRW',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇰🇷'
     },
     {
+      id:'73b17bae-0068-4870-84c3-d6919d9088ac',
       label: 'Sri Lankan Rupee',
       value: 'LKR',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇱🇰'
     },
     {
+      id:'ecb834e3-84b1-48ab-b100-92e5b38d15cd',
       label: 'Malaysian Ringgit',
       value: 'MYR',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇲🇾'
     },
     {
+      id:'e4992cdf-cd3d-41a6-9fc8-9b5615f484e0',
       label: 'Pakistani Rupee',
       value: 'PKR',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇵🇰'
     },
     {
+      id:'730b3703-e38d-48a6-82f1-b811f2580a97',
       label: 'Philippine Peso',
       value: 'PHP',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇵🇭'
     },
     {
+      id:'ebe69ffe-83d7-456c-bace-bd237eec86f6',
       label: 'Singapore Dollar',
       value: 'SGD',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇸🇬'
     },
     {
+      id:'88a1a100-4320-4ae1-92df-1943c80fbbc3',
       label: 'Thai Baht',
       value: 'THB',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇹🇭'
     },
     {
+      id:'f7edccad-6593-46d0-8cc3-a2fbba982bdf',
       label: 'Vietnamese Dong',
       value: 'VND',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇻🇳'
     },
     
     // Europe
     {
+      id:'00095d19-ef00-4f10-949e-d095bd1a05b0',
       label: 'Euro',
       value: 'EUR',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇪🇺'
     },
     {
+      id:'2754724c-923d-49b3-b901-8bf639f0025f',
       label: 'Czech Koruna',
       value: 'CZK',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇨🇿'
     },
     {
+      id:'52c87462-d5c6-4a12-9fea-63d2637d8f19',
       label: 'Danish Krone',
       value: 'DKK',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇩🇰'
     },
     {
+      id:'adb671cf-26ad-49f5-9a8a-32bdc0285c0a',
       label: 'British Pound',
       value: 'GBP',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇬🇧'
     },
     {
+      id:'34111564-d443-41d5-8d10-792cfc437cab',
       label: 'Hungarian Forint',
       value: 'HUF',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇭🇺'
     },
     {
+      id:'5382fcba-0c85-4837-9d4b-f37441bbdf93',
       label: 'Norwegian Krone',
       value: 'NOK',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇳🇴'
     },
     {
+      id:'4b76cb5b-bd48-42e9-9c94-afbd28a32879',
       label: 'Polish Złoty',
       value: 'PLN',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇵🇱'
     },
     {
+      id:'fa656e31-7c93-471b-9b9a-20497b3ca5d0',
       label: 'Romanian Leu',
       value: 'RON',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇷🇴'
     },
     {
+      id:'b7e38d3f-26d1-499b-a2d7-f248d5398d77',
       label: 'Swedish Krona',
       value: 'SEK',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇸🇪'
     },
     {
+      id:'ecb39ecc-3a86-4b78-b290-139935afe8a7',
       label: 'Turkish Lira',
       value: 'TRY',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇹🇷'
     },
     
     // Americas
     {
+      id:'759cb634-4985-4ef2-9066-2cf5b7244c4c',
       label: 'US Dollar',
       value: 'USD',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇺🇸'
     },
     {
+      id:'dfcc1f8d-deab-458d-b476-294b0465d0ff',
       label: 'Argentine Peso',
       value: 'ARS',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇦🇷'
     },
     {
+      id:'9a4f5e75-d001-4b4c-a9a2-adf5ce43edbe',
       label: 'Bolivian Boliviano',
       value: 'BOB',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇧🇴'
     },
     {
+      id:'e3bf7ddc-4cd1-41a4-a7dc-534641b899f7',
       label: 'Brazilian Real',
       value: 'BRL',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇧🇷'
     },
     {
+      id:'690b6e24-4bf6-43a2-830a-809bb3bc391e',
       label: 'Canadian Dollar',
       value: 'CAD',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇨🇦'
     },
     {
+      id:'71d7d0a9-43eb-40c4-b95f-3061ff0ed381',
       label: 'Chilean Peso',
       value: 'CLP',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇨🇱'
     },
     {
+      id:'654392c8-4dfd-405a-ad25-13138af827ad',
       label: 'Colombian Peso',
       value: 'COP',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇨🇴'
     },
     {
+      id:'b13185ea-e937-4fcc-925d-94671001948f',
       label: 'Costa Rican Colón',
       value: 'CRC',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇨🇷'
     },
     {
+      id:'506a8d2b-69e5-47d7-a349-eb768c128195',
       label: 'Dominican Peso',
       value: 'DOP',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇩🇴'
     },
     {
+      id:'6ecf1093-e305-4f94-9f56-727edc7003bb',
       label: 'Guatemalan Quetzal',
       value: 'GTQ',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇬🇹'
     },
     {
+      id:'7e0899bc-9677-4c71-a9de-96ec0c4cf52b',
       label: 'Jamaican Dollar',
       value: 'JMD',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇯🇲'
     },
     {
+      id:'cbfeb5bd-3b80-4711-91ed-31de3da65ca0',
       label: 'Mexican Peso',
       value: 'MXN',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇲🇽'
     },
     {
+      id:'119bec5d-88ae-428d-ab29-2f6be92a313b',
       label: 'Peruvian Sol',
       value: 'PEN',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇵🇪'
     },
     
     // Oceania
     {
+      id:'4a1ba200-e1cb-4e39-8f63-a6266e620e7d',
       label: 'Australian Dollar',
       value: 'AUD',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇦🇺'
     },
     {
+      id:'6cc7f8c5-7628-4564-9819-82c2e2482be3',
       label: 'New Zealand Dollar',
       value: 'NZD',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇳🇿'
     },
     
     // Middle East
     {
+      id:'95f95589-94fd-4aa7-8f29-de0b3889aff4',
       label: 'UAE Dirham',
       value: 'AED',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇦🇪'
     },
     {
+      id:'c14be8df-494f-40c7-b9cb-5cc7b68e4bfa',
       label: 'Jordanian Dinar',
       value: 'JOD',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇯🇴'
     },
     {
+      id:'4fe6e465-9f07-4784-bbc3-21c06b9f9132',
       label: 'Qatari Riyal',
       value: 'QAR',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇶🇦'
     },
     {
+      id:'8bcaa892-d3fa-406e-b2b1-306e05e1cb92',
       label: 'Saudi Riyal',
       value: 'SAR',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇸🇦'
     },
     {
+      id:'dffd7630-b041-48c5-853e-d3100bbfc243',
       label: 'Israeli Shekel',
       value: 'ILS',
       chain: '',
-      type: 'FIAT'
+      type: 'FIAT',
+      emoji: '🇮🇱'
     },
     
-    // USDC (USD Coin)
+    // USD Coin (USDC) Multichain
     {
+      id:'e68669e6-cfff-429c-aecb-e1d4f2ff32c5',
       label: 'USD Coin (Arbitrum)',
       value: 'USDC',
       chain: 'ARBITRUM',
-      type: 'CRYPTO'
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png',
+      chainIcon: 'https://assets.coingecko.com/coins/images/16547/large/photo_2023-03-29_21.47.00.jpeg'
     },
     {
+      id:'69df3344-b9aa-47fb-9d96-17fa14e1958a',
       label: 'USD Coin (Ethereum)',
       value: 'USDC',
       chain: 'ETHEREUM',
-      type: 'CRYPTO'
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png',
+      chainIcon: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png'
     },
     {
+      id:'d0448131-97d0-4aa9-b239-bcb194118a38',
       label: 'USD Coin (Polygon)',
       value: 'USDC',
       chain: 'POLYGON',
-      type: 'CRYPTO'
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png',
+      chainIcon: 'https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png'
     },
-    // {
-    //   label: 'USD Coin (Solana)',
-    //   value: 'USDC',
-    //   chain: 'SOLANA',
-    //   type: 'CRYPTO'
-    // },
     {
+      id: 'd42fff52-b268-4d24-9cd3-a1365e9bad20',
+      label: 'USD Coin (Solana)',
+      value: 'USDC',
+      chain: 'SOLANA',
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png',
+      chainIcon: 'https://assets.coingecko.com/coins/images/4128/large/solana.png'
+    },
+    {
+      id:'eb8ddf38-c186-4e1a-8d7b-d0fecb5ac375',
       label: 'USD Coin (Optimism)',
       value: 'USDC',
       chain: 'OPTIMISM',
-      type: 'CRYPTO'
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png',
+      chainIcon: 'https://assets.coingecko.com/coins/images/25244/large/Optimism.png'
     },
     {
+      id:'4e44778a-c7eb-4b6b-97c2-740d40313823',
       label: 'USD Coin (Base)',
       value: 'USDC',
       chain: 'BASE',
-      type: 'CRYPTO'
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/6319/large/USD_Coin_icon.png',
+      chainIcon: 'https://base.org/images/logo.svg'
     },
 
-    // USDT (Tether)
+    // Tether (USDT) Multichain
     {
+      id:'3781326f-2ff0-4924-bb3a-67b37aa0cf26',
       label: 'Tether (Arbitrum)',
       value: 'USDT',
       chain: 'ARBITRUM',
-      type: 'CRYPTO'
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/325/large/Tether.png',
+      chainIcon: 'https://assets.coingecko.com/coins/images/16547/large/photo_2023-03-29_21.47.00.jpeg'
     },
     {
+      id:'2255dcd2-4165-4c12-8585-56312517b90a',
       label: 'Tether (Ethereum)',
       value: 'USDT',
       chain: 'ETHEREUM',
-      type: 'CRYPTO'
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/325/large/Tether.png',
+      chainIcon: 'https://assets.coingecko.com/coins/images/279/large/ethereum.png'
     },
     {
+      id:'01d8234c-988e-4354-9aed-aeb3e372fa18',
       label: 'Tether (Polygon)',
       value: 'USDT',
       chain: 'POLYGON',
-      type: 'CRYPTO'
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/325/large/Tether.png',
+      chainIcon: 'https://assets.coingecko.com/coins/images/4713/large/matic-token-icon.png'
     },
-    // {
-    //   label: 'Tether (Solana)',
-    //   value: 'USDT',
-    //   chain: 'SOLANA',
-    //   type: 'CRYPTO'
-    // },
     {
+      id:'927c3458-310f-4ceb-af79-703bf28710ff',
+      label: 'Tether (Solana)',
+      value: 'USDT',
+      chain: 'SOLANA',
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/325/large/Tether.png',
+      chainIcon: 'https://assets.coingecko.com/coins/images/4128/large/solana.png'
+    },
+    {
+      id:'8229703d-627a-4a27-a647-85adcb314cc1',
       label: 'Tether (Optimism)',
       value: 'USDT',
       chain: 'OPTIMISM',
-      type: 'CRYPTO'
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/325/large/Tether.png',
+      chainIcon: 'https://assets.coingecko.com/coins/images/25244/large/Optimism.png'
     },
     {
+      id:'9bc412eb-213d-4071-96bb-c6a2dd40533f',
       label: 'Tether (Base)',
       value: 'USDT',
       chain: 'BASE',
-      type: 'CRYPTO'
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/325/large/Tether.png',
+      chainIcon: 'https://base.org/images/logo.svg'
     },
-    // {
-    //   label: 'Tether (Tron)',
-    //   value: 'USDT',
-    //   chain: 'TRON',
-    //   type: 'CRYPTO'
-    // },
-    // {
-    //   label: 'Bitcoin',
-    //   value: 'BTC',
-    //   chain: 'Bitcoin',
-    //   type: 'CRYPTO'
-    // }
+    {
+      id:'2491f2d5-2fd7-4083-b017-c3b96a148aa0',
+      label: 'Tether (Tron)',
+      value: 'USDT',
+      chain: 'TRON',
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/325/large/Tether.png',
+      chainIcon: 'https://assets.coingecko.com/coins/images/1094/large/tron-logo.png'
+    },
+
+    // Bitcoin (Native Chain)
+    {
+      label: 'Bitcoin',
+      value: 'BTC',
+      chain: 'BITCOIN',
+      type: 'CRYPTO',
+      icon: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png',
+      chainIcon: 'https://assets.coingecko.com/coins/images/1/large/bitcoin.png'
+    }
+    
   ];
 
   const FiatBottomSheet = ref<InstanceType<typeof VueBottomSheet>>()
@@ -620,6 +764,7 @@
 
 
   const entry = ref<number>()
+  const fee = ref()
 
   const SOURCE = reactive({
     name:'',
@@ -841,6 +986,7 @@
       quote.value = result?.quote
       DESTINATION.amount = result?.quote?.destinationAmount;
       order.value = {SOURCE,DESTINATION}
+      fee.value = result.fee
       
     }else{
       isInsufficient.value = true

@@ -108,7 +108,7 @@ export const useOrderStore = defineStore('order', {
       },
 
       async createOrder(payload:{price:number; amount:number; type:string; pairId:string, minimumAmount:number}) {
-        
+      
         this.loading = true
         try {
           const { axiosInstance } = useAxios()
@@ -167,7 +167,7 @@ export const useOrderStore = defineStore('order', {
         }
       },
 
-      async getPairWallets(orderType:string,pairId:string) {
+      async getPairWallets(pairId:string) {
         
         this.loading = true
         try {
@@ -176,7 +176,6 @@ export const useOrderStore = defineStore('order', {
           // const token = useCookie('token');
           const response = await axiosInstance.get(url,{
             params: {
-              orderType,
               pairId
             }
           });
@@ -244,6 +243,40 @@ export const useOrderStore = defineStore('order', {
               currency, 
               basePair,
               amount,
+            }
+          });
+
+          console.log(response.data);
+       
+          return response.data
+          
+        } catch (error: any | AxiosError) {
+          console.log(error)
+            if (axios.isAxiosError(error))  {
+              // Access to config, request, and response
+              console.log(error.response?.data)
+              return error.response?.data
+
+            } else {
+              // Just a stock error
+              console.error('Error:', error.message);
+            }
+            
+        } finally {
+          this.loading = false
+        }
+      },
+
+      async fetchPairRate(pairId:string) {
+        
+        this.loading = true
+        try {
+          const { axiosInstance } = useAxios()
+          const url = '/orders/pairs/rate';
+          // const token = useCookie('token');
+          const response = await axiosInstance.get(url, {
+            params: {
+              pairId
             }
           });
 

@@ -5,7 +5,14 @@
         <div class="w-full">
           <MenuButton class="w-full inline-flex Grotesque-Regular items-center justify-start whitespace-nowrap Grotesque-Regular py-2 px-3 gap-x-2 text-[14px] text-[#686767] bg-white hover:bg-gray-100 rounded-lg">
             <div class="flex items-center justify-center gap-2">
-              <h3 class="border rounded-full bg-black text-white text-[12px] px-2 py-3 ">{{selected ? selected.value : options[placeholder].value }}</h3> 
+              <!-- <h3 class="border rounded-full bg-black text-white text-[12px] px-2 py-3 ">{{selected ? selected.value : options[placeholder].value }}</h3> -->
+              <div class="flex items-center justify-center">
+                <div v-if="selected && selected.type ==='CRYPTO'" class="flex items-end justify-center">
+                 <img class="w-[30px] rounded-full" :src="selected?.icon" alt="avatar">
+                 <img class="w-[20px] bg-black rounded-full -ml-2" :src="selected?.chainIcon" alt="avatar">
+                </div>
+                <h3 v-else class="text-white text-[30px] ">{{ selected?.emoji }}</h3>
+              </div>
 
               <div class="flex flex-col items-start justify-center">
                 <h2 class='text-[15px] Grotesque-Bold text-[#686767] leading-none'>{{selected ? selected.label : options[placeholder].label}}</h2>
@@ -31,7 +38,14 @@
                 <a href="#" :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'flex items-center justify-start gap-3 px-4 py-2 Grotesque-Regular text-[14px]']">
                   
                   <div class="flex items-center justify-center gap-2">
-                    <h3 class="border rounded-full bg-black text-white text-[10px] px-2 py-3 ">{{ option.value }}</h3> 
+                    <div class="flex items-center justify-center">
+                      <div v-if="option.type ==='CRYPTO'" class="flex items-end justify-center">
+                        <img class="w-[30px] rounded-full" :src="option?.icon" alt="avatar">
+                        <img class="w-[20px] bg-black rounded-full -ml-2" :src="option?.chainIcon" alt="avatar">
+                      </div>
+                      <h3 v-else class="text-white text-[30px] ">{{ option?.emoji }}</h3>
+                    </div>
+                    
 
                     <div class="flex flex-col items-start justify-center">
                       <h2 class='text-[14px] Grotesque-Bold text-[#686767] leading-none'>{{option.label}}</h2>
@@ -70,7 +84,7 @@
 
   const {options,placeholder} = props
 
-  const selected = ref<option>()
+  const selected = ref<option>(options[placeholder])
 
   const emit = defineEmits(['update'])  // Declare Events
 
