@@ -71,8 +71,7 @@
       v-model:bankId="DETAILS.bankId"
       v-model:-accountNumber="DETAILS.accountNumber"
       v-model:-type="DETAILS.type"
-      v-model:currency="DETAILS.currency"
-      v-model:-optional="optionalField"
+      v-model:-optional="optional"
 
       @submit="onSubmit()"
       @back="tab = 'BANKS'"
@@ -129,31 +128,33 @@
     };
     
     const accounts = ref<any[]>([])
+    const optional = ref({field:'bicSwift',value:''})
 
     const DETAILS = reactive({
       bankId:'',
       accountNumber: '',
       type:'',
-      currency:'',
+      [optional.value.field]:'',
 
-      routingNumber:'',
-      sortCode:'',
-      bicSwift:'',
-      institutionNumber:'',
-      bsbNumber:'',
-      ifscCode:'',
-      clabeNumber:'',
-      cnapsCode:'',
-      nubanNumber:'',
-      pixCode:'',
-      clearingCode:''
+      // routingNumber:'',
+      // sortCode:'',
+      // bicSwift:'',
+      // institutionNumber:'',
+      // bsbNumber:'',
+      // transitNumber:'',
+      // ifscCode:'',
+      // clabeNumber:'',
+      // cnapsCode:'',
+      // nubanNumber:'',
+      // pixCode:'',
+      // clearingCode:''
    
     })
 
-    const optionalField = computed(() => {
-      const field = getBankField(DETAILS.currency);
-      return DETAILS[field];
-    });
+    // const optionalField = computed(() => {
+    //   const field = getBankField(DETAILS.currency);
+    //   return DETAILS[field];
+    // });
 
 
     function validate_Complete_Details(details:any) {
@@ -175,6 +176,8 @@
 
       console.log('started')
       emit('close')
+      DETAILS[optional.value?.field as string] = optional.value?.value
+      console.log('DETAILS',DETAILS)
 
       toast.promise(() => new Promise(async(resolve,reject) =>{
         const linked = await linkBankAccount(DETAILS)
@@ -218,8 +221,8 @@
     
     console.log(result)
     if(result?.success){
-        console.log(result?.value)
-        accounts.value = result?.accounts
+      console.log(result?.value)
+      accounts.value = result?.accounts
     }
     loading.value = false
   }

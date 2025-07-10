@@ -141,9 +141,8 @@
               <input
                   type="text"
                   class="Grotesque-Regular text-[12px] w-full sm:w-1/2 bg-gray-100 border-[1px] border-[#2F2B43]/10 px-4 py-2 rounded-xl flex items-center justify-between focus:ring-0 border-none outline-none"
-                  v-model="Optional"
-                  required
-                  :placeholder="`${getBankField(selectedCurrency?.currency as string)} (optional)`"
+                  v-model="Optional.value"
+                  :placeholder="`${getBankField} (optional)`"
               />
 
             </div>
@@ -237,26 +236,7 @@
   // const AccountNumber = ref()
   // const resolvedName = ref('')
 
-  const bankId = defineModel<string>('bankId')
-  const currency = defineModel<string>('currency')
-  // const country = defineModel<string>('country')
-  const Type = defineModel<string>('Type')
-  const AccountNumber = defineModel<string>('AccountNumber')
-  const Optional = defineModel<string>('Optional')
-
-  
-
-
-
-  const route = useRouter()
-
-  const emit = defineEmits(['submit','update-value','back'])  // Declare Events
-
-  watch([activeContinent, selectedCurrency], async(newVal) => {
-    selectedBank.value = undefined
-  });
-
-  const getBankField = computed(() => (currency: string) => {
+  const getBankField = computed(()=> {
     const currencyToFieldMap: Record<string, string> = {
       'USD': 'routingNumber',
       'GBP': 'sortCode',
@@ -272,7 +252,27 @@
     };
 
     // Fallback logic
-    return currencyToFieldMap[currency] || 'bicSwift'; // Default to SWIFT/BIC
+    return currencyToFieldMap[selectedCurrency.value?.currency as string] || 'bicSwift'; // Default to SWIFT/BIC
+  });
+
+  const bankId = defineModel<string>('bankId')
+  const currency = defineModel<string>('currency')
+  // const country = defineModel<string>('country')
+  const Type = defineModel<string>('Type')
+  const AccountNumber = defineModel<string>('AccountNumber')
+  // const Optional = defineModel<string>('Optional')
+  const Optional = defineModel<{field:string; value:string}>('Optional',{ default: {field:'', value:''} })
+
+  
+
+
+
+  const route = useRouter()
+
+  const emit = defineEmits(['submit','update-value','back'])  // Declare Events
+
+  watch([activeContinent, selectedCurrency], async(newVal) => {
+    selectedBank.value = undefined
   });
 
   const selectCurrency = (value: Currency) => {
@@ -334,9 +334,9 @@
 
   
 
-  // onMounted(async()=>{
-  //   getRate()
-  // })
+  onMounted(async()=>{
+    Optional.value.field = getBankField.value
+  })
 
   const getFlagEmoji = (country: string): string => {
     const flagMap: Record<string, string> = {

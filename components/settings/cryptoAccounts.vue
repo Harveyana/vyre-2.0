@@ -44,11 +44,11 @@
             <div class="flex items-start justify-between gap-y-3">
               <div class="flex flex-col items-start">
                 <h1 class="text-[18px] whitespace-nowrap SoraRegular text-[#080708]">
-                  Delete Bank
+                  Delete Account
                 </h1>
 
                 <h4 class="text-[13px] max-w-[90%] SansRegular text-[#686767]">
-                  Are you want to delete bank? You can always add the bank account again
+                  Are you want to delete account? You can always add another later
                 </h4>
               </div>
               

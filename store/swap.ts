@@ -14,7 +14,7 @@ interface BankDetails {
   bankId: string;
   accountNumber: string;
   type: string;
-  currency: string;
+  // currency: string;
   
   
   // Country-specific banking fields
