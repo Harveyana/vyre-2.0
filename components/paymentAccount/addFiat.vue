@@ -71,7 +71,7 @@
       v-model:bankId="DETAILS.bankId"
       v-model:-accountNumber="DETAILS.accountNumber"
       v-model:-type="DETAILS.type"
-      v-model:-country="DETAILS.country"
+      v-model:currency="DETAILS.currency"
       v-model:-optional="optionalField"
 
       @submit="onSubmit()"
@@ -108,24 +108,24 @@
    const emit = defineEmits(['close','refresh','switch']) 
 
   
-    const COUNTRY_FIELD_MAP = {
-      'United States': 'routingNumber',
-      'United Kingdom': 'sortCode',
-      'Canada': 'institutionNumber',
-      'Australia': 'bsbNumber',
-      'India': 'ifscCode',
-      'Mexico': 'clabeNumber',
-      'China': 'cnapsCode',
-      'Nigeria': 'nubanNumber',
-      'Brazil': 'pixCode',
-      'Hong Kong': 'clearingCode',
+    const CURRENCY_FIELD_MAP = {
+      'USD': 'routingNumber',
+      'GBP': 'sortCode',
+      'CAD': 'transitNumber',
+      'AUD': 'bsbNumber',
+      'INR': 'ifscCode',
+      'MXN': 'clabeNumber',
+      'CNY': 'cnapsCode',
+      'NGN': 'nubanNumber',
+      'BRL': 'pixCode',
+      'HKD': 'clearingCode'
     } as const; // <-- 'as const' makes it type-safe
 
-    type Country = keyof typeof COUNTRY_FIELD_MAP;
-    type BankField = typeof COUNTRY_FIELD_MAP[Country];
+    type Currency = keyof typeof CURRENCY_FIELD_MAP;
+    type BankField = typeof CURRENCY_FIELD_MAP[Currency];
 
-    const getBankField = (country: string): BankField | 'bicSwift' => {
-      return COUNTRY_FIELD_MAP[country as Country] ?? 'bicSwift';
+    const getBankField = (currency: string): BankField | 'bicSwift' => {
+      return CURRENCY_FIELD_MAP[currency as Currency] ?? 'bicSwift';
     };
     
     const accounts = ref<any[]>([])
@@ -134,7 +134,7 @@
       bankId:'',
       accountNumber: '',
       type:'',
-      country:'',
+      currency:'',
 
       routingNumber:'',
       sortCode:'',
@@ -151,7 +151,7 @@
     })
 
     const optionalField = computed(() => {
-      const field = getBankField(DETAILS.country);
+      const field = getBankField(DETAILS.currency);
       return DETAILS[field];
     });
 

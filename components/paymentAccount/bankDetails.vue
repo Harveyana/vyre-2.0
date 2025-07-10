@@ -126,7 +126,7 @@
                 type="text"
                 v-model="AccountNumber"
                 class="Grotesque-Regular text-[12px] w-full sm:w-1/2 bg-gray-100 border-[1px] border-[#2F2B43]/10 px-3 py-2 rounded-xl focus:ring-0 border-none outline-none"
-                placeholder="Account number"
+                placeholder="Account number || IBAN"
               />
 
               <div class="w-full sm:w-1/2 relative">
@@ -143,7 +143,7 @@
                   class="Grotesque-Regular text-[12px] w-full sm:w-1/2 bg-gray-100 border-[1px] border-[#2F2B43]/10 px-4 py-2 rounded-xl flex items-center justify-between focus:ring-0 border-none outline-none"
                   v-model="Optional"
                   required
-                  :placeholder="`${getBankField(selectedCurrency?.country as string)} (optional)`"
+                  :placeholder="`${getBankField(selectedCurrency?.currency as string)} (optional)`"
               />
 
             </div>
@@ -239,7 +239,7 @@
 
   const bankId = defineModel<string>('bankId')
   const currency = defineModel<string>('currency')
-  const country = defineModel<string>('country')
+  // const country = defineModel<string>('country')
   const Type = defineModel<string>('Type')
   const AccountNumber = defineModel<string>('AccountNumber')
   const Optional = defineModel<string>('Optional')
@@ -256,23 +256,23 @@
     selectedBank.value = undefined
   });
 
-  const getBankField = computed(() => (countryName: string) => {
-    const countryToFieldMap: Record<string, string> = {
-      'United States': 'routingNumber',
-      'United Kingdom': 'sortCode',
-      'Canada': 'transitNumber',
-      'Australia': 'bsbNumber',
-      'India': 'ifscCode',
-      'Mexico': 'clabeNumber',
-      'China': 'cnapsCode',
-      'Nigeria': 'nubanNumber',
-      'Brazil': 'pixCode',
-      'Hong Kong': 'clearingCode'
+  const getBankField = computed(() => (currency: string) => {
+    const currencyToFieldMap: Record<string, string> = {
+      'USD': 'routingNumber',
+      'GBP': 'sortCode',
+      'CAD': 'transitNumber',
+      'AUD': 'bsbNumber',
+      'INR': 'ifscCode',
+      'MXN': 'clabeNumber',
+      'CNY': 'cnapsCode',
+      'NGN': 'nubanNumber',
+      'BRL': 'pixCode',
+      'HKD': 'clearingCode'
       // Add more countries as needed
     };
 
     // Fallback logic
-    return countryToFieldMap[countryName] || 'bicSwift'; // Default to SWIFT/BIC
+    return currencyToFieldMap[currency] || 'bicSwift'; // Default to SWIFT/BIC
   });
 
   const selectCurrency = (value: Currency) => {
@@ -284,7 +284,6 @@
   const selectBank = async(bank:bank)=>{
     selectedBank.value = bank
     bankId.value = bank.id
-    country.value = bank.country
   }
 
 

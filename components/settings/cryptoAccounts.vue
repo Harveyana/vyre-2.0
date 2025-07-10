@@ -23,7 +23,7 @@
                 <h1 v-if="account?.chain" class="text-[12px] max-w-[90%] truncate leading-none whitespace-nowrap Grotesque-Regular text-[#080708]">
                   {{account?.name}}
                 </h1>
-                <ActionDrop  class="absolute top-1 right-1 bg-gray-200 rounded-xl" @update="(value:string)=>{actionDispatch(value,account.id)}" :filters="['Delete']" />
+                <ActionDrop  class="absolute top-1 right-1 bg-gray-200 rounded-xl" @update="(value:string)=> actionDispatch(value,account.id)" :filters="['Delete']" />
               </div>
                           
               <h4 v-if="account?.chain" class="text-[12px] whitespace-nowrap Grotesque-Regular text-[#686767]">
@@ -39,7 +39,7 @@
 
     <BaseDialogue :visible="showRemoveAccount">
 
-          <div class="flex flex-col h-fit w-[355px] gap-y-3">
+          <div class="flex flex-col h-fit sm:w-[355px] gap-y-3">
               
             <div class="flex items-start justify-between gap-y-3">
               <div class="flex flex-col items-start">
@@ -122,11 +122,11 @@
    const showRemoveAccount = ref(false)
    const showLoader = ref(false)
    const accounts = ref<any[]>([])
-   const accountId = ref('')
+   const selectedAccountId = ref('')
 
 
     const actionDispatch = (action:string,accountId:string)=>{
-      accountId.value = accountId
+      selectedAccountId.value = accountId
       if(action === 'Delete'){
         showRemoveAccount.value = true
       }
@@ -135,9 +135,11 @@
 
   const deleteAccount = async()=>{
 
+    showRemoveAccount.value = false
+
     toast.promise(() => new Promise(async(resolve,reject) =>{
 
-      const result = await deletePaymentAccount(accountId.value);
+      const result = await deletePaymentAccount(selectedAccountId.value);
       console.log(result)
 
       if(result?.success){
