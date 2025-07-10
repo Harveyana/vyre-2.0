@@ -71,6 +71,7 @@
       v-model:bankId="DETAILS.bankId"
       v-model:-accountNumber="DETAILS.accountNumber"
       v-model:-type="DETAILS.type"
+      v-model:-country="DETAILS.country"
       v-model:-optional="optionalField"
 
       @submit="onSubmit()"
@@ -133,7 +134,7 @@
       bankId:'',
       accountNumber: '',
       type:'',
-      currency:'',
+      country:'',
 
       routingNumber:'',
       sortCode:'',
@@ -150,7 +151,7 @@
     })
 
     const optionalField = computed(() => {
-      const field = getBankField(user.value?.country!);
+      const field = getBankField(DETAILS.country);
       return DETAILS[field];
     });
 
@@ -162,7 +163,7 @@
       if (!String(details.accountNumber).trim()) errors.push("Account number is required");
       if (!details.bankId.trim()) errors.push("Bank is required");
       if (!details.type.trim()) errors.push("Select Account type");
-      if (!details.currency.trim()) errors.push("currency Required");
+      // if (!details.currency.trim()) errors.push("currency Required");
 
       return {
         isValid: !errors.length,

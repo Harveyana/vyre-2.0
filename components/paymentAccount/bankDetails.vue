@@ -239,6 +239,7 @@
 
   const bankId = defineModel<string>('bankId')
   const currency = defineModel<string>('currency')
+  const country = defineModel<string>('country')
   const Type = defineModel<string>('Type')
   const AccountNumber = defineModel<string>('AccountNumber')
   const Optional = defineModel<string>('Optional')
@@ -283,6 +284,7 @@
   const selectBank = async(bank:bank)=>{
     selectedBank.value = bank
     bankId.value = bank.id
+    country.value = bank.country
   }
 
 
