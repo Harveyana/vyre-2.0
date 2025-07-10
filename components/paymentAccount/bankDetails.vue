@@ -143,7 +143,7 @@
                   class="Grotesque-Regular text-[12px] w-full sm:w-1/2 bg-gray-100 border-[1px] border-[#2F2B43]/10 px-4 py-2 rounded-xl flex items-center justify-between focus:ring-0 border-none outline-none"
                   v-model="Optional"
                   required
-                  :placeholder="`${getBankField(user?.country)} (optional)`"
+                  :placeholder="`${getBankField(selectedCurrency?.country as string)} (optional)`"
               />
 
             </div>

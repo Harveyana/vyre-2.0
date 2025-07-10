@@ -147,7 +147,7 @@
     })
 
     const optionalField = computed(() => {
-      const field = getBankField(user.value?.country!);
+      const field = getBankField(DETAILS.Address.country);
       return DETAILS[field];
     });
 

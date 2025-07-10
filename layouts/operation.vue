@@ -2,7 +2,7 @@
    <div class="min-h-screen h-[100dvh] bg-doodle  max-w-screen-3xl mx-auto w-full overflow-hidden flex flex-col items-center justify-center relative">
 
       <Toaster position="top-right" />
-      <div class="relative  w-full h-full flex flex-col items-start justify-start px-2 sm:px-10 py-10">
+      <div class="relative  w-full xl:w-[90%] 2xl:w-[60%] h-full flex flex-col items-start justify-start px-2 sm:px-10 py-10">
          <!-- <VyreMobileMenu />
          <VyreMenu/> -->
          <section class="w-full relative flex flex-col items-center justify-center">
