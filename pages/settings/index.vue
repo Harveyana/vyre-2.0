@@ -42,7 +42,7 @@
 
 
         <ProfileTab v-if="tab ==='PROFILE'" />
-        <!-- <FamilyTab v-if="tab ==='FAMILY'" /> -->
+        <PaymentAccounts v-if="tab ==='ACCOUNTS'" />
 
 
           

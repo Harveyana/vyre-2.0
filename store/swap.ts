@@ -116,7 +116,37 @@ export const useSwapStore = defineStore('swap', {
         }
       },
 
-      async getLinkedAccounts( type:string) {
+      async deletePaymentAccount( id:string) {
+        
+        this.loading = true
+        try {
+          const { axiosInstance } = useAxios()
+          const url = `/paymentAccount/${id}`;
+          // const token = useCookie('token');
+          const response = await axiosInstance.delete(url);
+
+          console.log(response.data);
+       
+          return response.data
+          
+        } catch (error: any | AxiosError) {
+          console.log(error)
+            if (axios.isAxiosError(error))  {
+              // Access to config, request, and response
+              console.log(error.response?.data)
+              return error.response?.data
+
+            } else {
+              // Just a stock error
+              console.error('Error:', error.message);
+            }
+            
+        } finally {
+          this.loading = false
+        }
+      },
+
+      async getLinkedAccounts(type:string) {
         
         this.loading = true
         try {
