@@ -7,7 +7,7 @@
     <div class=" w-[90%] sm:w-full h-[80vh] sm:h-[75vh] flex flex-col items-center justify-start gap-3 rounded-lg overflow-y-auto pt-8">
       
 
-      <div class="w-full h-fit sm:w-[65%] flex flex-col items-center justify-center gap-3 rounded-3xl bg-gradient-to-b from-white/50 to-[#F6F6F6] shadow-md px-4 sm:px-10 pt-4 sm:pt-6 pb-4">
+      <div class="w-full h-fit lg:w-[65%] flex flex-col items-center justify-center gap-3 rounded-3xl bg-gradient-to-b from-white/50 to-[#F6F6F6] shadow-md px-4 sm:px-10 pt-4 sm:pt-6 pb-4">
 
         <div class="w-fit flex items-center justify-center gap-2">
           <button
