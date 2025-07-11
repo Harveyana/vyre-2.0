@@ -136,15 +136,19 @@
             </div>
 
 
-            <div class="w-full flex flex-col sm:flex-row items-start justify-start gap-2" >
+            <div class="w-full flex flex-col items-start justify-start gap-1" >
 
               <input
                   type="text"
                   class="Grotesque-Regular text-[12px] w-full sm:w-1/2 bg-gray-100 border-[1px] border-[#2F2B43]/10 px-4 py-2 rounded-xl flex items-center justify-between focus:ring-0 border-none outline-none"
                   v-model="Optional.value"
-                  :placeholder="`${getBankField} (optional)`"
+                  :placeholder="`${getBankField}`"
               />
-
+              
+              <span class="flex items-center justify-center gap-1 pl-2 text-[11px] text-gray-600 mt-1 whitespace-nowrap">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#000" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2m1 15h-2v-2h2zm0-4h-2l-.5-6h3z"/></svg>
+                {{getInstruction}}
+              </span>
             </div>
 
             
@@ -171,7 +175,7 @@
         <baseButton
            @click="nextTab()"
             type="submit"
-            :disabled="!currency || showLoader"
+            :disabled="!currency || showLoader || loading"
             :class="currency ? 'bg-black': 'bg-gray-300'"
             class="self-end gap-3 flex items-center justify-center w-full py-3 text-white text-[15px] rounded-3xl mt-6"
           > 
@@ -255,6 +259,28 @@
     return currencyToFieldMap[selectedCurrency.value?.currency as string] || 'bicSwift'; // Default to SWIFT/BIC
   });
 
+  const getInstruction = computed(()=> {
+    const fieldMap: Record<string, string> = {
+      'USD': 'Routing number required for USD Transfers',
+      'GBP': 'sortCode required for GBP Transfers',
+      'CAD': 'transitNumber',
+      'AUD': 'bsbNumber',
+      'INR': 'ifscCode',
+      'MXN': 'clabeNumber',
+      'CNY': 'cnapsCode',
+      'NGN': 'Nuban is same as Account Number',
+      'BRL': 'pixCode',
+      'HKD': 'clearingCode required for HKD Transfers',
+      'EUR': 'bicSwift required for EUR Transfers'
+      // Add more countries as needed
+    };
+
+    // Fallback logic
+    return fieldMap[selectedCurrency.value?.currency as string] || 'bicSwift'; // Default to SWIFT/BIC
+  });
+
+
+
   const bankId = defineModel<string>('bankId')
   const currency = defineModel<string>('currency')
   // const country = defineModel<string>('country')
@@ -268,9 +294,7 @@
 
 
   const route = useRouter()
-
   const emit = defineEmits(['submit','update-value','back'])  // Declare Events
-
   watch([activeContinent, selectedCurrency], async(newVal) => {
     selectedBank.value = undefined
   });

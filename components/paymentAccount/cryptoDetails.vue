@@ -153,23 +153,23 @@
       label:'TRON',
       value:'TRON'
     },
-    {
-      label:'SOL',
-      value:'SOLANA'
-    },
     // {
-    //   label:'OP',
-    //   value:'OPTIMISM'
+    //   label:'SOL',
+    //   value:'SOLANA'
     // },
+    {
+      label:'OP',
+      value:'OPTIMISM'
+    },
     {
       label:'POLY',
       value:'POLYGON'
     },
     
-    // {
-    //   label:'ARB',
-    //   value:'ARBITRUM'
-    // },
+    {
+      label:'ARB',
+      value:'ARBITRUM'
+    },
 
   ]
 
@@ -214,12 +214,13 @@
     },
 
     // USDT (Tether)
-    {
-      label: 'Tether (Arbitrum)',
-      value: 'USDT',
-      chain: 'ARBITRUM',
-      type: 'CRYPTO'
-    },
+
+    // {
+    //   label: 'Tether (Arbitrum)',
+    //   value: 'USDT',
+    //   chain: 'ARBITRUM',
+    //   type: 'CRYPTO'
+    // },
     {
       label: 'Tether (Ethereum)',
       value: 'USDT',
@@ -238,18 +239,18 @@
       chain: 'SOLANA',
       type: 'CRYPTO'
     },
-    {
-      label: 'Tether (Optimism)',
-      value: 'USDT',
-      chain: 'OPTIMISM',
-      type: 'CRYPTO'
-    },
-    {
-      label: 'Tether (Base)',
-      value: 'USDT',
-      chain: 'BASE',
-      type: 'CRYPTO'
-    },
+    // {
+    //   label: 'Tether (Optimism)',
+    //   value: 'USDT',
+    //   chain: 'OPTIMISM',
+    //   type: 'CRYPTO'
+    // },
+    // {
+    //   label: 'Tether (Base)',
+    //   value: 'USDT',
+    //   chain: 'BASE',
+    //   type: 'CRYPTO'
+    // },
     {
       label: 'Tether (Tron)',
       value: 'USDT',

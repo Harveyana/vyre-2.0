@@ -1,6 +1,6 @@
 <template>
 
-  <div class="dark:bg-[#12171D] bg-gray-50 h-[80vh] rounded-2xl w-full gap-x-1 lg:gap-x-6 ">
+  <div class="bg-gray-50 h-[80vh] rounded-2xl w-full gap-x-1 lg:gap-x-6 ">
 
     <!-- <div class="w-full py-3 flex items-start justify-start mb-3">
 
@@ -40,7 +40,7 @@
         </div>
 
 
-        <div class="w-full bg-white/70 dark:bg-black/50 rounded-2xl h-[69vh] sm:h-[70vh] overflow-y-auto sm:border-r-2 flex flex-col items-center justify-start pb-8 sm:p-6 gap-y-2">
+        <div class="w-full bg-white/70 rounded-2xl h-[69vh] sm:h-[70vh] overflow-y-auto sm:border-r-2 flex flex-col items-center justify-start pb-8 sm:p-6 gap-y-2">
 
 
           <div v-if="loading" class="h-full flex flex-col gap-y-4 w-full rounded-xl items-center justify-center">
