@@ -69,9 +69,10 @@
       v-if="tab === 'DETAILS'"
 
       v-model:bankId="DETAILS.bankId"
+      v-model:currency="currency"
       v-model:-accountNumber="DETAILS.accountNumber"
       v-model:-type="DETAILS.type"
-      v-model:-optional="optional"
+      v-model:varies="varies"
 
       @submit="onSubmit()"
       @back="tab = 'BANKS'"
@@ -107,7 +108,28 @@
    const emit = defineEmits(['close','refresh','switch']) 
 
   
-    const CURRENCY_FIELD_MAP = {
+    // const CURRENCY_FIELD_MAP = {
+    //   'USD': 'routingNumber',
+    //   'GBP': 'sortCode',
+    //   'CAD': 'transitNumber',
+    //   'AUD': 'bsbNumber',
+    //   'INR': 'ifscCode',
+    //   'MXN': 'clabeNumber',
+    //   'CNY': 'cnapsCode',
+    //   'NGN': 'nubanNumber',
+    //   'BRL': 'pixCode',
+    //   'HKD': 'clearingCode'
+    // } as const; // <-- 'as const' makes it type-safe
+
+    // type Currency = keyof typeof CURRENCY_FIELD_MAP;
+    // type BankField = typeof CURRENCY_FIELD_MAP[Currency];
+
+    // const getBankField = (currency: string): BankField | 'bicSwift' => {
+    //   return CURRENCY_FIELD_MAP[currency as Currency] ?? 'bicSwift';
+    // };
+
+    const getBankField = computed(()=> {
+    const currencyToFieldMap: Record<string, string> = {
       'USD': 'routingNumber',
       'GBP': 'sortCode',
       'CAD': 'transitNumber',
@@ -118,23 +140,22 @@
       'NGN': 'nubanNumber',
       'BRL': 'pixCode',
       'HKD': 'clearingCode'
-    } as const; // <-- 'as const' makes it type-safe
-
-    type Currency = keyof typeof CURRENCY_FIELD_MAP;
-    type BankField = typeof CURRENCY_FIELD_MAP[Currency];
-
-    const getBankField = (currency: string): BankField | 'bicSwift' => {
-      return CURRENCY_FIELD_MAP[currency as Currency] ?? 'bicSwift';
+      // Add more countries as needed
     };
-    
+
+    // Fallback logic
+    return currencyToFieldMap[currency.value as string] || 'bicSwift'; // Default to SWIFT/BIC
+  });
+
     const accounts = ref<any[]>([])
-    const optional = ref({field:'bicSwift',value:''})
+    const currency = ref('')
+    const varies = ref('')
 
     const DETAILS = reactive({
       bankId:'',
       accountNumber: '',
       type:'',
-      [optional.value.field]:'',
+      [getBankField.value]: '',
 
       // routingNumber:'',
       // sortCode:'',
@@ -176,7 +197,7 @@
 
       console.log('started')
       emit('close')
-      DETAILS[optional.value?.field as string] = optional.value?.value
+      DETAILS[getBankField.value as string] = varies.value
       console.log('DETAILS',DETAILS)
 
       toast.promise(() => new Promise(async(resolve,reject) =>{

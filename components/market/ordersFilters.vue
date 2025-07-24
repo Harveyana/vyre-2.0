@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full flex justify-center items-start bg-white/60 dark:bg-black/50 rounded-2xl sm:p-3">
+  <div class="w-full h-full flex justify-center items-start bg-white/60 rounded-2xl sm:p-3">
     <!-- Loading State -->
     <div v-if="loading" class="flex flex-col gap-y-4 w-full rounded-xl items-center justify-center">
 
@@ -21,7 +21,7 @@
 
       <div class="w-full flex flex-col gap-2 px-3">
         <div class="flex justify-between items-center w-full">
-          <span class="text-sm font-medium text-gray-700 dark:text-white">
+          <span class="text-sm font-medium text-gray-700 ">
             Order Type
           </span>
         </div>
@@ -51,7 +51,7 @@
 
       <div class="w-full flex flex-col gap-2 px-3">
         <div class="flex justify-between items-center w-full">
-          <span class="text-sm font-medium text-gray-700 dark:text-white">
+          <span class="text-sm font-medium text-gray-700 ">
             Order Pair
           </span>
         </div>
@@ -109,10 +109,10 @@
       <!-- Full-width Price Range Filter -->
       <!-- <div class="w-full flex flex-col gap-2 px-3">
         <div class="flex justify-between items-center w-full">
-          <span class="text-sm font-medium text-gray-700 dark:text-white">
+          <span class="text-sm font-medium text-gray-700">
             Price Range
           </span>
-          <span class="text-sm text-gray-700 dark:text-white">
+          <span class="text-sm text-gray-700 ">
             {{ sliderValue[0] }} - {{ sliderValue[1] }}
           </span>
         </div>
@@ -125,7 +125,7 @@
             :min="priceRange.min"
             :step="priceStep"
           >
-            <SliderTrack class="relative grow rounded-full h-[3px] bg-gray-200 dark:bg-gray-600 w-full">
+            <SliderTrack class="relative grow rounded-full h-[3px] bg-gray-200 w-full">
               <SliderRange class="absolute bg-[#34da97] rounded-full h-full" />
             </SliderTrack>
             <SliderThumb
@@ -141,7 +141,7 @@
       <div class="w-full flex items-center justify-center gap-3 px-3">
         <!-- Min Price Input -->
         <div class="flex flex-col justify-center items-start w-1/2">
-          <span class="text-sm font-medium text-gray-700 dark:text-white">
+          <span class="text-sm font-medium text-gray-700 ">
             Min
           </span>
           <input
@@ -154,7 +154,7 @@
 
         <!-- Max Price Input -->
         <div class="flex flex-col justify-center items-start w-1/2">
-          <span class="text-sm font-medium text-gray-700 dark:text-white">
+          <span class="text-sm font-medium text-gray-700 ">
             Max
           </span>
           <input
@@ -166,8 +166,8 @@
         </div>
       </div>
 
-      <button @click="update()" class="w-full hover:bg-black/80 bg-black dark:bg-white items-center justify-center rounded-2xl py-2 mt-4">
-        <span class="text-[16px] font-medium text-gray-300 dark:text-black">
+      <button @click="update()" class="w-full hover:bg-black/80 bg-black items-center justify-center rounded-2xl py-3 mt-4">
+        <span class="text-[16px] font-medium text-gray-300">
             Apply
         </span>
       </button>

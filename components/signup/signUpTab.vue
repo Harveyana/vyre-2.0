@@ -3,9 +3,9 @@
     <div class="w-full h-fit ">
       <div class="w-full flex flex-col justify-start items-start">
         <p class="Grotesque-Regular text-[16px] text-[#737373]">
-          Welcome Back,
+           Let's get started,
         </p>
-        <h3 class="Grotesque-Bold text-[25px] text-[#1A1A1A]">Login or Signup</h3>
+        <h3 class="Grotesque-Bold text-[25px] text-[#1A1A1A]">Create Account</h3>
       </div>
     </div>
 
@@ -52,6 +52,7 @@
         />
       </button>
 
+
     </form>
 
     <div class="w-[70%] h-[0.1px] bg-gray-300 my-3">
@@ -70,18 +71,21 @@
         <span class="button-text">Continue with Google</span>
     </button>
 
-    <!-- <NuxtLink
-       href="/signup"
+    <NuxtLink
+       href="/login"
         class="text-sm text-[#737373] text-left cursor-pointer Grotesque-Regular my-2"
       >
-        Don’t have an account?
+        Already have an account?
 
         <span class="text-[#0050AB] cursor-pointer">
-          Create New
+          sign in
         </span>
 
-    </NuxtLink> -->
+    </NuxtLink>
 
+
+
+    <!-- <Toaster position="top-right" /> -->
   </div>
 </template>
 
@@ -113,7 +117,7 @@ const loginWithGoogle = async () => {
       prompt: 'select_account' // Force account selection
     },
     appState: { 
-      target: route.query.return_to || '/' 
+      target: route.query.return_to || '/onboard'
     }
   });
 };

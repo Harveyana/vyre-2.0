@@ -158,6 +158,8 @@
     const { user } = storeToRefs(useAuthStore()); 
    const emit = defineEmits(['toggle'])
 
+   const { $auth } = useNuxtApp();
+
    const showNotification = ref(false)
    const showApps = ref(false)
    const router = useRouter()
@@ -165,8 +167,15 @@
    const showLogout = ref(false)
    const expanded = ref(false)
 
-    const signOut = ()=>{
-      logUserOut()
+    
+
+    const signOut = async()=>{
+      // logUserOut()
+      
+      await $auth.client.logout({
+        returnTo: window.location.origin + '/login',
+        federated: true
+      });
       showLogout.value = false
       router.push('/login')
     }

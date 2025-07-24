@@ -25,9 +25,11 @@
     "vue3-carousel-nuxt": "^1.1.5"
   },
   "dependencies": {
+    "@auth0/auth0-spa-js": "^2.3.0",
     "@fawmi/vue-google-maps": "^0.9.79",
     "@googlemaps/js-api-loader": "^1.16.6",
     "@headlessui/vue": "^1.7.23",
+    "@lottiefiles/lottie-player": "^2.0.12",
     "@pinia/nuxt": "^0.5.1",
     "@vee-validate/yup": "^4.11.8",
     "@webzlodimir/vue-bottom-sheet": "^3.0.5",

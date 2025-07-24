@@ -67,7 +67,7 @@ export const useAuthStore = defineStore('auth', {
       authenticated: false,
       loading: false,
       progress: 10,
-      user: null,
+      user: undefined,
       permisssions: [''],
       store: null,
       organisation: null,
@@ -115,6 +115,39 @@ export const useAuthStore = defineStore('auth', {
           } finally {
             this.loading = false
           }
+      },
+
+      async register_User() {
+        
+        this.loading = true
+
+        try {
+          // const token = useCookie('token');
+          const { axiosInstance } = useAxios()
+          const url = '/register';
+          // this.email = payload.DETAILS.email
+          // const token = useCookie('token');
+          const response = await axiosInstance.post(url);
+
+          console.log(response.data);
+    
+           return response.data
+          
+        } catch (error: any | AxiosError) {
+          console.log(error)
+            if (axios.isAxiosError(error))  {
+              // Access to config, request, and response
+              console.log(error.response?.data)
+              return error.response?.data
+
+            } else {
+              // Just a stock error
+              console.error('Error:', error.message);
+            }
+            
+        } finally {
+          this.loading = false
+        }
       },
 
       async authenticateOtp(payload:{code:string, userId:string}) {
@@ -181,38 +214,7 @@ export const useAuthStore = defineStore('auth', {
         }
       },
 
-      async register_User(payload: Userpayload) {
-        
-        this.loading = true
-
-        try {
-          // const token = useCookie('token');
-          const { axiosInstance } = useAxios()
-          const url = '/register';
-          this.email = payload.DETAILS.email
-          // const token = useCookie('token');
-          const response = await axiosInstance.post(url, payload);
-
-          console.log(response.data);
-    
-           return response.data
-          
-        } catch (error: any | AxiosError) {
-          console.log(error)
-            if (axios.isAxiosError(error))  {
-              // Access to config, request, and response
-              console.log(error.response?.data)
-              return error.response?.data
-
-            } else {
-              // Just a stock error
-              console.error('Error:', error.message);
-            }
-            
-        } finally {
-          this.loading = false
-        }
-      },
+     
 
       async userAddress(payload:{userId:string, country:string,address:string, state:string, city:string, postalCode:string}) {
         
@@ -637,7 +639,7 @@ export const useAuthStore = defineStore('auth', {
         
         this.loading = true
         try {
-          const { axiosInstance } = useAxios()
+          const { axiosInstance } = await useAxios()
           const url = '/user/get-profile';
           // const token = useCookie('token');
           const response = await axiosInstance.get(url);

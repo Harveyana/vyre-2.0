@@ -21,23 +21,23 @@ export default defineNuxtRouteMiddleware(async(to) => {
   // }
 
   //  If logged in and trying to access auth pages, redirect home
-  if (isAuthenticated && (to?.name === 'login' || to?.name === 'signup' || to?.name === 'forgot-password' || to?.name === 'callback')) {
-    return navigateTo('/');
-  }
+  // if (isAuthenticated && (to?.name === 'login' || to?.name === 'signup' || to?.name === 'forgot-password')) {
+  //   return navigateTo('/');
+  // }
 
   // If not logged in and trying to access protected page
-  if (!isAuthenticated && !['login', 'callback', 'signup', 'forgot-password'].includes(to?.name as string)) {
-    // Store the original path for post-login redirect
-    if (to.fullPath.startsWith('/') || to.fullPath.startsWith('/app')) {
-      sessionStorage.setItem('preLoginRoute', to.fullPath);
-    }
+  // if (!isAuthenticated && !['login', 'signup', 'forgot-password'].includes(to?.name as string)) {
+  //   // Store the original path for post-login redirect
+  //   if (to.fullPath.startsWith('/') || to.fullPath.startsWith('/app')) {
+  //     sessionStorage.setItem('preLoginRoute', to.fullPath);
+  //   }
     
-    // Redirect to login with return_to parameter
-    return navigateTo({
-      path: '/login',
-      query: { return_to: to.fullPath }
-    });
-  }
+  //   // Redirect to login with return_to parameter
+  //   return navigateTo({
+  //     path: '/login',
+  //     query: { return_to: to.fullPath }
+  //   });
+  // }
 
 
   // If not logged in and trying to access protected page

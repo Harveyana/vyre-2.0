@@ -141,7 +141,7 @@
               <input
                   type="text"
                   class="Grotesque-Regular text-[12px] w-full sm:w-1/2 bg-gray-100 border-[1px] border-[#2F2B43]/10 px-4 py-2 rounded-xl flex items-center justify-between focus:ring-0 border-none outline-none"
-                  v-model="Optional.value"
+                  v-model="Varies"
                   :placeholder="`${getBankField}`"
               />
               
@@ -286,8 +286,8 @@
   // const country = defineModel<string>('country')
   const Type = defineModel<string>('Type')
   const AccountNumber = defineModel<string>('AccountNumber')
-  // const Optional = defineModel<string>('Optional')
-  const Optional = defineModel<{field:string; value:string}>('Optional',{ default: {field:'', value:''} })
+  const Varies = defineModel<string>('varies')
+  // const Optional = defineModel<{field:string; value:string}>('Optional',{ default: {field:'', value:''} })
 
   
 
@@ -359,7 +359,8 @@
   
 
   onMounted(async()=>{
-    Optional.value.field = getBankField.value
+    // Optional.value.field = getBankField.value
+    currency.value = selectedCurrency.value?.currency
   })
 
   const getFlagEmoji = (country: string): string => {

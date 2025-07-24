@@ -2,13 +2,13 @@
    <div class="min-h-screen h-[100dvh] bg-doodle max-w-screen-3xl mx-auto w-full overflow-hidden flex flex-col items-center justify-center">
 
       <Toaster position="top-right" />
-      <div class=" w-full h-full flex  flex-col sm:flex-row items-center justify-center px-4 sm:px-10">
+      <div class=" w-full h-full flex  flex-col sm:flex-row items-center justify-center px-4 sm:px-16">
 
         <section class="w-[40%] h-full flex items-center justify-center header p-6">
           
         </section>
 
-        <section class="w-full sm:w-[40%] ">
+        <section class="w-full lg:w-[30%] ">
            <slot /> 
         </section>
         

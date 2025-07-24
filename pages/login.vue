@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full rounded-lg bg-white sm:w-[540px]">
+    <div class="w-full rounded-lg bg-white sm:w-[450px]">
       <div class="w-full flex flex-row ">
         <LoginTab v-if="TAB =='LOGIN'" @next="(userId:string)=>{showVerify(userId)}" />
         <TwoFactorTab  v-if="TAB =='VERIFY'" v-model:userId="userId" />

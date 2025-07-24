@@ -1,12 +1,13 @@
 <template>
   <div
-    class="w-full h-full bg-white rounded-xl"
+    class="w-full sm:w-[450px] h-full bg-white rounded-xl"
   >
-    <div class="w-full h-full rounded-xl px-4 sm:px-8 py-6 overflow-y-auto">
+    <div class="w-full h-full rounded-xl">
 
       <!-- <Preference v-if="tab =='SELECT'" @update-value="(value:string)=>{tab = value}" /> -->
 
-      <Individual />
+      <!-- <Individual /> -->
+      <SignUpTab />
 
       <!-- <Business v-if="tab =='BUSINESS'" @back="tab = 'SELECT'" /> -->
 

@@ -1,47 +1,86 @@
-import axios from 'axios'
-
+import axios from 'axios';
 
 export const useAxios = () => {
-
   const config = useRuntimeConfig();
-  const baseURL = config.public.baseUrl;
-  
+  const { $auth } = useNuxtApp();
+  const router = useRouter();
+
   const axiosInstance = axios.create({
-    baseURL: baseURL, // Replace with your base URL
-    // timeout: 1000, // Optional, set a timeout for requests
+    baseURL: config.public.baseUrl,
+    headers: {
+      'Content-Type': 'application/json'
+    }
   });
 
-    const token = useCookie('token');
-    const router = useRouter()
-    axiosInstance.defaults.headers.common['authorization'] = `Bearer ${token.value}`;
-    axiosInstance.defaults.headers.common['Content-Type'] = 'application/json';
-
-
-    axiosInstance.interceptors.response.use(
-      (response) => {
-        // If the response is successful, just return the response
-        return response;
-      },
-      async(error) => {
-        // If the response has a status of 401 or 403, handle it accordingly
-        if (error.response) {
-          if ([401, 403].includes(error.response.status)) {
-            // Store current route if it's a dashboard route
-            // if (router.currentRoute.value.fullPath.startsWith('/dashboard') || 
-            //     router.currentRoute.value.fullPath.startsWith('/app')) {
-              sessionStorage.setItem('preLoginRoute', router.currentRoute.value.fullPath);
-            // }
-            
-            // Clear token and redirect to login
-            token.value = null;
-            await navigateTo('/login');
-          }
-
-        }
-        // Always return a rejected promise so that the calling code knows an error occurred
+  // Request interceptor to inject token
+  axiosInstance.interceptors.request.use(
+    async (config) => {
+      try {
+        const token = await $auth.client.getTokenSilently().catch(async (error:any) => {
+          await handleAuthError(error, $auth, router);
+          throw error; // Stop request execution
+        });
+        
+        config.headers.Authorization = `Bearer ${token}`;
+        return config;
+      } catch (error) {
         return Promise.reject(error);
       }
-    );
+    },
+    (error) => Promise.reject(error)
+  );
 
-  return {axiosInstance}
-}
+  // Response interceptor for error handling
+  axiosInstance.interceptors.response.use(
+    (response) => response,
+    async (error) => {
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        const currentRoute = router.currentRoute.value.fullPath;
+        
+        // Only store protected routes
+        if (isProtectedRoute(currentRoute)) {
+          sessionStorage.setItem('preLoginRoute', currentRoute);
+        }
+        localStorage.clear();
+
+        await $auth.client.logout({
+          returnTo: window.location.origin + '/login',
+          federated: true
+        });
+
+      }
+      return Promise.reject(error);
+    }
+  );
+
+  return { axiosInstance };
+};
+
+const handleAuthError = async (error: any, $auth: any, router: any) => {
+  const errorCode = error?.error || error?.message;
+  
+  const authErrors = [
+    'missing_refresh_token',
+    'invalid_grant',
+    'login_required',
+    'timeout'
+  ];
+
+  if (authErrors.some(code => errorCode?.includes(code))) {
+    const currentRoute = router.currentRoute.value.fullPath;
+    
+    if (isProtectedRoute(currentRoute)) {
+      sessionStorage.setItem('preLoginRoute', currentRoute);
+    }
+    localStorage.clear();
+    await $auth.client.logout({
+      returnTo: window.location.origin + '/login',
+      federated: true
+    });
+  }
+};
+
+const isProtectedRoute = (path: string) => {
+  const protectedPaths = ['/', '/app', '/account'];
+  return protectedPaths.some(p => path.startsWith(p));
+};
