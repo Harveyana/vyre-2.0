@@ -125,7 +125,7 @@
    onMounted(async()=>{
 
       try {
-         const {success, user, newUser} = await getProfile()
+         const {success, user, isNewUser} = await getProfile()
          if(success){
             console.log('user', user)
             user.value = user

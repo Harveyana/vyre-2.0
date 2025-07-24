@@ -639,7 +639,7 @@ export const useAuthStore = defineStore('auth', {
         
         this.loading = true
         try {
-          const { axiosInstance } = await useAxios()
+          const { axiosInstance } = useAxios()
           const url = '/user/get-profile';
           // const token = useCookie('token');
           const response = await axiosInstance.get(url);
