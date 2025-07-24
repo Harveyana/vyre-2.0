@@ -130,7 +130,7 @@
             console.log('user', user)
             user.value = user
          }
-         if(newUser)return showOnboard.value = true
+         if(isNewUser)return showOnboard.value = true
         // router.push('/')
       } catch (e) {
         console.error(e)
