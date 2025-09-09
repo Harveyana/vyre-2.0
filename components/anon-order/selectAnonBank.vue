@@ -1,5 +1,13 @@
 <template>
-    <div class="h-[59vh] bg-white">
+    <div class="h-[59vh] bg-white w-full sm:w-[30vw]">
+
+      <button
+          @click="$emit('close')"
+            class="self-end hover:bg-black hover:text-white gap-3 flex items-center justify-center w-fit py-2 px-3 bg-white border border-black  text-black text-[15px] rounded-3xl mt-6"
+          >
+            Close
+        </button>
+
 
       <div class="w-full flex items-center justify-between px-4 my-6">
         <div :class="['h-1 rounded-full w-[30%]', Tab === 'CURRENCY'? 'bg-black' : 'bg-gray-100']"></div>
@@ -11,7 +19,7 @@
       <!-- select currency -->
       <div v-if="Tab === 'CURRENCY'" class="w-full h-[80%] flex flex-col px-2 rounded-2xl sm:shadow-md py-3 gap-y-3">
         <!-- Continent Tabs -->
-        <div class="flex overflow-x-auto gap-2 pb-2 scrollbar-hide">
+        <div class="flex flex-wrap gap-2 pb-2">
           <button
             v-for="(_, continent) in currenciesByContinent"
             :key="`tab-${continent}`"
@@ -125,38 +133,37 @@
                 id="place"
                 type="text"
                 v-model="AccountNumber"
-                class="Grotesque-Regular text-[12px] w-full sm:w-1/2 bg-gray-100 border-[1px] border-[#2F2B43]/10 px-3 py-2 rounded-xl focus:ring-0 border-none outline-none"
+                class="Grotesque-Regular text-[12px] w-full bg-gray-100 border-[1px] border-[#2F2B43]/10 px-3 py-2 rounded-xl focus:ring-0 border-none outline-none"
                 placeholder="Account number || IBAN"
               />
 
-              <div class="w-full sm:w-1/2 relative">
+              <!-- <div class="w-full sm:w-1/2 relative">
                 <SetupSelect :options="[{label:'CHECKING',value:'CHECKING'}, {label:'SAVINGS',value:'SAVINGS'}]" :placeholder="Type ? Type :'Select Type'" @update="(value:any)=>{Type = value}" />
-              </div>
+              </div> -->
 
             </div>
 
 
-            <div v-if="activeContinent !=='AFRICA'" class="w-full flex flex-col items-start justify-start gap-1" >
-              <input
-                type="text"
-                class="Grotesque-Regular text-[12px] w-full sm:w-1/2 bg-gray-100 border-[1px] border-[#2F2B43]/10 px-4 py-2 rounded-xl flex items-center justify-between focus:ring-0 border-none outline-none"
-                v-model="Varies"
-                :placeholder="`${getBankField}`"
-              />
+            <div class="w-full flex flex-col items-start justify-start gap-1" >
 
+              <!-- <input
+                  type="text"
+                  class="Grotesque-Regular text-[12px] w-full sm:w-1/2 bg-gray-100 border-[1px] border-[#2F2B43]/10 px-4 py-2 rounded-xl flex items-center justify-between focus:ring-0 border-none outline-none"
+                  v-model="Varies"
+                  :placeholder="`${getBankField}`"
+              /> -->
+              
               <span class="flex items-center justify-center gap-1 pl-2 text-[11px] text-gray-600 mt-1 whitespace-nowrap">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#000" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2m1 15h-2v-2h2zm0-4h-2l-.5-6h3z"/></svg>
-                  {{getInstruction}}
+                <svg v-if="AccountName && !nameLoading" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#000" d="m10 17l-5-5l1.41-1.42L10 14.17l7.59-7.59L19 8m-7-6A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
+
+                <div v-if="nameLoading" class="w-full h-full flex flex-col items-center justify-center ">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="#000" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3c4.97 0 9 4.03 9 9"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="16;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
+                </div>
+                {{AccountName}}
               </span>
             </div>
 
-            <span class="flex items-center justify-center gap-1 pl-2 text-[11px] text-gray-600 mt-1 whitespace-nowrap">
-              <svg v-if="AccountName && !nameLoading" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#000" d="m10 17l-5-5l1.41-1.42L10 14.17l7.59-7.59L19 8m-7-6A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2"/></svg>
-              <div v-if="nameLoading" class="w-full h-full flex flex-col items-center justify-center ">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="none" stroke="#000" stroke-dasharray="16" stroke-dashoffset="16" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3c4.97 0 9 4.03 9 9"><animate fill="freeze" attributeName="stroke-dashoffset" dur="0.2s" values="16;0"/><animateTransform attributeName="transform" dur="1.5s" repeatCount="indefinite" type="rotate" values="0 12 12;360 12 12"/></path></svg>
-              </div>
-              {{AccountName}}
-            </span>
+            
 
           </div>
 
@@ -175,7 +182,7 @@
             class="self-end gap-3 flex items-center justify-center w-full py-3 bg-white border border-black  text-black text-[15px] rounded-3xl mt-6"
           >
             Back
-      </button>
+        </button>
 
         <button
            @click="nextTab()"
@@ -264,25 +271,7 @@
     return currencyToFieldMap[selectedCurrency.value?.currency as string] || 'bicSwift'; // Default to SWIFT/BIC
   });
 
-  const getInstruction = computed(()=> {
-    const fieldMap: Record<string, string> = {
-      'USD': 'Routing number required for USD Transfers',
-      'GBP': 'sortCode required for GBP Transfers',
-      'CAD': 'transitNumber',
-      'AUD': 'bsbNumber',
-      'INR': 'ifscCode',
-      'MXN': 'clabeNumber',
-      'CNY': 'cnapsCode',
-      'NGN': 'Nuban is same as Account Number',
-      'BRL': 'pixCode',
-      'HKD': 'clearingCode required for HKD Transfers',
-      'EUR': 'bicSwift required for EUR Transfers'
-      // Add more countries as needed
-    };
 
-    // Fallback logic
-    return fieldMap[selectedCurrency.value?.currency as string] || 'bicSwift'; // Default to SWIFT/BIC
-  });
 
 
 
@@ -293,7 +282,7 @@
   const Type = defineModel<string>('Type')
   const AccountNumber = defineModel<string>('AccountNumber')
   const AccountName = defineModel<string>('AccountName')
-  const Varies = defineModel<string>('varies')
+  // const Varies = defineModel<string>('varies')
   // const Optional = defineModel<{field:string; value:string}>('Optional',{ default: {field:'', value:''} })
 
   
@@ -301,7 +290,7 @@
 
 
   const route = useRouter()
-  const emit = defineEmits(['submit','update-value','back'])  // Declare Events
+  const emit = defineEmits(['submit','update-value','back','close'])  // Declare Events
   watch([activeContinent, selectedCurrency], async(newVal) => {
     selectedBank.value = undefined
   });
@@ -332,6 +321,45 @@
     showLoader.value = false
   }
 
+  const resolveAccount = async(bankId:string, accountNumber:string)=>{
+
+    nameLoading.value = true
+    const result = await verifyBank({bankId, accountNumber})
+    
+    console.log(result)
+    if(result?.success){
+        console.log(result?.value)
+        AccountName.value = result.data?.accountName
+    }
+    nameLoading.value = false
+  }
+
+  // Debounced verification function
+  const debouncedVerify = useDebounceFn(async () => {
+    if (!bankId.value || !AccountNumber.value) {
+      AccountName.value = ''
+      return
+    }
+
+    // isLoading.value = true
+    try {
+      await resolveAccount(bankId.value, AccountNumber.value)
+      // AccountName.value = result
+    } catch (error) {
+      AccountName.value = 'invalid'
+      console.error('Verification failed:', error)
+    } finally {
+      // isLoading.value = false
+    }
+  }, 500) // 500ms debounce delay
+
+  watch(() => [bankId.value, AccountNumber.value], ([newBankId, newAccountNumber]) => {
+    if (newBankId && newAccountNumber) {
+      debouncedVerify()
+    }
+    
+  }, { immediate: true })
+
   const nextTab = async()=> {
     
 
@@ -346,7 +374,7 @@
 
     if(Tab.value === 'SUBMIT'){
       if(!AccountNumber.value) return toast.error('Enter Account Number')
-      if(!Type.value) return toast.error('Select Account Type')
+      if(!AccountName.value) return toast.error('Account Name Not Found')
       
       emit('submit')
     }
@@ -669,47 +697,6 @@
   const currentContinentCurrencies = computed<Currency[]>(() => {
     return currenciesByContinent[activeContinent.value] || []
   })
-
-
-  // Resolving Banks 
-
-   const resolveAccount = async(bankId:string, accountNumber:string)=>{
-
-    nameLoading.value = true
-    const result = await verifyBank({bankId, accountNumber})
-    
-    console.log(result)
-    if(result?.success){
-        console.log(result?.value)
-        AccountName.value = result.data?.accountName
-    }
-    nameLoading.value = false
-  }
-
-  // Debounced verification function
-  const debouncedVerify = useDebounceFn(async () => {
-    if (!bankId.value || !AccountNumber.value) {
-      AccountName.value = ''
-      return
-    }
-
-    // isLoading.value = true
-    try {
-      await resolveAccount(bankId.value, AccountNumber.value)
-    } catch (error) {
-      AccountName.value = 'invalid'
-      console.error('Verification failed:', error)
-    } finally {
-      // isLoading.value = false
-    }
-  }, 500) // 500ms debounce delay
-
-  watch(() => [bankId.value, AccountNumber.value], ([newBankId, newAccountNumber]) => {
-    if (newBankId && newAccountNumber) {
-      debouncedVerify()
-    }
-    
-  }, { immediate: true })
 
 
   </script>

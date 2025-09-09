@@ -1,8 +1,8 @@
 <template>
     <div class="w-full rounded-lg bg-white sm:w-[450px]">
       <div class="w-full flex flex-row ">
-        <LoginTab v-if="TAB =='LOGIN'" @next="(userId:string)=>{showVerify(userId)}" />
-        <TwoFactorTab  v-if="TAB =='VERIFY'" v-model:userId="userId" />
+        <LoginTab />
+        <!-- <TwoFactorTab  v-if="TAB =='VERIFY'" v-model:userId="userId" /> -->
       </div>
     </div>
 </template>
@@ -20,10 +20,10 @@ const TAB = ref('LOGIN');
 const userId = ref('')
 // const email = ref("");
 
-const showVerify = (value:string)=>{
-  userId.value = value
-  TAB.value = 'VERIFY'
-}
+// const showVerify = (value:string)=>{
+//   userId.value = value
+//   TAB.value = 'VERIFY'
+// }
 
 </script>
 

@@ -85,31 +85,55 @@
           <div class="w-full flex items-center justify-between p-3.5 border rounded-2xl">
 
             <div class="w-fit flex items-center justify-center gap-x-1">
-                  <img :src="order?.type =='BUY'? order?.pair?.baseWallet.imgurl : order?.pair?.quoteWallet.imgurl" class="w-10 rounded-full"/>
 
-                  <div class="flex flex-col items-center jsutify-center">
+                <div>
+                  <div v-if="order?.type =='BUY'">
+                    <img v-if="order?.pair?.quoteCurrency.type ==='CRYPTO'" :src="order?.pair?.quoteCurrency.imgUrl" class="w-10 rounded-full"/>
+                    <h3 v-else class="text-[20px] ">{{ order?.pair?.quoteCurrency?.flagEmoji }}</h3>
+                  </div>
+
+                  <div v-else>
+                    <img v-if="order?.pair?.baseCurrency.type ==='CRYPTO'" :src="order?.pair?.baseCurrency.imgUrl" class="w-10 rounded-full"/>
+                    <h3 v-else class="text-[60px] ">{{ order?.pair?.baseCurrency?.flagEmoji }}</h3>
+                  </div>
+                </div>
+
+                <div class="flex flex-col items-center jsutify-center">
                     <h2 class="text-[12px] text-[#707070]">
                       From
                     </h2>
                     <h2 class="Grotesque-Regular text-[13px] text-[#111111]">
-                      {{order?.type =='BUY'? order?.pair?.base : order?.pair?.quote}}
+                      {{order?.type =='BUY'? order?.pair?.quoteCurrency?.ISO : order?.pair?.baseCurrency?.ISO}}
                     </h2>
-                  </div>
+                </div>
+
             </div>
 
             <svg class=" border rounded-full" xmlns="http://www.w3.org/2000/svg" width="2.5em" height="2.5em" viewBox="0 0 24 24"><path fill="black" d="M12.984 15a1 1 0 0 0 1.848.53l2.688-2.687a1 1 0 0 0-1.415-1.414l-1.12 1.12V5a1 1 0 0 0-2 0zm-1.969-6a1 1 0 0 0-1.848-.53L6.48 11.157a1 1 0 1 0 1.414 1.414l1.121-1.12V19a1 1 0 1 0 2 0z"/></svg>
 
             <div class="w-fit flex items-center justify-center gap-x-1">
-                  <img :src="order?.type =='BUY'? order?.pair?.quoteWallet.imgurl : order?.pair?.baseWallet.imgurl" class="w-10 rounded-full"/>
 
-                  <div class="flex flex-col items-center jsutify-center">
-                    <h2 class="text-[12px] text-[#707070]">
-                      To
-                    </h2>
-                    <h2 class="Grotesque-Regular text-[13px] text-[#111111]">
-                      {{order?.type =='BUY'? order?.pair?.quote : order?.pair?.base}}
-                    </h2>
-                  </div>
+              <div>
+                <div v-if="order?.type =='BUY'">
+                  <img v-if="order?.pair?.baseCurrency.type ==='CRYPTO'" :src="order?.pair?.baseCurrency?.imgUrl" class="w-10 rounded-full"/>
+                  <h3 v-else class="text-[20px] ">{{ order?.pair?.baseCurrency?.flagEmoji }}</h3>
+                </div>
+
+                <div v-else>
+                  <img v-if="order?.pair?.quoteCurrency.type ==='CRYPTO'" :src="order?.pair?.quoteCurrency.imgUrl" class="w-10 rounded-full"/>
+                  <h3 v-else class="text-[60px]">{{ order?.pair?.quoteCurrency?.flagEmoji }}</h3>
+                </div>
+              </div>
+
+
+              <div class="flex flex-col items-center jsutify-center">
+                <h2 class="text-[12px] text-[#707070]">
+                  To
+                </h2>
+                <h2 class="Grotesque-Regular text-[13px] text-[#111111]">
+                  {{order?.type =='BUY'? order?.pair?.baseCurrency ?.ISO : order?.pair?.quoteCurrency?.ISO}}
+                </h2>
+              </div>
             </div>
 
           </div>

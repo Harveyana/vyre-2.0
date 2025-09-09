@@ -45,7 +45,7 @@
            </NuxtLink>
          </li>
  
-         <li>
+         <!-- <li>
            <NuxtLink 
              href="" 
              :class="$route.path == '/send' ? 'text-black bg-white' : 'text-white bg-black '"  
@@ -56,7 +56,14 @@
                <path fill="currentColor" d="M20.04 2.323c1.016-.355 1.992.621 1.637 1.637l-5.925 16.93c-.385 1.098-1.915 1.16-2.387.097l-2.859-6.432l4.024-4.025a.75.75 0 0 0-1.06-1.06l-4.025 4.024l-6.432-2.859c-1.063-.473-1-2.002.097-2.387z"/>
              </svg>
            </NuxtLink>
-         </li>
+         </li> -->
+
+         <li>
+            <NuxtLink href="/accounts" @click="closeMenu" :class="$route.path.includes('/accounts')? 'text-black bg-[#e5f2fe]':'text-white bg-black hover:bg-white'"  class="flex items-center justify-center gap-1 py-2 px-3 text-base text-gray-900 rounded-full  group">
+              <svg xmlns="http://www.w3.org/2000/svg" :class="$route.path.includes('/accounts')? 'text-black':'text-gray-500'" class="flex-shrink-0 w-6 h-6 transition duration-75 group-hover:text-black" viewBox="0 0 28 28"><path fill="currentColor" d="M3 5.75A2.75 2.75 0 0 1 5.75 3h13.5A2.75 2.75 0 0 1 22 5.75v1.258a3.75 3.75 0 0 1 3.5 3.742v10.5A3.75 3.75 0 0 1 21.75 25H6.754a3.75 3.75 0 0 1-3.75-3.75v-10.5H3V6h.011A3 3 0 0 1 3 5.75m17.5 0c0-.69-.56-1.25-1.25-1.25H5.75a1.25 1.25 0 1 0 0 2.5H20.5zM18.75 16a.75.75 0 0 0 0 1.5h2.5a.75.75 0 0 0 0-1.5z"/>
+              </svg>
+            </NuxtLink>
+          </li>
  
          <li>
            <NuxtLink 
@@ -82,12 +89,25 @@
      </transition>
  
      <!-- Connect Wallet Button -->
-     <button 
+     <!-- <button 
        v-if="!expanded" 
        class="text-gray-200 bg-black Grotesque-Regular hover:bg-white hover:text-black rounded-3xl text-[12px] sm:text-[16px] sm:px-6 sm:py-3 px-3 py-2"
      >
        Connect Wallet
-     </button>
+     </button> -->
+
+      <button
+        v-if="!expanded" 
+        class="flex items-center justify-center w-fit text-sm bg-black rounded-full focus:ring-0 " id="user-menu-button-2" aria-expanded="false" data-dropdown-toggle="dropdown-2">
+        <img v-if="user && user?.photoUrl" class="max-w-8 min-w-6 min-h-6 rounded-full" :src="user?.photoUrl" alt="user photo">
+        <!-- <svg xmlns="http://www.w3.org/2000/svg" class="mx-1" width="18" height="18" viewBox="0 0 32 32"><path fill="#fff" d="M11.166 23.963L22.36 17.5c1.43-.824 1.43-2.175 0-3L11.165 8.037c-1.43-.826-2.598-.15-2.598 1.5v12.926c0 1.65 1.17 2.326 2.598 1.5z"/></svg> -->
+      </button>
+
+      <NuxtLink v-if="user && user?.userStatus !=='ACTIVE'" href="/kyc" class=" bg-black hover:bg-white flex items-center justify-center gap-1 py-2 px-2 text-base rounded-full group">
+        <svg xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 w-6 h-6 text-white transition duration-75 group-hover:text-black"  viewBox="0 0 24 24"><g fill="currentColor"><path d="m12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035q-.016-.005-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427q-.004-.016-.017-.018m.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093q.019.005.029-.008l.004-.014l-.034-.614q-.005-.018-.02-.022m-.715.002a.02.02 0 0 0-.027.006l-.006.014l-.034.614q.001.018.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01z"/><path fill="currentColor" d="M12 13c2.396 0 4.575.694 6.178 1.672c.8.488 1.484 1.064 1.978 1.69c.486.615.844 1.351.844 2.138c0 .845-.411 1.511-1.003 1.986c-.56.45-1.299.748-2.084.956c-1.578.417-3.684.558-5.913.558s-4.335-.14-5.913-.558c-.785-.208-1.524-.506-2.084-.956C3.41 20.01 3 19.345 3 18.5c0-.787.358-1.523.844-2.139c.494-.625 1.177-1.2 1.978-1.69C7.425 13.695 9.605 13 12 13m0-11a5 5 0 1 1 0 10a5 5 0 0 1 0-10"/></g></svg>
+        <span  class="text-[14px] Grotesque-Regular text-white group-hover:text-black">Submit KYC</span>
+      </NuxtLink>
+
    </div>
 
   <BaseDialogue :visible="showLogout">
@@ -120,7 +140,7 @@
 
             <div class="w-full flex items-center justify-center gap-x-4">
 
-                <button @click="signOut"  class="w-full sm:w-1/2 bg-black flex flex-row items-center justify-center rounded-2xl mt-6 py-3">
+                <button @click="signOut()"  class="w-full sm:w-1/2 bg-black flex flex-row items-center justify-center rounded-2xl mt-6 py-3">
                 <span class="text-[16px] SoraRegular text-[#FFFFFF] text-center">Yes, Logout</span>
                 </button>
 
@@ -148,7 +168,7 @@
     const { user } = storeToRefs(useAuthStore()); 
    const emit = defineEmits(['toggle'])
 
-   const { $auth } = useNuxtApp();
+   const { signOut } = useAuth();
 
    const expanded = ref(false)
    const showApps = ref(false)
@@ -156,16 +176,16 @@
 
    const showLogout = ref(false)
 
-    const signOut = async()=>{
-      // logUserOut()
+    // const signOut = async()=>{
+    //   // logUserOut()
       
-      await $auth.client.logout({
-        returnTo: window.location.origin + '/login',
-        federated: true
-      });
-      showLogout.value = false
-      // router.push('/login')
-    }
+    //   await $auth.client.logout({
+    //     returnTo: window.location.origin + '/login',
+    //     federated: true
+    //   });
+    //   showLogout.value = false
+    //   // router.push('/login')
+    // }
    
 
    const isDark = useDark()

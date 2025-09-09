@@ -22,41 +22,49 @@ interface Userpayload {
     }
 }
 
-interface Businesspayload {
-  TYPE: string;
-  PERSONAL:{
-    firstName: string;
-    lastName: string;
-    email:string;
-    phoneNumber: string
-  }
-  BUSINESS:{
-    type: string;
-    name: string;
-    regNo: string;
-    address: string;
-    file: string;
-  }
-  DIRECTOR:{
-    portfolio: string;
-    firstName: string;
-    lastName: string;
-    idType: string;
-    idFile: string;
-  }
-
+interface Address {
+  streetLine1: string;
+  city: string;
+  stateRegionProvince: string;
+  postalCode: string;
+  countryCode: string;
 }
 
-interface storePayload {
-  location: string;
-  latitude: number;
-  longitude: number;
-  admin:{
-    firstName: string,
-    lastName: string,
-    email: string,
-    phoneNo: string
-  };
+interface GovernmentIdDocument {
+  type: string; // You might want to use a union type like 'PASSPORT' | 'DRIVERS_LICENSE' | 'NATIONAL_ID'
+  // countryCode: string;
+  documentIdNumber: string;
+  issuanceDate: string;
+  expirationDate: string;
+  frontIdImage: File | undefined; // Changed to File type for file uploads
+}
+
+interface ProofOfAddressDocument {
+  type: string; // Could be union type like 'UTILITY_BILL' | 'BANK_STATEMENT' | 'LEASE_AGREEMENT'
+  description: string;
+  proofOfAddressImage: string; // Base64 string or URL
+}
+
+interface Documents {
+  governmentId: GovernmentIdDocument;
+  // proof_of_Address: ProofOfAddressDocument;
+}
+
+interface UserDetails {
+  legalFirstName: string;
+  legalLastName: string;
+  phoneNumber: string;
+  dateOfBirth: string;
+  nationalIdType: string,
+  nationalIdNumber: string,
+  address: Address;
+  documents: Documents;
+  employmentStatus: string;
+  mostRecentOccupation: string;
+  sourceOfFunds: string;
+  accountPurpose: string;
+  expectedMonthlyPaymentsUsd: string;
+  // isIntermediary: boolean;
 }
 
 
@@ -115,6 +123,38 @@ export const useAuthStore = defineStore('auth', {
           } finally {
             this.loading = false
           }
+      },
+
+      async SubmitKyc(payload:UserDetails) {
+        
+        // this.loading = true
+        console.log(payload)
+
+        try {
+          const { axiosInstance } = useAxios()
+          const url = '/user/upload_kyc';
+          // const token = useCookie('token');
+          const response = await axiosInstance.post(url, payload);
+
+          console.log(response.data);
+    
+          return response.data
+          
+        } catch (error: any | AxiosError) {
+          console.log(error)
+            if (axios.isAxiosError(error))  {
+              // Access to config, request, and response
+              console.log(error.response?.data)
+              return error.response?.data
+
+            } else {
+              // Just a stock error
+              console.error('Error:', error.message);
+            }
+            
+        } finally {
+          // this.loading = false
+        }
       },
 
       async register_User() {
@@ -908,7 +948,7 @@ export const useAuthStore = defineStore('auth', {
 
       async getBanksByCurrency(currency:string) {
         
-        this.loading = true
+        // this.loading = true
         try {
           const { axiosInstance } = useAxios()
           const url = '/banks/currency';
@@ -935,7 +975,7 @@ export const useAuthStore = defineStore('auth', {
             }
             
         } finally {
-          this.loading = false
+          // this.loading = false
         }
       },
 
@@ -974,7 +1014,7 @@ export const useAuthStore = defineStore('auth', {
 
       async verifyBank(payload:{bankId:string, accountNumber:string}) {
         
-        this.loading = true
+        // this.loading = true
         console.log(payload)
 
         try {
@@ -1000,7 +1040,7 @@ export const useAuthStore = defineStore('auth', {
             }
             
         } finally {
-          this.loading = false
+          // this.loading = false
         }
       },
 
@@ -1038,7 +1078,7 @@ export const useAuthStore = defineStore('auth', {
 
       async getbankAccounts() {
         
-        this.loading = true
+        // this.loading = true
         try {
           const { axiosInstance } = useAxios()
           const url = '/user/bank';
@@ -1061,13 +1101,13 @@ export const useAuthStore = defineStore('auth', {
             }
             
         } finally {
-          this.loading = false
+          // this.loading = false
         }
       },
 
       async deleteBankAccount(userBankId:string) {
         
-        this.loading = true
+        // this.loading = true
         try {
           const { axiosInstance } = useAxios()
           const url = `/user/bank/${userBankId}`;
@@ -1090,7 +1130,7 @@ export const useAuthStore = defineStore('auth', {
             }
             
         } finally {
-          this.loading = false
+          // this.loading = false
         }
       },
 

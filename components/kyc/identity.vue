@@ -3,7 +3,7 @@
 
   
 
-      <div class="w-full h-full overflow-y-auto">
+      <div class="w-full overflow-y-auto h-[80vh] justify-start items-start">
         <div class="w-full flex items-start">
 
           <div class="w-full flex flex-col items-start ">
@@ -27,51 +27,45 @@
         
         
 
-        <div class="flex flex-col w-full h-[70vh] gap-y-6 my-4">
+        <div class="flex flex-col w-full gap-y-6 pb-18">
 
           <form
             @submit.prevent="submitForm()"
             class="w-full mt-4 flex flex-col gap-y-4"
           >
-            <!-- <div class="w-full relative">
-              <label class="Grotesque-Regular text-md text-[#010109]">
-                Identity Type
-              </label>
-              <DropSelect :key="resetKey" class="w-full" @update="(value:string)=>{identity.type = value}" :options="['Registered Businesss','Non-Registered Business']" />
-            </div> -->
+            <div class="w-full flex flex-col items-center justify-center gap-y-4 border-[1px] border-gray-300 rounded-2xl p-4">
 
-            <div class="w-full relative">
+              <div class="w-full relative">
+                <label class="Grotesque-Regular text-md text-[#010109]">
+                  National Identity Type
+                </label>
+                <Options :key="resetKey" class="w-full" @update="(value:string)=>{nationalIdType = value}" :options="nationalIdTypes" />
+              </div>
+
+              <div class="w-full relative">
+                <label class="Grotesque-Regular text-md text-[#010109]">
+                 National ID Number
+                </label>
+                <input
+                  required
+                  v-model="nationalIdNumber"
+                  type="text"
+                  class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-2.5 rounded-2xl flex items-center justify-between outline-none"
+                  placeholder="National Id Number"
+                />
+              </div>
+
+
+            </div>
+
+            <!-- <div class="w-full relative">
                 <label class="Grotesque-Regular text-md text-[#010109]">
                   Issuing country
                 </label>
                 <CountrySelect :options="countries" @update="(value:string)=> countryCode = value"/>
-            </div>
+            </div> -->
 
-            <div class="w-full relative">
-              <label class="Grotesque-Regular text-md text-[#010109]">
-                Issuance Date
-              </label>
-              <input
-                required
-                v-model="issuanceDate"
-                type="date"
-                class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-2.5 rounded-2xl flex items-center justify-between outline-none"
-                placeholder="issuance Date"
-              />
-            </div>
-
-            <div class="w-full relative">
-              <label class="Grotesque-Regular text-md text-[#010109]">
-                Expiration Date
-              </label>
-              <input
-                required
-                v-model="expirationDate"
-                type="date"
-                class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-2.5 rounded-2xl flex items-center justify-between outline-none"
-                placeholder="expiration Date"
-              />
-            </div>
+            
 
             <div class="w-full relative">
                 <label class="Grotesque-Regular text-md text-[#010109]">
@@ -92,14 +86,39 @@
 
               <div class="w-full relative">
                 <label class="Grotesque-Regular text-md text-[#010109]">
-                  Identity Type
+                  Upload Identity Type
                 </label>
                 <DropSelect :key="resetKey" class="w-full" @update="(value:string)=>{type = value}" :options="identityTypes" />
               </div>
 
               <div class="w-full relative">
                 <label class="Grotesque-Regular text-md text-[#010109]">
-                  ID Number
+                  Issuance Date
+                </label>
+                <input
+                  required
+                  v-model="issuanceDate"
+                  type="date"
+                  class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-2.5 rounded-2xl flex items-center justify-between outline-none"
+                  placeholder="issuance Date"
+                />
+              </div>
+
+              <div class="w-full relative">
+                <label class="Grotesque-Regular text-md text-[#010109]">
+                  Expiration Date
+                </label>
+                <input
+                  v-model="expirationDate"
+                  type="date"
+                  class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-2.5 rounded-2xl flex items-center justify-between outline-none"
+                  placeholder="expiration Date"
+                />
+              </div>
+
+              <div class="w-full relative">
+                <label class="Grotesque-Regular text-md text-[#010109]">
+                  Upload ID Number
                 </label>
                 <input
                   required
@@ -164,9 +183,13 @@
     const documentIdNumber = defineModel<string>('documentIdNumber')
     const issuanceDate = defineModel<string>('issuanceDate')
     const expirationDate = defineModel<string>('expirationDate')
+
+    const nationalIdType = defineModel<string>('nationalIdType')
+    const nationalIdNumber = defineModel<string>('nationalIdNumber')
+
     const accountPurpose = defineModel<string>('accountPurpose')
     const expectedMonthlyPaymentsUsd = defineModel<string>('expectedMonthlyPaymentsUsd')
-    const countryCode = defineModel<string>('countryCode')
+    // const countryCode = defineModel<string>('countryCode')
     const frontIdImage = defineModel<string>('frontIdImage')
 
     // const identity = reactive({
@@ -180,7 +203,7 @@
     //   frontIdImage:''
     // })
 
-  const emit = defineEmits(['back','submit'])  // Declare Events
+  const emit = defineEmits(['back','next'])  // Declare Events
 
   const submitForm = async()=>{
     // console.log(identity)
@@ -188,8 +211,9 @@
      if(!type.value || 
        !documentIdNumber.value || 
        !issuanceDate.value || 
-       !expirationDate.value ||
-       !countryCode.value || 
+      //  !expirationDate.value ||
+       !nationalIdType.value ||
+       !nationalIdType.value ||
         !frontIdImage.value
      ) return
      console.log({
@@ -197,18 +221,11 @@
         documentIdNumber:documentIdNumber.value,
         issuanceDate: issuanceDate.value,
         expirationDate: expirationDate.value,
-        countryCode: countryCode.value,
+        // countryCode: countryCode.value,
         frontIdImage: frontIdImage.value
      })
 
-     emit('submit', {
-        type: type.value,
-        documentIdNumber: documentIdNumber.value,
-        issuanceDate: issuanceDate.value,
-        expirationDate: expirationDate.value,
-        countryCode: countryCode.value,
-        frontIdImage: frontIdImage.value
-      })
+     emit('next')
 
   }
 
@@ -391,6 +408,12 @@
   { label: "$100,000 - $999,999", value: "BETWEEN_100000_999999" },
   { label: "$1,000,000 - $9,999,999", value: "BETWEEN_1000000_9999999" },
   { label: "Over $10,000,000", value: "OVER_10000000" }
+  ]
+
+  const nationalIdTypes = [
+    { label: "NIN", value: "nin" },
+    { label: "BVN", value: "bvn" },
+    { label: "TIN", value: "tin" }
   ]
 
   const accountPurposeOptions = [

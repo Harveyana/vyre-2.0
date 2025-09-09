@@ -3,7 +3,7 @@
 
   
 
-      <div class="w-full flex flex-col items-center justify-start  h-full overflow-y-auto">
+      <div class="w-full flex flex-col items-center justify-start">
         <div class="w-full flex items-start">
 
           <div class="w-full flex flex-col items-start ">
@@ -27,7 +27,7 @@
         
         
 
-        <div class="flex flex-col w-full h-[70vh] gap-y-6 mb-8">
+        <div class="flex flex-col w-full items-start justify-start overflow-y-auto h-[80vh] gap-y-6 pb-12">
 
           <form
             @submit.prevent="submitForm()"
@@ -37,8 +37,6 @@
           
 
           <div class="w-full mx-auto sm:p-4 space-y-6">
-
-              <h2 class="text-2xl font-bold text-gray-800">User Information</h2>
               
               <!-- Personal Information Section -->
               <div class="bg-white rounded-lg shadow p-2">
@@ -107,11 +105,11 @@
                 <h3 class="text-lg font-semibold text-gray-700 border-b pb-2 mb-4">Document Details</h3>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <p class="text-sm font-medium text-gray-500">Document Type</p>
+                    <p class="text-sm font-medium text-gray-500">Uploaded Document Type</p>
                     <p class="mt-1 text-gray-900">{{ type || 'Not provided' }}</p>
                   </div>
                   <div>
-                    <p class="text-sm font-medium text-gray-500">Document ID Number</p>
+                    <p class="text-sm font-medium text-gray-500">Uploaded Document ID Number</p>
                     <p class="mt-1 text-gray-900">{{ documentIdNumber || 'Not provided' }}</p>
                   </div>
                   <div>
@@ -122,10 +120,10 @@
                     <p class="text-sm font-medium text-gray-500">Expiration Date</p>
                     <p class="mt-1 text-gray-900">{{ expirationDate || 'Not provided' }}</p>
                   </div>
-                  <div>
+                  <!-- <div>
                     <p class="text-sm font-medium text-gray-500">Issuing Country</p>
                     <p class="mt-1 text-gray-900">{{ issuingCountry || 'Not provided' }}</p>
-                  </div>
+                  </div> -->
                 </div>
               </div>
 
@@ -149,7 +147,7 @@
               </div>
 
               <!-- Document Images Section -->
-              <div v-if="proofOfAddressImage" class="bg-white rounded-lg shadow p-2">
+              <!-- <div v-if="proofOfAddressImage" class="bg-white rounded-lg shadow p-2">
                 <h3 class="text-lg font-semibold text-gray-700 border-b pb-2 mb-4">Document Images</h3>
                 <div>
                   <p class="text-sm font-medium text-gray-500">Proof of Address</p>
@@ -169,7 +167,7 @@
                         class="mt-2 max-w-full h-auto max-h-64 rounded border border-gray-200">
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
 
 
@@ -222,8 +220,8 @@
     const postalCode = defineModel<string>('postalCode')
     const countryCode = defineModel<string>('countryCode')
 
-    const proofOfAddressType = defineModel<string>('proofOfAddressType')
-    const proofOfAddressImage = defineModel<string>('proofOfAddressImage')
+    // const proofOfAddressType = defineModel<string>('proofOfAddressType')
+    // const proofOfAddressImage = defineModel<string>('proofOfAddressImage')
 
 
     const type = defineModel<string>('type')
@@ -232,7 +230,7 @@
     const expirationDate = defineModel<string>('expirationDate')
     const accountPurpose = defineModel<string>('accountPurpose')
     const expectedMonthlyPaymentsUsd = defineModel<string>('expectedMonthlyPaymentsUsd')
-    const issuingCountry = defineModel<string>('issuingCountry')
+    // const issuingCountry = defineModel<string>('issuingCountry')
 
     // const address = reactive({
     //   streetLine1:'',
@@ -246,30 +244,23 @@
 
   const submitForm = async()=>{
     
-    if(!streetLine1.value || 
-      !city.value || 
-      !stateRegionProvince.value || 
-      !postalCode.value ||
-      !countryCode.value || 
-      !proofOfAddressImage.value
-    ) return
-    console.log({
-      streetLine1:streetLine1.value, 
-      city:city.value, 
-      stateRegionProvince: stateRegionProvince.value, 
-      postalCode: postalCode.value, 
-      countryCode: countryCode.value, 
-      proofOfAddressImage: proofOfAddressImage.value
-    })
+    // if(!streetLine1.value || 
+    //   !city.value || 
+    //   !stateRegionProvince.value || 
+    //   !postalCode.value ||
+    //   !countryCode.value || 
+    //   !proofOfAddressImage.value
+    // ) return
+    // console.log({
+    //   streetLine1:streetLine1.value, 
+    //   city:city.value, 
+    //   stateRegionProvince: stateRegionProvince.value, 
+    //   postalCode: postalCode.value, 
+    //   countryCode: countryCode.value, 
+    //   proofOfAddressImage: proofOfAddressImage.value
+    // })
 
-    emit('submit', {
-      streetLine1:streetLine1.value, 
-      city:city.value, 
-      stateRegionProvince: stateRegionProvince.value, 
-      postalCode: postalCode.value, 
-      countryCode: countryCode.value, 
-      proofOfAddressImage: proofOfAddressImage.value
-    })
+    emit('submit')
 
   }
 

@@ -5,7 +5,7 @@
         <p class="Grotesque-Regular text-[16px] text-[#737373]">
           Welcome Back,
         </p>
-        <h3 class="Grotesque-Bold text-[25px] text-[#1A1A1A]">Login or Signup</h3>
+        <h3 class="Grotesque-Bold text-[25px] text-[#1A1A1A]">Login</h3>
       </div>
     </div>
 
@@ -58,7 +58,7 @@
     </div>
 
     <button 
-        @click="loginWithGoogle()"
+        @click="signInWithGoogle()"
         class="google-signin-button w-full"
       >
         <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
@@ -70,7 +70,7 @@
         <span class="button-text">Continue with Google</span>
     </button>
 
-    <!-- <NuxtLink
+    <NuxtLink
        href="/signup"
         class="text-sm text-[#737373] text-left cursor-pointer Grotesque-Regular my-2"
       >
@@ -80,7 +80,7 @@
           Create New
         </span>
 
-    </NuxtLink> -->
+    </NuxtLink>
 
   </div>
 </template>
@@ -91,11 +91,14 @@ import { Toaster, toast } from 'vue-sonner'
 import eye from "~/assets/img/Eye.png";
 import eyeSlash from "~/assets/img/eye-slash.png";
 import { storeToRefs } from 'pinia';
-import { useAuthStore } from '~/store/auth';
-const { loginUser } = useAuthStore();   
-const { loading } = storeToRefs(useAuthStore());
+// import { useAuthStore } from '~/store/auth';
+// const { loginUser } = useAuthStore();   
+// const { loading } = storeToRefs(useAuthStore());
 
 const { $auth } = useNuxtApp()
+
+const { signInWithGoogle, signIn } = useAuth();
+const loading = ref(false)
 
 const router = useRouter()
 const route = useRoute()
@@ -106,34 +109,13 @@ const showEmail = ref(true);
 const showPassword = ref(false);
 
 
-const loginWithGoogle = async () => {
-  await $auth.client.loginWithRedirect({
-    authorizationParams: {
-      connection: 'google-oauth2',
-      prompt: 'select_account' // Force account selection
-    },
-    appState: { 
-      target: route.query.return_to || '/' 
-    }
-  });
-};
-
 const inputs = reactive({
   password:'',
   email:''
 })
 
-
 const emit = defineEmits(["next"]);
 
-function isValidRedirect(path?: string | null): path is string {
-  if (!path) return false;
-  
-  // Only allow redirects to specific prefixes
-  const allowedPrefixes = ['/', '/app'];
-  return allowedPrefixes.some(prefix => path.startsWith(prefix)) &&
-  !['/login', '/signup'].includes(path);
-}
 
 const login = async()=>{
   if(inputs.email && !inputs.password){
@@ -142,22 +124,23 @@ const login = async()=>{
   }
 
   if(inputs.email && inputs.password){
+
+    loading.value = true
     
     toast.promise(() => new Promise(async(resolve,reject) =>{
 
       try{
 
-        await $auth.client.loginWith('auth0', {
-          loginParams: {
-            connection: 'Username-Password-Authentication',
-            email: inputs.email,
-            password: inputs.password,
-          }
-        });
+        const result = await signIn(inputs.email,inputs.password)
 
-        resolve({msg:'Signin Successful'})
+        if(result.success){
+          resolve({msg:result.message})
+        }else{
+          reject({msg: result.message})
+        }
 
       } catch (error) {
+        loading.value = false
         console.error(error)
         reject({msg:'Operation failed'})
       }
@@ -166,10 +149,14 @@ const login = async()=>{
         loading: 'Signing in...',
         success: (data: any) => {
           // emit('verified', data.userId)
-          navigateTo('/')
+          // navigateTo('/')
+          loading.value = false
           return data.msg
         },
-        error: (data: any) => {return data.msg}
+        error: (data: any) => {
+          loading.value = false
+          return data.msg
+        }
       })
 
   }
@@ -178,34 +165,6 @@ const login = async()=>{
 
 }
 
-
-
-
-// async function login() {
-//   const signedIn = await loginUser(inputs);
-
-//   if (signedIn.success) {
-//     $toast.success(signedIn.msg);
-
-//     if (signedIn.twoFactorEnabled) {
-//       return emit('next', signedIn.userId);
-//     }
-
-//     // Check for stored redirect path
-//     const redirectPath = sessionStorage.getItem('preLoginRoute');
-    
-//     // Validate the redirect path
-//     if (isValidRedirect(redirectPath)) {
-//       sessionStorage.removeItem('preLoginRoute');
-//       return navigateTo(redirectPath);
-//     }
-    
-//     // Default redirect
-//     return navigateTo('/');
-//   } else {
-//     $toast.error(signedIn.msg);
-//   }
-// }
 
 
 </script>

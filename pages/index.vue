@@ -62,29 +62,14 @@
           <div class="col-span-12 h-fit lg:col-span-8 flex flex-col gap-y-6">
 
             <!-- Ads -->
-            <div class="col-span-12 relative h-fit lg:col-span-8 bg-black rounded-2xl px-8 py-4 border border-black">
-              <div class="w-full flex flex-col justify-center gap-y-3">
-                <h2 class="text-black text-xl Grotesque-Bold text-white">
-                  Earn Free Crypto <span class="Grotesque-Bold">with Vyre!</span>
-                </h2>
-
-                <div class="w-full flex flex-col items-start justify-start gap-y-3">
-                  <p class="text-black Grotesque-Regular text-[13px] text-white">Refer your friends and get paid<br> earn them for free!</p>
-
-                  <BaseButton class="Grotesque-SemiBold bg-[#e5f2fe] w-fit px-6 py-2 rounded-2xl">
-                    Earn now
-                  </BaseButton>
-                </div>
-                
-
-                
-              </div>
+            <div class="col-span-12 relative h-fit lg:col-span-8 bg-black rounded-2xl px-2 sm:px-8 py-4 border border-black">
+              <BannerAd />
 
               <img src="~/assets/img/bg1.svg" class="w-28 absolute right-0 bottom-0 "/>
 
             </div>
 
-            <div class="col-span-12 h-fit lg:col-span-8 rounded-2xl flex flex-col gap-2 ">
+            <!-- <div class="col-span-12 h-fit lg:col-span-8 rounded-2xl flex flex-col gap-2 ">
 
               <div class="w-full flex items-center justify-start">
                 <h2 class="text-black dark:text-white text-lg Grotesque-Bold">
@@ -98,20 +83,20 @@
                 </div>
               </div>
 
-            </div>
+            </div> -->
 
             <div class="col-span-12 h-fit lg:col-span-6">
               <div class="w-full flex flex-row items-center justify-between mb-4">
-                <h2 class="text-black dark:text-white text-lg Grotesque-Bold">
+                <h2 class="text-black text-lg Grotesque-Bold">
                 Recent Activities
                 </h2>
 
-                <button @click="">
+                <!-- <button @click="">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 512 512">
                     <path fill="#000" d="M224 304a16 16 0 0 1-11.31-27.31l157.94-157.94A55.7 55.7 0 0 0 344 112H104a56.06 56.06 0 0 0-56 56v240a56.06 56.06 0 0 0 56 56h240a56.06 56.06 0 0 0 56-56V168a55.7 55.7 0 0 0-6.75-26.63L235.31 299.31A15.92 15.92 0 0 1 224 304"/>
                     <path fill="#000" d="M448 48H336a16 16 0 0 0 0 32h73.37l-38.74 38.75a56.35 56.35 0 0 1 22.62 22.62L432 102.63V176a16 16 0 0 0 32 0V64a16 16 0 0 0-16-16"/>
                   </svg>
-                </button>
+                </button> -->
                 <!-- <img src="~/assets/img/right-arrow.png" class="w-10 md:w-12 rounded-2xl hover:bg-gray-500 px-2" alt='transactions'/> -->
               </div>
               
@@ -150,24 +135,22 @@
 
             <div class="col-span-12 h-fit lg:col-span-6 flex flex-col items-started justify-center">
 
-              <h2 class="text-black dark:text-white text-lg Grotesque-Regular mb-2">
-                Actions
+              <h2 class="text-black text-lg Grotesque-Regular mb-2">
+                Quick Actions
               </h2>
 
               <div class="w-full flex items-center justify-between sm:justify-center gap-x-3">
 
-                <baseButton class="bg-white flex items-center justify-center gap-x-2 rounded-xl border border-black Grotesque-Bold w-[50%] py-2 px-6 text-black text-[14px]">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
-                    <path fill="#000" fill-rule="evenodd" d="M2 12c0 5.523 4.477 10 10 10s10-4.477 10-10S17.523 2 12 2S2 6.477 2 12m13.53.47a.75.75 0 0 1 0 1.06l-3 3a.75.75 0 0 1-1.06 0l-3-3a.75.75 0 1 1 1.06-1.06l1.72 1.72V8a.75.75 0 0 1 1.5 0v6.19l1.72-1.72a.75.75 0 0 1 1.06 0" clip-rule="evenodd"/>
-                  </svg>
-                  Receive
-                </baseButton>
-
-                <baseButton class="bg-black flex items-center justify-center gap-x-2 rounded-xl border border-white Grotesque-Bold w-[50%] py-2.5 px-8 text-white text-[15px]">
+                <NuxtLink href="/swap" class="bg-black flex items-center justify-center gap-x-2 rounded-xl border border-white Grotesque-Bold w-[50%] py-2.5 px-8 text-white text-[15px]">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24"><path fill="#fff" fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12s4.477 10 10 10s10-4.477 10-10m-13.53-.47a.75.75 0 0 1 0-1.06l3-3a.75.75 0 0 1 1.06 0l3 3a.75.75 0 1 1-1.06 1.06l-1.72-1.72V16a.75.75 0 0 1-1.5 0V9.81l-1.72 1.72a.75.75 0 0 1-1.06 0" clip-rule="evenodd"/></svg>
-                  Send
-                </baseButton>
-              
+                  Transfer
+                </NuxtLink>
+
+                <NuxtLink href="/accounts" class="bg-white flex items-center justify-center gap-x-2 rounded-xl border border-black Grotesque-Bold w-[50%] py-2 px-6 text-black text-[14px]">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 28 28"><path fill="#000" d="M3 5.75A2.75 2.75 0 0 1 5.75 3h13.5A2.75 2.75 0 0 1 22 5.75v1.258a3.75 3.75 0 0 1 3.5 3.742v10.5A3.75 3.75 0 0 1 21.75 25H6.754a3.75 3.75 0 0 1-3.75-3.75v-10.5H3V6h.011A3 3 0 0 1 3 5.75m17.5 0c0-.69-.56-1.25-1.25-1.25H5.75a1.25 1.25 0 1 0 0 2.5H20.5zM18.75 16a.75.75 0 0 0 0 1.5h2.5a.75.75 0 0 0 0-1.5z"/></svg>
+                  Accounts
+                </NuxtLink>
+
               </div>
 
               <!-- <div class=" bg-white dark:bg-[#0B1015] rounded-xl w-full h-full">
@@ -179,11 +162,11 @@
             <!-- Recents Transactions -->
             <div class="col-span-12 h-fit lg:col-span-6">
               <div class="w-full flex flex-row items-center justify-between mb-4">
-                <h2 class="text-black dark:text-white text-lg Grotesque-Bold">
+                <h2 class="text-black text-lg Grotesque-Bold">
                 Pending Activities
                 </h2>
 
-                <button @click="$router.push('/transactions')">
+                <button @click="">
                   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 512 512">
                     <path fill="#000" d="M224 304a16 16 0 0 1-11.31-27.31l157.94-157.94A55.7 55.7 0 0 0 344 112H104a56.06 56.06 0 0 0-56 56v240a56.06 56.06 0 0 0 56 56h240a56.06 56.06 0 0 0 56-56V168a55.7 55.7 0 0 0-6.75-26.63L235.31 299.31A15.92 15.92 0 0 1 224 304"/>
                     <path fill="#000" d="M448 48H336a16 16 0 0 0 0 32h73.37l-38.74 38.75a56.35 56.35 0 0 1 22.62 22.62L432 102.63V176a16 16 0 0 0 32 0V64a16 16 0 0 0-16-16"/>

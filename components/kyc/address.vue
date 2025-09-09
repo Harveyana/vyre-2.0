@@ -3,7 +3,7 @@
 
   
 
-      <div class="w-full flex flex-col items-center justify-start  h-full overflow-y-auto">
+      <div class="w-full flex flex-col items-center justify-start">
         <div class="w-full flex items-start">
 
           <div class="w-full flex flex-col items-start ">
@@ -27,7 +27,7 @@
         
         
 
-        <div class="flex flex-col w-full h-[70vh] gap-y-6 mb-8">
+        <div class="flex flex-col w-full h-[70vh] items-start justify-start overflow-y-auto gap-y-6 mb-12">
 
           <form
             @submit.prevent="submitForm()"
@@ -99,7 +99,7 @@
                 <CountrySelect :options="countries" @update="(value:string)=> countryCode = value"/>
             </div>
 
-            <div class="w-full flex flex-col items-center justify-center gap-y-4 border-[1px] border-gray-300 rounded-2xl p-4">
+            <!-- <div class="w-full flex flex-col items-center justify-center gap-y-4 border-[1px] border-gray-300 rounded-2xl p-4">
 
               <div class="w-full relative">
                 <label class="Grotesque-Regular text-md text-[#010109]">
@@ -112,18 +112,12 @@
                 <label class="Grotesque-Regular text-md text-[#010109]">
                   Upload ID (Front)
                 </label>
-                <!-- <input
-                  required
-                  v-model="address.postalCode"
-                  type="text"
-                  class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-[1px] border-[#2F2B43]/10 px-3 py-2.5 rounded-2xl flex items-center justify-between outline-none"
-                  placeholder="Postal Code"
-                /> -->
+               
                 <input type="file" @change="handleFileUpload('frontIdImage', $event)" accept="image/*" required>
 
               </div>
 
-            </div>
+            </div> -->
 
             
 
@@ -195,8 +189,8 @@
     const postalCode = defineModel<string>('postalCode')
     const countryCode = defineModel<string>('countryCode')
 
-    const proofOfAddressType = defineModel<string>('proofOfAddressType')
-    const proofOfAddressImage = defineModel<string>('proofOfAddressImage')
+    // const proofOfAddressType = defineModel<string>('proofOfAddressType')
+    // const proofOfAddressImage = defineModel<string>('proofOfAddressImage')
 
     // const address = reactive({
     //   streetLine1:'',
@@ -206,7 +200,7 @@
     //   countryCode:''
     // })
 
-  const emit = defineEmits(['back','submit'])  // Declare Events
+  const emit = defineEmits(['back','next'])  // Declare Events
 
   const submitForm = async()=>{
     
@@ -214,8 +208,8 @@
       !city.value || 
       !stateRegionProvince.value || 
       !postalCode.value ||
-      !countryCode.value || 
-      !proofOfAddressImage.value
+      !countryCode.value
+      // !proofOfAddressImage.value
     ) return
     console.log({
       streetLine1:streetLine1.value, 
@@ -223,30 +217,30 @@
       stateRegionProvince: stateRegionProvince.value, 
       postalCode: postalCode.value, 
       countryCode: countryCode.value, 
-      proofOfAddressImage: proofOfAddressImage.value
+      // proofOfAddressImage: proofOfAddressImage.value
     })
 
-    emit('submit', {
+    emit('next', {
       streetLine1:streetLine1.value, 
       city:city.value, 
       stateRegionProvince: stateRegionProvince.value, 
       postalCode: postalCode.value, 
       countryCode: countryCode.value, 
-      proofOfAddressImage: proofOfAddressImage.value
+      // proofOfAddressImage: proofOfAddressImage.value
     })
 
   }
 
-  const handleFileUpload = (field:string, event:any) => {
-    const file = event.target.files[0]
-    if (file) {
-      const reader = new FileReader()
-      reader.onload = (e) => {
-        proofOfAddressImage.value = e.target?.result as string
-      }
-      reader.readAsDataURL(file)
-    }
-  }
+  // const handleFileUpload = (field:string, event:any) => {
+  //   const file = event.target.files[0]
+  //   if (file) {
+  //     const reader = new FileReader()
+  //     reader.onload = (e) => {
+  //       proofOfAddressImage.value = e.target?.result as string
+  //     }
+  //     reader.readAsDataURL(file)
+  //   }
+  // }
 
 
   // const props = defineProps<{
@@ -258,21 +252,20 @@
   // const open =ref(false)
 
   const proofTypes = [
-    'Utility bill',
-    'Bank statement',
-    'Tax bill',
-    'Government letter',
-    'Lease agreement',
-    'Insurance statement',
-    'Credit Card statement',
-    'Employment contract',
-    'University letter',
-    'Mortgage Statement',
-    'Council tax bill',
-    'Electoral register',
-    'Driving license',
-    'Social security Statement',
-    'Payslip'
+    'BANK_STATEMENT',
+    'NATIONAL_ID',
+    'DRIVERS_LICENSE',
+    'PASSPORT'
+    // 'Insurance statement',
+    // 'Credit Card statement',
+    // 'Employment contract',
+    // 'University letter',
+    // 'Mortgage Statement',
+    // 'Council tax bill',
+    // 'Electoral register',
+    // 'Driving license',
+    // 'Social security Statement',
+    // 'Payslip'
   ]
 
   const countries = ref<{label: string; value: string}[]>([

@@ -2,6 +2,8 @@
   <NuxtLayout>
     <!-- <NuxtLoadingIndicator /> -->
     <!-- <Toaster position="top-right" /> -->
-      <NuxtPage />
+    <NuxtPage />
   </NuxtLayout>
+
+  
 </template>

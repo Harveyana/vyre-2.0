@@ -88,7 +88,7 @@ export const useSwapStore = defineStore('swap', {
 
       async linkCryptoAccount(payload:{currency:string, chain:string, address:string}) {
         
-        this.loading = true
+        // this.loading = true
         try {
           const { axiosInstance } = useAxios()
           const url = '/paymentAccount/crypto';
@@ -112,13 +112,13 @@ export const useSwapStore = defineStore('swap', {
             }
             
         } finally {
-          this.loading = false
+          // this.loading = false
         }
       },
 
       async deletePaymentAccount( id:string) {
         
-        this.loading = true
+        // this.loading = true
         try {
           const { axiosInstance } = useAxios()
           const url = `/paymentAccount/${id}`;
@@ -142,13 +142,13 @@ export const useSwapStore = defineStore('swap', {
             }
             
         } finally {
-          this.loading = false
+          // this.loading = false
         }
       },
 
       async getLinkedAccounts(type:string) {
         
-        this.loading = true
+        // this.loading = true
         try {
           const { axiosInstance } = useAxios()
           const url = '/linkedAccounts';
@@ -176,7 +176,7 @@ export const useSwapStore = defineStore('swap', {
             }
             
         } finally {
-          this.loading = false
+          // this.loading = false
         }
       },
 

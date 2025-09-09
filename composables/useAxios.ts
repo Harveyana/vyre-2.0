@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const useAxios = () => {
   const config = useRuntimeConfig();
-  const { $auth } = useNuxtApp();
+  const { $clerk } = useNuxtApp();
   const router = useRouter();
 
   const axiosInstance = axios.create({
@@ -16,10 +16,13 @@ export const useAxios = () => {
   axiosInstance.interceptors.request.use(
     async (config) => {
       try {
-        const token = await $auth.client.getTokenSilently().catch(async (error:any) => {
-          await handleAuthError(error, $auth, router);
-          throw error; // Stop request execution
-        });
+        let token;
+        try {
+          token = await $clerk.getToken();
+        } catch (error) {
+          await handleAuthError(error, router);
+          throw error; // Still propagate the error
+        }
         
         config.headers.Authorization = `Bearer ${token}`;
         return config;
@@ -41,12 +44,10 @@ export const useAxios = () => {
         if (isProtectedRoute(currentRoute)) {
           sessionStorage.setItem('preLoginRoute', currentRoute);
         }
-        localStorage.clear();
 
-        await $auth.client.logout({
-          returnTo: window.location.origin + '/login',
-          federated: true
-        });
+        // const loginPath = '/login';
+        // const redirectUrl = new URL(loginPath, window.location.origin).toString();
+        await navigateTo('/login');
 
       }
       return Promise.reject(error);
@@ -56,28 +57,18 @@ export const useAxios = () => {
   return { axiosInstance };
 };
 
-const handleAuthError = async (error: any, $auth: any, router: any) => {
-  const errorCode = error?.error || error?.message;
-  
-  const authErrors = [
-    'missing_refresh_token',
-    'invalid_grant',
-    'login_required',
-    'timeout'
-  ];
+const handleAuthError = async (error: any,router: any) => {
 
-  if (authErrors.some(code => errorCode?.includes(code))) {
+  console.log(error)
+
     const currentRoute = router.currentRoute.value.fullPath;
     
     if (isProtectedRoute(currentRoute)) {
       sessionStorage.setItem('preLoginRoute', currentRoute);
     }
-    localStorage.clear();
-    await $auth.client.logout({
-      returnTo: window.location.origin + '/login',
-      federated: true
-    });
-  }
+    // const loginPath = '/login';
+    // const redirectUrl = new URL(loginPath, window.location.origin).toString();
+    await navigateTo('/login');
 };
 
 const isProtectedRoute = (path: string) => {

@@ -11,7 +11,7 @@
 
     <CoinsLottie />
 
-    <form @submit.prevent="login()" class="w-full mt-2 flex flex-col gap-y-1">
+    <form @submit.prevent="initRegister()" class="w-full mt-2 flex flex-col gap-y-1">
 
       <input
         v-if="showEmail"
@@ -27,7 +27,7 @@
         <input
           v-model="inputs.password"
           :type="passwordVisible ? 'text' : 'password'"
-          @keyup.enter="login()"
+          @keyup.enter="initRegister()"
           placeholder="Password"
           class="Grotesque-Regular text-[14px] w-full bg-[#F9F9FC] border-none focus:ring-0 px-3 py-3 rounded-xl flex items-center justify-between outline-none"
         />
@@ -45,7 +45,7 @@
         Forgot password?
       </NuxtLink> -->
 
-      <button @keyup.enter="login()" :disabled="loading" type="submit" class="w-full flex items-center justify-center py-3.5 bg-black text-white rounded-2xl mt-6">
+      <button @keyup.enter="initRegister()" :disabled="loading" type="submit" class="w-full flex items-center justify-center py-3.5 bg-black text-white rounded-2xl mt-6">
         <span v-if="!loading" class="text-[16px] text-white text-center">Continue</span>
         <ProgressSpinner v-else class="" style="width: 25px; height: 25px" strokeWidth="8" fill="#ffff"
             animationDuration=".5s" aria-label="Custom ProgressSpinner" 
@@ -59,7 +59,7 @@
     </div>
 
     <button 
-        @click="loginWithGoogle()"
+        @click="signInWithGoogle()"
         class="google-signin-button w-full"
       >
         <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
@@ -97,12 +97,14 @@ import eyeSlash from "~/assets/img/eye-slash.png";
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '~/store/auth';
 const { loginUser } = useAuthStore();   
-const { loading } = storeToRefs(useAuthStore());
+// const { loading } = storeToRefs(useAuthStore());
 
-const { $auth } = useNuxtApp()
+
+const { signUp, signInWithGoogle } = useAuth();
 
 const router = useRouter()
 const route = useRoute()
+const loading = ref(false)
 
 const passwordVisible = ref(false);
 
@@ -110,17 +112,17 @@ const showEmail = ref(true);
 const showPassword = ref(false);
 
 
-const loginWithGoogle = async () => {
-  await $auth.client.loginWithRedirect({
-    authorizationParams: {
-      connection: 'google-oauth2',
-      prompt: 'select_account' // Force account selection
-    },
-    appState: { 
-      target: route.query.return_to || '/onboard'
-    }
-  });
-};
+// const loginWithGoogle = async () => {
+//   await $auth.client.loginWithRedirect({
+//     authorizationParams: {
+//       connection: 'google-oauth2',
+//       prompt: 'select_account' // Force account selection
+//     },
+//     appState: { 
+//       target: route.query.return_to || '/onboard'
+//     }
+//   });
+// };
 
 const inputs = reactive({
   password:'',
@@ -130,16 +132,8 @@ const inputs = reactive({
 
 const emit = defineEmits(["next"]);
 
-function isValidRedirect(path?: string | null): path is string {
-  if (!path) return false;
-  
-  // Only allow redirects to specific prefixes
-  const allowedPrefixes = ['/', '/app'];
-  return allowedPrefixes.some(prefix => path.startsWith(prefix)) &&
-  !['/login', '/signup'].includes(path);
-}
 
-const login = async()=>{
+const initRegister = async()=>{
   if(inputs.email && !inputs.password){
     showEmail.value = false
     return showPassword.value = true
@@ -148,32 +142,35 @@ const login = async()=>{
   if(inputs.email && inputs.password){
     
     toast.promise(() => new Promise(async(resolve,reject) =>{
-
+      loading.value = true
       try{
 
-        await $auth.client.loginWith('auth0', {
-          loginParams: {
-            connection: 'Username-Password-Authentication',
-            email: inputs.email,
-            password: inputs.password,
-          }
-        });
+        const result = await signUp(inputs.email,inputs.password)
 
-        resolve({msg:'Signin Successful'})
+        if(result.success){
+         resolve({msg:result.message}) 
+        }else{
+          reject({msg:result.message})
+        }
 
       } catch (error) {
         console.error(error)
+        loading.value = false
         reject({msg:'Operation failed'})
       }
       }), 
       {
-        loading: 'Signing in...',
+        loading: 'Signing up...',
         success: (data: any) => {
-          // emit('verified', data.userId)
-          navigateTo('/')
+          emit('next')
+          // navigateTo('/')
+          loading.value = false
           return data.msg
         },
-        error: (data: any) => {return data.msg}
+        error: (data: any) => {
+          loading.value = false
+          return data.msg
+        }
       })
 
   }

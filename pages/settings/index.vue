@@ -58,9 +58,9 @@
 
   const { loading, user, store } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
 
-  // definePageMeta({
-  //   layout: 'settings'
-  // })
+  definePageMeta({
+    layout: 'settings'
+  })
   const tab = ref('PROFILE')
   
 

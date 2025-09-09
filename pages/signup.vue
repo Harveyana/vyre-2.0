@@ -7,9 +7,8 @@
       <!-- <Preference v-if="tab =='SELECT'" @update-value="(value:string)=>{tab = value}" /> -->
 
       <!-- <Individual /> -->
-      <SignUpTab />
-
-      <!-- <Business v-if="tab =='BUSINESS'" @back="tab = 'SELECT'" /> -->
+      <SignUpTab v-if="TAB =='SIGNUP'" @next="TAB = 'VERIFY'" />
+      <VerifyToken  v-if="TAB =='VERIFY'" />
 
     </div>
   </div>
@@ -25,15 +24,15 @@ definePageMeta({
 
 const router = useRouter()
 const route = useRoute();
-const tab = ref(route.query.tab ? route.query.tab : 'SELECT');
+const TAB = ref('SIGNUP');
 
 
-watch(tab.value, async(newtab, oldtab) => {
-    router.push({
-        path: '/signup',
-        query: { tab: newtab as string },
-    })
-})
+// watch(tab.value, async(newtab, oldtab) => {
+//     router.push({
+//         path: '/signup',
+//         query: { tab: newtab as string },
+//     })
+// })
 
 
 </script>

@@ -7,6 +7,8 @@
       <div class="h-full flex flex-col items-center justify-center gap-3 text-center">
         <LottieLoader />
 
+        <div id="clerk-captcha"></div>
+
         <h3 class="Grotesque-Regular text-[20px] text-[#1A1A1A]">
           wait a minute...
         </h3>
@@ -24,7 +26,7 @@ definePageMeta({
 })
 
 
-const { $auth } = useNuxtApp()
+const { $clerk } = useNuxtApp()
 
 const router = useRouter()
 
@@ -36,9 +38,9 @@ onMounted(async()=>{
     // const user = await $auth.client.getUser()
     // console.log('user', user)
 
-    await $auth.client.handleRedirectCallback()
-    const target = $auth.client.appState?.target || '/';
-    navigateTo(target);
+    await $clerk.handleRedirectCallback()
+    // const target = $auth.client.appState?.target || '/';
+    // navigateTo(target);
     // router.push('/')
   } catch (e) {
     console.error(e)

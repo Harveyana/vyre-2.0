@@ -153,10 +153,10 @@
       label:'TRON',
       value:'TRON'
     },
-    // {
-    //   label:'SOL',
-    //   value:'SOLANA'
-    // },
+    {
+      label:'SOL',
+      value:'SOLANA'
+    },
     {
       label:'OP',
       value:'OPTIMISM'

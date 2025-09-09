@@ -35,7 +35,7 @@
 
 
         <button :disabled="loading" @click.prevent="authenticate()"  class="w-full bg-black flex flex-row items-center justify-center rounded-2xl mt-6 py-3">
-          <span v-if="!loading" class="text-[16px] text-white text-center">Sign In</span>
+          <span v-if="!loading" class="text-[16px] text-white text-center">Validate</span>
           <ProgressSpinner v-else class="" style="width: 25px; height: 25px" strokeWidth="8" fill="#ffff"
             animationDuration=".5s" aria-label="Custom ProgressSpinner" 
           />
@@ -53,9 +53,6 @@
   import { useAuthStore } from '~/store/auth';
   const { authenticateOtp } = useAuthStore();
 
-  const { authenticated, loading } = storeToRefs(useAuthStore()); // make authenticated state reactive with storeToRefs
-
-  const userId = defineModel<string>("userId")
 
 
   const router = useRouter()
@@ -63,19 +60,16 @@
 
   const { $toast } = useNuxtApp()
 
+  const { handleVerification } = useAuth();
+
+  const loading = ref(false)
+
 
 
   async function authenticate() {
-        const signedIn = await authenticateOtp({code:code.value, userId:userId.value}); // login user
-        console.log(signedIn)
-        if (signedIn.success) {
-          $toast.success(signedIn.msg)
-          router.push('/')
-          
-        }else{
-          $toast.error(signedIn.msg)
-        }
-        
+    loading.value = true
+    await handleVerification(code.value);
+    loading.value = false
   }
 
 

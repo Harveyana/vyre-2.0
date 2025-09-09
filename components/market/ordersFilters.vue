@@ -57,51 +57,55 @@
         </div>
 
         <div class="w-full flex gap-x-2 overflow-x-auto items-center justify-start py-2 px-3">
-          <button
+          <div
             v-for="pair in allPairs"
-            :key="pair?.id"
+            :key="pair.id"
+            class="w-fit min-w-40 border hover:bg-white flex flex-col items-center justify-start gap-x-5 py-4 rounded-2xl border-[1px] px-4 cursor-pointer relative"
             @click="selectPair(pair)"
-            class="border rounded-3xl px-3 py-1 transition-colors duration-200 group"
-            :class="{
-              'border-black hover:bg-gray-100': selectedPair?.id === pair?.id,
-              'border-none': selectedPair?.id !== pair?.id
-            }"
+            :class="
+              selectedPair?.id === pair?.id
+                ? 'bg-white'
+                : ' border-[#F8F8FC] bg-gray-100'
+            "
           >
+            
+            <div class="w-full flex items-center justify-center">
+              <div class="min-w-fit flex items-center justift-center gap-2 ">
 
-            <div class="flex items-center justift-center">
-              <!-- <img :src="order?.pair?.baseWallet?.imgurl" class="z-10 w-10 sm:w-12 -mr-2 sm:-mr-2.5  rounded-full"/> -->
-              <div class="z-10 flex items-center justify-center">
-                <div v-if="pair?.baseCurrency && pair?.baseCurrency.type ==='CRYPTO'" class="flex items-end justify-center">
-                 <img class="w-[40px] sm:w-[40px] bg-white rounded-full" :src="pair?.baseCurrency?.imgUrl" alt="avatar">
-                 <img v-if="pair?.baseCurrency?.isStablecoin" class="w-[20px] bg-black rounded-full -ml-5" :src="pair?.baseCurrency?.chainImgUrl" alt="avatar">
+                <div class=" bg-white rounded-full z-10 flex items-center justify-center p-2">
+                  <div v-if="pair?.baseCurrency && pair?.baseCurrency.type ==='CRYPTO'" class="flex items-end justify-center">
+                    <img class="w-[50px] rounded-full" :src="pair?.baseCurrency?.imgUrl" alt="avatar">
+                    <!-- <img v-if="pair?.baseCurrency?.isStablecoin" class="w-[20px] bg-black rounded-full -ml-5" :src="pair?.baseCurrency?.chainImgUrl" alt="avatar"> -->
+                  </div>
+                  <h3 v-else class="text-white text-[30px] bg-white rounded-full  ">{{ pair?.baseCurrency?.flagEmoji }}</h3>
                 </div>
-                <h3 v-else class="text-white text-[30px] bg-white rounded-full  ">{{ pair?.baseCurrency?.flagEmoji }}</h3>
-              </div>
 
 
-              <!-- <img :src="order?.pair?.quoteWallet?.imgurl" class="z-20 w-6 sm:w-8 rounded-full self-end"/> -->
+                <div class="absolute top-0 right-0 z-20 flex items-center justify-center self-end">
+                  <div v-if="pair?.quoteCurrency && pair?.quoteCurrency.type ==='CRYPTO'" class="flex items-end justify-center">
+                    <img class="w-[30px] rounded-full" :src="pair?.quoteCurrency?.imgUrl" alt="avatar">
+                    <img v-if="pair?.quoteCurrency?.chainImgUrl" class="w-[20px] bg-black rounded-full -ml-5" :src="pair?.quoteCurrency?.chainImgUrl" alt="avatar">
+                  </div>
 
-              <div class="z-20 flex items-center justify-center self-end">
-                <div v-if="pair?.quoteCurrency && pair?.quoteCurrency.type ==='CRYPTO'" class="flex items-end justify-center">
-                 <img class="w-[30px] rounded-full" :src="pair?.quoteCurrency?.imgUrl" alt="avatar">
-                 <img v-if="pair?.quoteCurrency?.chainImgUrl" class="w-[20px] bg-black rounded-full -ml-2" :src="pair?.quoteCurrency?.chainImgUrl" alt="avatar">
+                  <h3 v-else class="text-white text-[20px] bg-white rounded-full ">{{ pair?.quoteCurrency?.flagEmoji }}</h3>
                 </div>
-                <h3 v-else class="text-white text-[30px] ">{{ pair?.quoteCurrency?.flagEmoji }}</h3>
-              </div>
 
+              </div>
             </div>
 
-            <span 
-              class="whitespace-nowrap font-200 text-[13px] transition-colors duration-200"
-              :class="{
-                'text-black Grotesque-SemiBold group-hover:text-[#34da97]': selectedPair?.id === pair?.id,
-                'text-black Grotesque-Regular': selectedPair?.id !== pair?.id
-              }"
-            >
-              {{pair?.name}}
+            <div class="w-full flex items-center justify-center">
 
-            </span>
-          </button>
+              <img v-if="pair?.baseCurrency?.isStablecoin" class="w-[20px] bg-black rounded-full " :src="pair?.baseCurrency?.chainImgUrl" alt="avatar">
+                <!-- <h3 class="Grotesque-Regular text-[11px] text-[#1A1A1A] whitespace-nowrap">
+                  {{pair.name}}
+                </h3> -->
+            </div>
+
+            <h3 class="mt-4 Grotesque-Regular text-[11px] text-[#1A1A1A] whitespace-nowrap">
+                {{pair.name}}
+            </h3>
+
+          </div>
         </div>
 
       </div>

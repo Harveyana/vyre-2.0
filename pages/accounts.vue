@@ -1,17 +1,17 @@
 <template>
   <div class="w-full h-full flex flex-col items-center justify-start">
      
-      <div class="w-full sm:w-[50%] h-full flex items-start justify-start">
+      <!-- <div class="w-full sm:w-[50%] h-full flex items-start justify-start">
 
         <button @click="$router.back()" class="rounded-xl px-3 py-2 flex items-center justify-center gap-1 text-[12px] sm:text-[15px] text-black Grotesque-Regular">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="#000" d="m4.836 12l6.207 6.207l1.414-1.414L7.664 12l4.793-4.793l-1.414-1.414zm5.65 0l6.207 6.207l1.414-1.414L13.314 12l4.793-4.793l-1.414-1.414z"/></svg>
           Back
         </button>
         
-      </div>
+      </div> -->
      
      <div class="w-full sm:w-[50%] h-full flex items-center justify-center">  
-      <div class="w-full h-fit flex flex-col items-center justify-start gap-3 rounded-lg overflow-y-auto pt-8">
+      <div class="w-full h-fit flex flex-col items-center justify-start gap-3 rounded-lg overflow-y-auto pt-4">
         
 
         <!-- <div class="w-full h-fit flex flex-col items-center justify-center gap-3 rounded-3xl shadow-md px-2 pt-4 sm:pt-6 pb-4">
@@ -50,7 +50,7 @@
 
         </div> -->
 
-        <div class="w-full h-fit flex flex-col items-center justify-start gap-3 rounded-3xl px-2 pt-4 sm:pt-6 pb-4">
+        <div class="w-full h-fit flex flex-col items-center justify-start gap-3 rounded-3xl px-2 pt-4 pb-4">
 
           <TabsRoot v-model:modelValue="TAB" class="w-full bg-[#F8F8FC] h-fit rounded-2xl" default-value="FIAT">
                 <TabsList class="h-full p-1 rounded-2xl bg-[#F8F8FC] shrink-0 flex items-center justify-center" aria-label="Manage your account">
@@ -106,7 +106,7 @@
 
 
 definePageMeta({
-  layout: 'operation'
+  layout: 'settings'
 })
 
 const showConfirm = ref(false)

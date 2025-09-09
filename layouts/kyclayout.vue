@@ -23,9 +23,9 @@
          </div>
 
 
-         <VyreMobileMenu />
-         <VyreMenu/>
-        <section class="w-full relative flex flex-col items-center justify-center ">
+         <!-- <VyreMobileMenu />
+         <VyreMenu/> -->
+        <section class="w-full relative flex flex-col items-center justify-center mt-5 sm:mt-10">
             <Transition name="page" mode="out-in">
               <slot />
             </Transition>

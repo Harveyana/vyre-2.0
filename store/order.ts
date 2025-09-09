@@ -1,10 +1,31 @@
 import { defineStore } from 'pinia';
 import axios,{AxiosError} from 'axios';
 
+interface Anonymous{
+  amount: string;
+  user:{
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    email: string;
+  },
+  bank:{
+    bankCode: string;
+    accountNumber: string;
+    recipient: string
+  },
+  crypto:{
+    address: string
+  },
+  orderId: string
+  currencyId: string
+}
+
 
 export const useOrderStore = defineStore('order', {
     state: () => ({
       loading: false,
+      order: null,
     }),
     actions: {
 
@@ -87,6 +108,8 @@ export const useOrderStore = defineStore('order', {
           const response = await axiosInstance.get(url);
 
           console.log(response.data);
+
+          this.order = response.data?.order
        
           return response.data
           
@@ -113,6 +136,36 @@ export const useOrderStore = defineStore('order', {
         try {
           const { axiosInstance } = useAxios()
           const url = '/orders/create';
+          // const token = useCookie('token');
+          const response = await axiosInstance.post(url, payload);
+
+          console.log(response.data);
+       
+          return response.data
+          
+        } catch (error: any | AxiosError) {
+          console.log(error)
+            if (axios.isAxiosError(error))  {
+              // Access to config, request, and response
+              console.log(error.response?.data)
+              return error.response?.data
+
+            } else {
+              // Just a stock error
+              console.error('Error:', error.message);
+            }
+            
+        } finally {
+          this.loading = false
+        }
+      },
+
+      async initializeAnonymous(payload:Anonymous) {
+        
+        this.loading = true
+        try {
+          const { axiosInstance } = useAxios()
+          const url = '/orders/anonymous/initiate';
           // const token = useCookie('token');
           const response = await axiosInstance.post(url, payload);
 
@@ -166,6 +219,7 @@ export const useOrderStore = defineStore('order', {
           this.loading = false
         }
       },
+
 
       async getPairWallets(pairId:string) {
         

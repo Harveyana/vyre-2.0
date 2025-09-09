@@ -242,7 +242,7 @@
     
     console.log(result)
     if(result?.success){
-      console.log(result?.value)
+      console.log(result?.accounts)
       accounts.value = result?.accounts
     }
     loading.value = false

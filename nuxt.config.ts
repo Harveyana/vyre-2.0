@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     public: {
       baseUrl: 'https://api.vyre.africa/api/v1',
     }
-    // https://vyre-africa-backend.onrender.com/api/v1
+    // https://vyre-africa-backend-6km6.onrender.com/api/v1
     // http://localhost:5000/api/v1
   },
   

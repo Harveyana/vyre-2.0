@@ -6,9 +6,9 @@
          <!-- <VyreMobileMenu />
          <VyreMenu/> -->
          <section class="w-full relative flex flex-col items-center justify-center">
-            <Transition name="page" mode="out-in">
+            <!-- <Transition name="page" mode="out-in"> -->
               <slot />
-            </Transition>
+            <!-- </Transition> -->
          </section>
       
       </div>
@@ -25,7 +25,7 @@
    const { progress } = storeToRefs(useAuthStore());
 
    const route = useRoute()
-   const progressValue = ref(progress)
+   // const progressValue = ref(progress)
    
 </script>
 
