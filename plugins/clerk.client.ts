@@ -2,9 +2,9 @@
 import { Clerk } from '@clerk/clerk-js';
  
 export default defineNuxtPlugin(async (nuxtApp) => {
-  const publishableKey = 'pk_test_ZGVlcC1sYW1iLTUwLmNsZXJrLmFjY291bnRzLmRldiQ';
+  const publishableKey = 'pk_live_Y2xlcmsudnlyZS5hZnJpY2Ek';
 
-  // pk_live_Y2xlcmsudnlyZS5hZnJpY2Ek
+  // pk_test_ZGVlcC1sYW1iLTUwLmNsZXJrLmFjY291bnRzLmRldiQ 
 
   if (!publishableKey) {
     throw new Error('Missing Clerk Publishable Key');
