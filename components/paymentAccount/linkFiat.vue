@@ -14,6 +14,7 @@
       v-if="tab === 'DETAILS'"
       v-model:bank-name="DETAILS.bankName"
       v-model:-accountNumber="DETAILS.accountNumber"
+      v-model:AccountName="DETAILS.accountName"
       v-model:-currency="DETAILS.currency"
       v-model:-type="DETAILS.type"
       v-model:-optional="optionalField"
@@ -119,6 +120,7 @@
 
     const DETAILS = reactive({
       accountNumber: '',
+      accountName:'',
       bankName:'',
       currency: '',
       type:'',
@@ -157,6 +159,7 @@
 
       // Required fields check
       if (!details.accountNumber) errors.push("Account number is required");
+      if (!details.accountName) errors.push("Account name is required");
       if (!details.bankName?.trim()) errors.push("Bank name is required");
       if (!details.currency) errors.push("Currency is required");
 
@@ -177,6 +180,7 @@
 
       // Account Info Validation
       if (!String(details.accountNumber).trim()) errors.push("Account number is required");
+      if (!String(details.accountName).trim()) errors.push("Account name is required");
       if (!details.bankName.trim()) errors.push("Bank name is required");
       if (!details.currency.trim()) errors.push("Currency is required");
       if (!details.type.trim()) errors.push("Select Account type");
@@ -210,7 +214,7 @@
         }
       }), 
       {
-        loading: 'Linking Account',
+        loading: 'Processing Account...',
         success: (data: any) => {
           emit('refresh')
           return data.msg
