@@ -161,7 +161,7 @@
 
             <!-- Recents Transactions -->
             <div class="col-span-12 h-fit lg:col-span-6">
-              <div class="w-full flex flex-row items-center justify-between mb-4">
+              <!-- <div class="w-full flex flex-row items-center justify-between mb-4">
                 <h2 class="text-black text-lg Grotesque-Bold">
                 Pending Activities
                 </h2>
@@ -172,11 +172,10 @@
                     <path fill="#000" d="M448 48H336a16 16 0 0 0 0 32h73.37l-38.74 38.75a56.35 56.35 0 0 1 22.62 22.62L432 102.63V176a16 16 0 0 0 32 0V64a16 16 0 0 0-16-16"/>
                   </svg>
                 </button>
-                <!-- <img src="~/assets/img/right-arrow.png" class="w-10 md:w-12 rounded-2xl hover:bg-gray-500 px-2" alt='transactions'/> -->
-              </div>
+              </div> -->
               
               <!-- <div class="overflow-y-scroll scroll-smooth max-h-[10rem] lg:max-h-[15rem] flex flex-col items-center justify-start rounded-2xl col-span-12 py-2 mb-2 md:mb-5 space-y-4"> -->
-                <Activities />
+                <!-- <Activities /> -->
               <!-- </div> -->
             </div>
 

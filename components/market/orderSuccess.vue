@@ -66,7 +66,7 @@
 
             <div class="w-full flex gap-3 items-center justify-center border border-[#8D9CA5] rounded-lg px-3">
               <h1 class="text-[14px] interSemiBold text-[#8D9CA5]">
-                https://hdehwgfi762838e3672uy23
+                https://app.vyre.africa/order/hdehwgfi762838e3672uy23
               </h1>
 
               <button @click="copyLink()"  class="p-4 hover:bg-gray-200">

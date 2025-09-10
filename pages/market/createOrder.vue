@@ -136,7 +136,7 @@
 
     // const {currency, balance, type} = props
 
-   const tab = ref('PAIR');
+   const tab = ref('SUCCESS');
    const emit = defineEmits(['close'])
    
    const order = ref()
