@@ -13,6 +13,7 @@ interface Address {
 interface BankDetails {
   bankId: string;
   accountNumber: string;
+  accountName: string;
   type: string;
   // currency: string;
   
